@@ -6,7 +6,8 @@ import os
 
 TOKEN = os.environ.get('BOT_TOKEN', '8903255663:AAGH2-Ak0vZx0iw9Bzkr8t3RtPc0LFS84cg')
 
-bot = telebot.TeleBot(TOKEN)
+import os
+TOKEN = os.environ.get('BOT_TOKEN', '8903255663:AAGH2-Ak0vZx0iw9Bzkr8t3RtPc0LFS84cg')
 
 def safe_html(text):
     return html.escape(str(text))
