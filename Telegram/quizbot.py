@@ -5,776 +5,597 @@ import html
 import os
 
 TOKEN = os.environ.get('BOT_TOKEN', '8903255663:AAGH2-Ak0vZx0iw9Bzkr8t3RtPc0LFS84cg')
-
-import os
-TOKEN = os.environ.get('BOT_TOKEN', '8903255663:AAGH2-Ak0vZx0iw9Bzkr8t3RtPc0LFS84cg')
+bot = telebot.TeleBot(TOKEN)
 
 def safe_html(text):
     return html.escape(str(text))
 
 QUIZ_DATA = [
-    {
-        "question": "An`anaviy marketingning bosh g`oyasi",
-        "options": [
-            "iste`molchiga kerakli narsani ishlab chiqarish",
-            "imkoniyat boricha ishlab chiqarish",
-            "kam harajat evaziga mahsulot ishlab chiqarish",
-            "resurlar tejamkorligiga rioya qilish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing kontseptsiyasining ma'nosi:",
-        "options": [
-            "talabni shakllantirish, sotishni takomillashtirish, ishlab chiqarishni odamlar talabini qondirishga yo'naltirish",
-            "mahsulot hajmiy o'sishi bilan tannarxining kamayishi odamlar talabini qondirishga yo'naltirish",
-            "mahsulot sifatining o'sishi bilan mahsulot sotish hajmining o'sishi va odamlar talabini qondirishga yo'naltirish",
-            "mahsulot sifatining o'sishi bilan mahsulot sotish hajmining o'sishi sotishni takomillashtirish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing sub'ekti nima?",
-        "options": [
-            "iste'molchi tashkilotlar, ulgurji savdo, marketing bo'yicha mutaxassislar,ishlab chiqaruvchi va xizmat ko'rsatuvchi tashkilot",
-            "ishlab chiqaruvchi va xizmat ko'rsatuvchi tashkilot texnologiya va jihozlar",
-            "yangi xorijiy sotish bozorlarini qo'shimcha tadqiq qilish firma tovarlarini xorijiy bozorlarida sotishni tashkil etish",
-            "marketing bo'yicha mutaxassislar xizmat ko'rsatuvchi tashkilot texnologiya va jihozlar"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Tadbirkorning marketing majmuasiga kiradi",
-        "options": [
-            "tovar, hizmat, uning narxi, yetkazib berish va sotish usullari, reklama, sotishni rag'batlantirish",
-            "sotuvchi, iste'molchi, haridor o'rtasidagi vositachi",
-            "tovar, bozor, raqobat, raqiblar",
-            "ishlab chiqarish, ta'minot, sotish, iste'mol"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing so'zining lug'aviy ma'nosi-bu:",
-        "options": [
-            "market-bozor, ing-harakat",
-            "market-do'kon, ing-harakat",
-            "market-bozor, ing-qoshish",
-            "market-maskan, ing-harakat"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Imkoning boricha ko'proq tovar ishlab chiqaraver, chunki bozor talabi cheksiz shiori qaysi kontseptsiyaga xos",
-        "options": [
-            "ishlab chiqarishga yo'naltirilgan kontseptsiya",
-            "ijtimoiy-ahloqiy kontseptsiya",
-            "iste'molchiga yo'naltirilgan kontseptsiya",
-            "sotishga yo'naltirilgan kontseptsiya"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Mana tovar tayyor kelavering va savdolashing shiori qaysi kontseptsiyaga xos",
-        "options": [
-            "sotishga yo'naltirilgan kontseptsiya",
-            "ishlab chiqarishga yo'naltirilgan kontseptsiya",
-            "iste'molchiga yo'naltirilgan kontseptsiya",
-            "ijtimoiy-ahloqiy kontseptsiya"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing tadqiqotlari qanday asosiy elementlardan iborat?",
-        "options": [
-            "ma'lumotlarni tahlil qilish, yig'ish, qayta ishlash",
-            "ma'lumotlarni tahlil qilish, o'rganish, qayta ishlash",
-            "ma'lumotlarni o'rganish, yig'ish, qayta ishlash",
-            "ma'lumotlarni to'plash, yig'ish, qayta ishlash"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing qanday tizimni ifodalaydi?",
-        "options": [
-            "ishlab chiqarish - iste'mol",
-            "ayirboshlash",
-            "ishlab chiqarish - sotish",
-            "sotish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketingning asosiy tamoyillarini aniqlang?",
-        "options": [
-            "bozorni bilish, bozorga moslashish, bozorga ta'sir o'tkazish",
-            "haridor va mijozlarning puxta o'rganish, tahlil qilish, tovar harid qilishga undash",
-            "reklama, tovar, markalash, narx",
-            "analitik, ishlab chiqarish, savdo-sotiq, boshqaruv va nazorat"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing tamoyili nima?",
-        "options": [
-            "korxonani ishlab chiqarish, sotish faoliyatini boshqarish to'g'risidagi ilmiy asoslangan tasavvurlar tasnifidir",
-            "Bozor iqtisodiyoti sharoitida korxonalarning boshqa korxonalar bilan xamkorlik faoliyeti",
-            "Bozor iqtisodiyoti sharoitida barcha korxonalar haqida ma'lumotga ega bo'lumish",
-            "korxonani ishlab chiqarish faoliyati to'g'risidagi ma'lumotga ega bo'lish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketingning asosiy funktsiyalarini aniqlang?",
-        "options": [
-            "analitik, ishlab chiqarish, savdo-sotiq, boshqaruv va nazorat",
-            "ishlab chiqarish va tashkil etish",
-            "boshqaruv investitsiyalash va nazorat",
-            "analiz va boshqaruv"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Ishlab chiqarishni xom-ashyo resurslari bilan ta'minlash-bu...",
-        "options": [
-            "marketingni ishlab chiqarish funktsiyasi",
-            "marketingni nazorat funktsiyasi",
-            "marketingni sotish funktsiyasi",
-            "marketingni tashkiliy funktsiyasi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing turlaridan qaysisi to'g'ri?",
-        "options": [
-            "remarketing, demarketing, qo'llab-quvvatlovchi, qarama-qarshi harakatlanuvchi",
-            "ishlab chiqarish vositalari tovar va xizmatlar",
-            "tijorat va notijorat iste'mol tovarlari xizmatlar va boshqalar",
-            "tijorat va notijorat iste'mol tovarlari"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Noratsional ehtiyojlarni qondiruvchi tovar va hizmatlar bo'lgan talabni kamaytirish yoki butunlay yo'q qilishga xizmat qiladi",
-        "options": [
-            "antimarketing",
-            "rivojlantiruvchi marketing",
-            "demarketing",
-            "konversion marketing"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Rivojlantiruvchi marketing turi qaysi holatlarda qo'llaniladi?",
-        "options": [
-            "potentsial talab mavjud, uni real talabga aylantirish kerak bo'lganda",
-            "talab pasayib ketganda",
-            "taklif ortib ketganda",
-            "talab bilan taklif muvozanatlashganda"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Antimarketing qaysi holatlarda qo'llaniladi?",
-        "options": [
-            "noratsional ehtiyojlarni qondiruvchi tovar, hizmatlar bo'lgan talabni kamaytirish yoki butunlay yo'q qilishga xizmat qiladi",
-            "talab pasaytirishga xizmat qiladi",
-            "taklifni ortishiga xizmat qiladi",
-            "talab bilan taklif muvozanatlashtiradi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Remarketing qaysi holatalarda qo'llaniladi?",
-        "options": [
-            "talabning pasayishi yuzaga kelganda",
-            "taklif ortib ketganda",
-            "talab bilan taklif muvozanatlashganda",
-            "taklif pasayib ketganda"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "To'g'ridan-to'g'ri marketing nima?",
-        "options": [
-            "ehtiyojni hisobga olgan holda, firma ishlab chiqargan mahsulotni sotish",
-            "kompyuter baza ma'lumotlari asosida mijozlarni o'rganish",
-            "ehtiyojni hisobga olmagan holda firma ishlab chiqargan mahsulotini sotish",
-            "tovarni savdo vositalarisiz sotish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Mavjud talab darajasini saqlab qolish uchun amalga oshiriladigan hatti-harakatlar-bu",
-        "options": [
-            "qo'llab-quvvatlovchi marketing",
-            "rivojlanuvchi marketing",
-            "rag'batlantiruvchi marketing",
-            "remarketing"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Rag'batlantiruvchi marketing",
-        "options": [
-            "talabni uyg'otadi",
-            "talabni rag'batlantiradi",
-            "talabni pasaytirish",
-            "talabni yo'qotadi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Demarketing bu",
-        "options": [
-            "talabni rag'batlantirishni anglatadi",
-            "talabni muvozanatlashtirini anglatadi",
-            "talabni qo'llashni anglatadi",
-            "talabni tugatishni anglatadi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing muhitini shakllantiruvchi ichki omillar ...",
-        "options": [
-            "firma rahbariyati tomonidan nazorat qilinadigan - texnologik jarayon, moliyaviy ahvoli, tashkiliy tuzilishi, bozorni tanlash bilan bog'liqdir",
-            "firma rahbariyati tomonidan nazorat qilinmaydigan - texnologik jarayon va moliyaviy ahvoli tashkiliy tuzilishi bozorni tanlash bilan bog'liqdir",
-            "firma rahbariyati tomonidan nazorat qilinadigan korxonaning moliyaviy ahvoli va bozorni tanlash bilan bog'liqdir",
-            "firma rahbariyati tomonidan nazorat qilinmaydigan korxonaning moliyaviy ahvoli va bozorni tanlash bilan bog'liqdir"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing tashqi muhiti omillari ...",
-        "options": [
-            "tashkilot va uning marketing xizmatlari tomonidan boshqarila olmaydigan, nazorat qilinmaydigan, faoliyatiga ta'sir ko'rsatuvchi tarkibiy qismlardir",
-            "tashkilot va uning marketing xizmatlari tomonidan boshqarila olmaydigan faoliyatiga ta'sir ko'rsatuvchi tarkibiy qismlardir",
-            "tashkilot va uning marketing xizmatlari tomonidan boshqarila olmaydigan faoliyatiga ta'sir ko'rsatmaydigan tarkibiy qismlardir",
-            "tashkilot va uning marketing xizmatlari tomonidan nazorat qilinmaydigan faoliyatiga ta'sir ko'rsatuvchi tarkibiy qismlardir"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Mikromuhitda quyidagi omillar nazorat qilinadi:",
-        "options": [
-            "firmaning infratuzilmasini",
-            "iste'molchining xatti-harakatini",
-            "siyosiy muhitni",
-            "raqobatchilarni"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing tizimi bu...",
-        "options": [
-            "qo'yilgan maqsadlarga erishish, maqsadli bozor talabini qondirish uchun marketing qismlarining aniq birikuvidir",
-            "qo'yilgan maqsadlarga erishish uchun marketing qismlarining aniq birikuvidir",
-            "maqsadli bozor talabini qondirish uchun marketing qismlarining aniq birikuvidir",
-            "maqsadli bozor talabini aniqlash va qondirish uchun marketing qismlarining aniq birikuvidir"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Ta'minotchilar",
-        "options": [
-            "alohida olingan tashkilot, uyushma, shaxslar yig'indisidan tarkib topib, firmani moddiy, moliyaviy va mahsulot resurslari bilan ta'minlaydi",
-            "alohida olingan tashkilot, uyushma, shaxslar yig'indisidan tarkib topib, firmani moddiy resurslari bilan ta'minlaydi",
-            "alohida olingan tashkilot, uyushma, shaxslar yig'indisidan tarkib topib, firmani moliyaviy va mahsulot resurslari bilan ta'minlaydi",
-            "alohida olingan tashkilot, uyushma, shaxslar yig'indisidan tarkib topib, firmani moddiy, moliyaviy resurslari bilan ta'minlaydi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Bozor strategiyasini shakllantirish, amalga oshirish, axborot bilan ta'minlash qaysi boshqaruv funksiyasiga mos tushadi?",
-        "options": [
-            "marketingni boshqarish",
-            "ishlab chiqarishni boshqarish",
-            "moliyaviy boshqarish",
-            "kadrlarni boshqarish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing bo'yicha vositachilar",
-        "options": [
-            "tashkilot uchun uning tovarlarini mijozlarga yetkazish, sotish, aloqa o'rnatish bo'yicha yordam ko'rsatuvchilardir",
-            "tashkilot uchun uning tovarlarini mijozlarga yetkazish, aloqa o'rnatish bo'yicha yordam ko'rsatuvchilardir",
-            "tashkilot uchun uning tovarlarini mijozlarga yetkazish sotish bo'yicha yordam ko'rsatuvchilardir",
-            "tashkilot uchun uning tovarlarini sotish aloqa o'rnatish bo'yicha yordam ko'rsatuvchilardir"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Iste'molchilar",
-        "options": [
-            "firmalar, alohida fizik shaxslar yoki ularni potentsial guruhi bo'lib, ular bozorda mavjud bo'lgan tovar va xizmatlarni olishga tayyor",
-            "alohida fizik shaxslar yoki ularni potentsial guruhi bo'lib ular bozorda mavjud bo'lgan tovar va xizmatlarni olishga tayyor",
-            "firmalar va ularni potentsial guruhi bo'lib ular bozorda mavjud bo'lgan tovar va xizmatlarni olishga tayyor",
-            "alohida fizik va jismoniy shaxslar bo'lib ular bozorda mavjud bo'lgan tovar va xizmatlarni olishga tayyor"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Raqobatchilar",
-        "options": [
-            "istak bo'yicha, safdosh tovar bo'yicha, tovar turi bo'yicha turkumlanadi",
-            "alohida olingan tashkilot va uyushma, shaxslar guruhidan tashkil topib firmani moddiy moliyaviy va mahsulot resurslari bilan ta'minlaydi",
-            "tashkilot uchun uning tovarlarini mijozlarga yetkazish bo'yicha yordam ko'rsatuvchilar",
-            "innovatsiyalarni tadqiq etuvchilar"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Vertikal marketing tizimi deganda nimani tushunasiz?",
-        "options": [
-            "bu taqsimot kanallarining shunday strukturasiki, unda ishlab chiqaruvchilar, ulgurji va chakana savdogarlar yagona bitta tizim sifatida faoliyat yuritadilar",
-            "bu taqsimot kanallarining shunday strukturasiki unda faqat ishlab chiqaruvchilar va ulgurji savdogarlar yagona bitta tizim sifatida faoliyat yuritadilar",
-            "ishlab chiqaruvchilar ham ulgurji va chakana savdogarlar ham alohida-alohida tizim sifatida faoliyat yuritadilar",
-            "brokerlar tizimi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Vertikal marketing tizimining qanday shakllari mavjud?",
-        "options": [
-            "bevosita, bilvosita",
-            "kuchli va o'rta kuchsiz",
-            "shartnoma asosidagi korporativ va ma'muriy",
-            "muntazam va nomuntazam"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing tizimi tarkibiga qaysi elementlarni qamrab oladi?",
-        "options": [
-            "ta'minotchilar, raqobatchilar, iste'molchilar, vositachilar, firma",
-            "ta'minotchilar, iste'molchilar, auditorlar, vositachilar",
-            "iste'molchilar, auditorlar, firma, ta'minotchilar",
-            "firma, raqobatchilar, vositachilar, auditorlar"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Birlamchi ma'lumotlar manbaalari nimalardan iborat?",
-        "options": [
-            "kuzatish",
-            "so'rov",
-            "eksperiment",
-            "shaxsiy uchrashuv"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Qayd etilganlardan qaysi biri reklama vositalariga kirmaydi?",
-        "options": [
-            "mexanik, fizik, bioreklamalar",
-            "bosma reklama",
-            "transport vositalari yordamidagi reklama",
-            "televidenie va radio reklama vositalari"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Quyidagilardan qaysi biri reklama turlariga mansub emas?",
-        "options": [
-            "majburlovchi",
-            "uyg'otuvchi (undovchi)",
-            "ma'lumot beruvchi",
-            "taqqoslama"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing Dasturlari qanday muddatga mo'ljallangan bo'ladi?",
-        "options": [
-            "qisqa muddatli, o'rta muddatli, uzoq muddatli",
-            "qisqa muddatli va uzoq muddatli",
-            "qisqa muddatli",
-            "faqat uzoq muddatli"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Makromarketing nima degani?",
-        "options": [
-            "makromarketing mamlakatning jami xo'jaligi miqyosidagi mahsulotlarni yaratish, uning pirovard iste'molchiga tomon ko'chishi",
-            "butun mamlakat bo'yicha moddiy boyliklarni va xizmatlar okimini boshqarishni tartibga solishdan iborat",
-            "kontsern va assotsiatsiya vazirliklar darajasidagi bozor muammolarining yechimini topish",
-            "korxona miqyosidagi bozor faoliyati"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing maqsadlarining to'g'risini aniqlang?",
-        "options": [
-            "ehtiyojni qondirish darajasini ko'tarish, foydani oshirish, bozorga yangi tovarlar chiqarish",
-            "korxona va tovarlar to'g'risida yaxshi fikrlarni shakllantirish",
-            "mo'ljallangan bozorni egallash va g'oyalar sotishni ko'paytirish",
-            "ehtiyojni qondirish darajasini ko'tarish va foydani oshirish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Nol bosqichli kanal ishtirokchilari kimlar",
-        "options": [
-            "ishlab chiqaruvchi, iste'molchi",
-            "vositachi va iste'molchi",
-            "ishlab chiqaruvchi va vositachi",
-            "ishlab chiqaruvchi vositachi va iste'molchi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing strategiyasi-bu",
-        "options": [
-            "maqsadga erishish uchun, qanday harakat qilish kerak degan savolga javob izlash",
-            "ishlab chiqarishni tashkil etish",
-            "sotishni rag'batlantirish",
-            "iste'molchilarni qo'llab-quvvatlash"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Taktika deganda nimani tushunasiz?",
-        "options": [
-            "marketing aniq yo'naltirilgan amaliyotini tanlash",
-            "marketing faoliyatini boshqarish",
-            "mahsulot assortimenti rejalashtirish va savdoga rag'bat beradigan tadbirlarni shakllantirish",
-            "savdo va taqsimot, marketing faoliyatini boshqarish va nazorat qilish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing faoliyatini bajarilishini nazorat qilishning qanday turlarini bilasiz?",
-        "options": [
-            "yillik rejani bajarilishini nazorat qilish, foydadorlikni nazorat qilish, strategik nazorat",
-            "strategik nazorat",
-            "foydadorlikni nazorat qilish",
-            "yillik rejani bajarilishini nazorat qilish, strategic nazorat"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing-MIKS ning asosiy to'ldiruvchilarini aniqlang?",
-        "options": [
-            "narx, mahsulot, o'rin joy, siljish harakat",
-            "tovar, pul, munosabat, mijoz, tadqiqot",
-            "tovar, pul, ehtiyoj, talab, taklif",
-            "narx, taklif, talab, ehtiyoj, haridorlar"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Kon'yuktura nima?",
-        "options": [
-            "u bozorda ma'lum bir vaqtda talab va taklif nisbati bilan bog'liq bo'lgan narxlar darajasi orqali yuzaga keladigan iqtisodiy holat",
-            "u bozorda ma'lum bir vaqtda talab va narx nisbati orqali yuzaga keladigan iqtisodiy holat",
-            "u bozorda talab va narx nisbati orqali vujudga kelayotgan talabdan iborat",
-            "u bozorda talab va narx nisbati orqali vujudga keladigan taklifdan iborat"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Konyuktura so'zining lug'aviy ma'nosi nima?",
-        "options": [
-            "lotincha holat",
-            "inglizcha masofa",
-            "lotincha oraliq",
-            "yunoncha masofa"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Bozor innovatsiyasi deganda nima tushuniladi?",
-        "options": [
-            "yangi mahsulotlarni bozorga chiqarish",
-            "yangi mahsulotlarni ishlab chiqish",
-            "mahsulot bo'yicha yangi g'oyalar olish",
-            "yangi mahsulot bo'yicha reklama uyushtirish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Bozor infrastrukturasi nima?",
-        "options": [
-            "bozor iqtisodiyoti uchun xizmat ko'rsatuvchi, har-xil sohalar tushuniladi",
-            "bozordagi talab va taklifni miqdordan va tarkiban bir-biriga muvofiq kelishib tushuniladi",
-            "bozor muvozanatining mavjudligi yoki buzulganligi tushuniladi",
-            "bozordagi talab va taklifni miqdordan va tarkiban bir-biriga nomuvofiq kelishib tushuniladi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Bozor mohiyatini aniqlang?",
-        "options": [
-            "bozor- mavjud, potentsial haridorlarning majmui",
-            "bozor-tovarlarni taklif qilish joyi",
-            "bozor-iqtisodiy ayriboshlash joyi",
-            "oldi-sotdi munosabatlari yig'indisi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Bozor turlaridan qaysilari to'g'ri?",
-        "options": [
-            "iste'mol tovarlari, ishlab chiqarish vositalari bozori va xizmatlar, qimmatli qog'ozlar, intellektual tovarlar va boshqalar",
-            "ishlab chiqarish vositalari bozori agrofirma va halq xo'jaligi ta'minoti",
-            "jahon bozori regional bozor va boshqalar",
-            "mahalliy bozor va dehqon bozori iste'molchi bozori"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Bozorga yorib kirish strategiyasining mohiyatini aniqlang?",
-        "options": [
-            "tovarlarning boshlang'ich bahosi past o'rnatilib, talab rag'batlantiradi, bozorda asosiy ulushni egallab, narx oshiriladi",
-            "tovarlar ko'p miqdorda ishlab chiqarilib, yuqori narx belgilanadi",
-            "past bahoda, oz miqdorda tovarlar bilan bozorga kiriladi",
-            "bozordagi narx bilan tovar ishlab chiqariladi va bozorda o'z o'rnini egallaydi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Tovarning yashash davri bosqichlarini ketma-ketligining to'g'riligini ko'rsating?",
-        "options": [
-            "tatbiq qilish, o'sish, yetuklik, to'yinish, pasayish",
-            "to'yinish, tadbiq qilish, o'sish, yetuklik",
-            "etuklik, o'sish, pasayish, tadbiq qilish",
-            "o'sish, yetuklik, pasayish, to'yinish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Tovar belgisi qanday vazifani bajaradi?",
-        "options": [
-            "sifat kafolati, individuallik va himoya qilish",
-            "marka nomi va marka belgisi",
-            "tovar sifati va xizmat qilish muddati",
-            "individuallik va himoya qilish, kafolatlash"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Mebel, gilam, telefon, kir yuvish mashinasi tovarning qaysi turiga mansub?",
-        "options": [
-            "tanlab olinadigan tovarlar",
-            "alohida ehtiyojdagi tovarlar",
-            "passiv tovarlar",
-            "impulsiv tarzda sotib olinadigan tovarlar"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Tovarni qaysi hayotiylik davrida firma yuqori foyda oladi?",
-        "options": [
-            "yuksalish",
-            "pasayish",
-            "hayotga tadbiq etish",
-            "etilish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "General Motors uchun GM- bu...",
-        "options": [
-            "marka belgisi",
-            "tovar markasi",
-            "marka nomi",
-            "tovar belgisi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Coca-cola bu ...",
-        "options": [
-            "marka nomi",
-            "tovar belgisi",
-            "tovar markasi",
-            "marka belgisi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Impulsiv tarzda sotib olinadigan tovarlarga qaysilar kiradi?",
-        "options": [
-            "saqich, gazeta, kitob",
-            "oziq ovqat mahsulotlari",
-            "zontik sharf",
-            "mashina va uy"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Demping narx bu ...",
-        "options": [
-            "tovarni o'z tannarxidan arzon sotish",
-            "tovarni bozor narxida sotish",
-            "ko'zlangan foydani keltiruvchi narx belgilash san'ati",
-            "tovarni bozor narxidan qimmatga sotish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "SWOT tahlili-bu",
-        "options": [
-            "ichki imkoniyatlar, ichki xavf-xatar, tashqi imkoniyatlar, tashqi xavf-xatar",
-            "ichki imkoniyatlar va ichki xavf-xatar",
-            "tashqi imkoniyatlar va tashqi xavf-xatar",
-            "ichki imkoniyatlar"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Monopoliya nima?",
-        "options": [
-            "bozorda bitta ishlab chiqaruvchi ko'pchilik xaridorlarga xizmat ko'rsatadi",
-            "Tadbirkorlarning erkinligi",
-            "ko'p sonli kichik firmalarning raqobatlashuvi",
-            "bozorda ishlab chiqaruvchilar soni juda ko'p bo'lib, xaridorlarga xizmat qiladilar"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Monopsoniya- bu",
-        "options": [
-            "tanho iste'molchining hukmronligi",
-            "bozorda u qadar ko'p bo'lmagan iste'molchilarning hukmronligi",
-            "bozorda ishlab chiqaruvchilar soni juda ko'p bo'lib, xaridorlarga xizmat qiladilar",
-            "tarmoqda u qadar ko'p bo'lmagan korxonalarning hukmronlik qilishi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing fanining asosiy maqsadi nimadan iborat?",
-        "options": [
-            "Mamnun xaridorlardan foyda olish ilmlarini tashkillashtirish",
-            "Sotuv hajmini oshirish",
-            "Reklama siyosatini rivojlantirish",
-            "Xaridorlar e'tirozlarini maksimal bartaraf etish"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Tovarlarning hayotiy tsikli qanday fazalardan iborat",
-        "options": [
-            "vujudga kelish, o'sish, etuklik, so'nish",
-            "narx, manzil, tovar va reklama",
-            "moda, stil, fetish",
-            "brend, marka, promoshn"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing- inson faoliyati turi bo'lib, zarurat va ehtiyojlarni ayirboshlash vositasida qondirishga yo'naltirilgan degan ibora qaysi olimga taaluqli",
-        "options": [
-            "Filip Kotlerga",
-            "Genri Fordga",
-            "Benedjamin Franklinga",
-            "Garri Kisenjerga"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Marketing nazariyasi va amaliyoti qaysi davlatda ilk bor amaliy qaror topdi",
-        "options": [
-            "AQShda",
-            "Xitoyda",
-            "Buyuk Britaniyada",
-            "Germaniyada"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Raqamli marketing davri nechanchi yildan boshlab rivojlana boshladi",
-        "options": [
-            "2000 yildan boshlab",
-            "2025 yilda boshlanishi bashorat etilmoqda",
-            "1960 yildan boshlab",
-            "1945 yildan boshlab"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Raqobat bu:",
-        "options": [
-            "bozor iqtisodiyoti sharoitida o'z mavqeini mustahkamlash uchun kurash",
-            "Majburiy safarbarlik",
-            "sotsialistik musobaqa",
-            "tovar ishlab chiqaruvchiga tanho hukmronlikni ta'minlab beruvchi dastak"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Savdo vositachilari",
-        "options": [
-            "ulgurji, chakana savdogarlar",
-            "bank kredit sug'urta va boshqa moliyaviy xizmatlarni amalga oshiradi",
-            "savdo va logistik, marketing vositachilariga bo'linadi",
-            "ombor tizimi xizmatlarida tovar va oqim harakatlarini transportirovka qilish bilan shug'ullanadi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Moliyaviy vositachilar",
-        "options": [
-            "bank, kredit, sug'urta va boshqa moliyaviy xizmatlarni amalga oshiradi",
-            "savdo va logistik, marketing vositachilariga bo'linadi",
-            "ulgurji va chakana savdogarlar",
-            "ombor tizimi xizmatlarida tovar va oqim harakatlarini transportirovka qilish bilan shug'ullanadi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Logistika vositachilari",
-        "options": [
-            "ombor tizimi xizmatlarida tovar, oqim harakatlarini transportirovka qilish bilan shug'ullanadi",
-            "savdo, logistik, marketing vositachilariga bo'linadi",
-            "ulgurji va chakana savdogarlar",
-            "bank kredit sug'urta va boshqa moliyaviy xizmatlarni amalga oshiradi"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Brokerlar- bu",
-        "options": [
-            "ishlab chiqaruvchi bilan iste'molchini uchrashtiruvcbi firmalar",
-            "turli mamlakatlarda eksport ishlarini bajaradigan firmalar",
-            "turli mamlakatlarda import ishlarini bajaradigan firmalar",
-            "qimmatli qog'ozlar metallar oldi-sotdisi bilan shug'ullanadigan firmalar"
-        ],
-        "correct_index": 0
-    },
-    {
-        "question": "Neposredstvennaya distributsiyani tanlashning afzalliklari nimada?",
-        "options": [
-            "Mijoz bilan bevosita aloqa o'rnatish va taqsimot jarayonini to'liq nazorat qilish",
-            "Mahsulot tannarxining haddan tashqari oshishi",
-            "Savdo kanallari sonining kamayib ketishi",
-            "Raqobatchilar bilan hamkorlik qilish zarurati"
-        ],
-        "correct_index": 0
-    },
-]
-
-for i, quiz in enumerate(QUIZ_DATA):
-    shift = i % 4
-    quiz["options"] = quiz["options"][-shift:] + quiz["options"][:-shift]
-    quiz["correct_index"] = (quiz["correct_index"] + shift) % 4
+    {"question": "1. An`anaviy marketingning bosh g`oyasi", "options": ["iste`molchiga kerakli narsani ishlab chiqarish", "imkoniyat boricha ishlab chiqarish", "kam harajat evaziga mahsulot ishlab chiqarish", "resurlar tejamkorligiga rioya qilish"], "correct_index": 0},
+    {"question": "2. Marketing kontseptsiyasining ma’nosi:", "options": ["mahsulot hajmiy o’sishi bilan tannarxining kamayishi odamlar talabini qondirishga yo’naltirish", "talabni shakllantirish, sotishni takomillashtirish, ishlab chiqarishni odamlar talabini qondirishga yo’naltirish", "mahsulot sifatining o’sishi bilan mahsulot sotish hajmining o’sishi ва odamlar talabini qondirishga yo’naltirish", "mahsulot sifatining o’sishi bilan mahsulot sotish hajmining o’sishi sotishni takomillashtirish"], "correct_index": 1},
+    {"question": "3. Marketing sub’ekti nima?", "options": ["ishlab chiqaruvchi va xizmat ko’rsatuvchi tashkilot texnologiya va jihozlar", "yangi xorijiy sotish bozorlarini qo’shimcha tadqiq qilish firma tovarlarini xorijiy bozorlarida sotishni tashkil etish", "iste’molchi tashkilotlar, ulgurji savdo, marketing bo’yicha mutaxassislar,ishlab chiqaruvchi va xizmat ko’rsatuvchi tashkilot", "marketing bo’yicha mutaxassislar  xizmat ko’rsatuvchi tashkilot texnologiya va jihozlar"], "correct_index": 2},
+    {"question": "4. Tadbirkorning marketing majmuasiga kiradi", "options": ["sotuvchi, iste’molchi, haridor o’rtasidagi  vositachi", "tovar, bozor, raqobat, raqiblar", "ishlab chiqarish, ta’minot, sotish, iste’mol", "tovar, hizmat, uning narxi, yetkazib berish va sotish usullari, reklama, sotishni rag’batlantirish"], "correct_index": 3},
+    {"question": "5. Marketing so’zining lug’aviy ma’nosi-bu:", "options": ["market-bozor, ing-harakat", "market-do’kon, ing-harakat", "market-bozor, ing-qoshish", "market-maskan, ing-harakat"], "correct_index": 0},
+    {"question": "6. “Imkoning boricha ko’proq tovar ishlab chiqaraver, chunki bozor talabi cheksiz” shiori qaysi kontseptsiyaga xos", "options": ["ijtimoiy-ahloqiy kontseptsiya", "ishlab chiqarishga yo’naltirilgan kontseptsiya", "iste’molchiga yo’naltirilgan kontseptsiya", "sotishga yo’naltirilgan kontseptsiya"], "correct_index": 1},
+    {"question": "7. “Mana tovar tayyor kelavering va savdolashing” shiori qaysi kontseptsiyaga xos", "options": ["ishlab chiqarishga yo’naltirilgan kontseptsiya", "iste’molchiga yo’naltirilgan kontseptsiya", "sotishga yo’naltirilgan kontseptsiya", "ijtimoiy-ahloqiy kontseptsiya"], "correct_index": 2},
+    {"question": "8. Marketing tadqiqotlari qanday asosiy elementlardan iborat?", "options": ["ma’lumotlarni tahlil qilish, o’rganish, qayta ishlash", "ma’lumotlarni o’rganish, yig’ish, qayta ishlash", "ma’lumotlarni to’plash, yig’ish, qayta ishlash", "ma’lumotlarni tahlil qilish, yig’ish, qayta ishlash"], "correct_index": 3},
+    {"question": "9. Marketing qanday tizimni ifodalaydi?", "options": ["ishlab chiqarish – iste`mol", "ayirboshlash", "ishlab chiqarish - sotish", "sotish"], "correct_index": 0},
+    {"question": "10. Marketingning asosiy tamoyillarini aniqlang?", "options": ["haridor va mijozlarning puxta o`rganish, tahlil qilish, tovar harid qilishga undash", "bozorni bilish, bozorga moslashish, bozorga ta`sir o`tkazish", "reklama, tovar, markalash, narx.", "analitik, ishlab chiqarish, savdo-sotiq, boshqaruv va nazorat"], "correct_index": 1},
+    {"question": "11. Marketing tamoyili nima?", "options": ["Bozor iqtisodiyoti sharoitida  korxonalarning boshqa korxonalar bilan xamkorlik faoliyati", "Bozor iqtisodiyoti sharoitida barcha korxonalar haqida ma’lumotga ega bo’lish", "korxonani ishlab chiqarish, sotish faoliyatini boshqarish to’g’risidagi ilmiy asoslangan tasavvurlar tasnifidir", "korxonani ishlab chiqarish  faoliyati  to’g’risidagi ma’lumotga ega bo’lish"], "correct_index": 2},
+    {"question": "12. Marketingning asosiy funktsiyalarini aniqlang?", "options": ["ishlab chiqarish ва tashkil etish", "boshqaruv investitsiyalash. va nazorat", "analiz ва boshqaruv", "analitik, ishlab chiqarish, savdo- sotiq, boshqaruv va nazorat"], "correct_index": 3},
+    {"question": "13. Ishlab chiqarishni xom-ashyo resurslari bilan ta’minlash-bu...", "options": ["marketingni ishlab chIqarish funktsiyasi", "marketingni nazorat funktsiyasi", "marketingni sotish funktsiyasi", "marketingni tashkiliy funktsiyasi"], "correct_index": 0},
+    {"question": "14. Marketing turlaridan qaysisi to`g`ri?", "options": ["ishlab chiqarish vositalari tovar va xizmatlar", "remarketing, demarketing, qo`llab-quvvatlovchi, qarama-qarshi harakatlanuvchi", "tijorat va notijorat iste`mol tovarlari xizmatlar va boshqalar", "tijorat va notijorat iste`mol tovarlari"], "correct_index": 1},
+    {"question": "15. ....noratsional ehtiyojlarni qondiruvchi tovar va hizmatlar bo’lgan talabni kamaytirish yoki butunlay yo’q qilishga xizmat qiladi", "options": ["rivojlantiruvchi marketing", "demarketing", "antimarketing", "konversion marketing"], "correct_index": 2},
+    {"question": "16. Rivojlantiruvchi marketing turi qaysi holatlarda qo’llaniladi?", "options": ["talab pasayib ketganda", "taklif ortib ketganda", "talab bilan taklif muvozanatlashganda", "potentsial talab mavjud, uni real talabga aylantirish kerak bo’lganda"], "correct_index": 3},
+    {"question": "17. Antimarketing qaysi holatlarda qo’llaniladi?", "options": ["noratsional ehtiyojlarni qondiruvchi tovar, hizmatlar bo’lgan talabni kamaytirish yoki butunlay yo’q qilishga xizmat qiladi", "talab pasaytirishga xizmat qiladi", "taklifni ortishiga xizmat qiladi", "talab bilan taklif muvozanatlashtiradi"], "correct_index": 0},
+    {"question": "18. Remarketing  qaysi holatalarda qo’llaniladi?", "options": ["taklif ortib ketganda", "talabning pasayishi yuzaga kelganda", "talab bilan taklif muvozanatlashganda", "taklif pasayib ketganda"], "correct_index": 1},
+    {"question": "19. To’g’ridan - to’g’ri marketing nima?", "options": ["kompьyuter baza ma’lumotlari asosida mijozlarni o’rganish", "ehtiyojni hisobga olmagan holda firma ishlab chiqargan mahsulotini sotish", "ehtiyojni hisobga olgan holda, firma ishlab chiqargan mahsulotni sotish", "tovarni savdo vositalarisiz sotish"], "correct_index": 2},
+    {"question": "20. Mavjud talab darajasini saqlab qolish uchun amalga oshiriladigan hatti-harakatlar-bu ..", "options": ["rivojlanuvchi marketing", "rag’batlantiruvchi marketing", "remarketing", "qo’llab-quvvatlovchi marketing"], "correct_index": 3},
+    {"question": "21. Rag`batlantiruvchi marketing", "options": ["talabni uyg`otadi", "talabni rabatlantiradi", "talabni pasaytirish", "talabni yo`qotadi"], "correct_index": 0},
+    {"question": "22. Demarketing – bu", "options": ["talabni muvozanatlashtirining anglatadi", "talabni ragbatlantirishni anglatadi", "talabni qo`llashni anglatadi.", "talabni tugatishni anglatadi."], "correct_index": 1},
+    {"question": "23. Marketing muhitini shakllantiruvchi ichki omillar ...", "options": ["firma rahbariyati tomonidan nazorat qilinmaydigan - texnologik jarayon ва moliyaviy ahvoli tashkiliy tuzilishi bozorni tanlash bilan bog’liqdir", "firma rahbariyati tomonidan nazorat qilinadigan korxonaning moliyaviy ahvoli ва bozorni tanlash bilan bog’liqdir", "firma rahbariyati tomonidan nazorat qilinadigan - texnologik jarayon, moliyaviy ahvoli, tashkiliy tuzilishi, bozorni tanlash bilan bog’liqdir", "firma rahbariyati tomonidan nazorat qilinmaydigan korxonaning moliyaviy ahvoli ва bozorni tanlash bilan bog’liqdir"], "correct_index": 2},
+    {"question": "24. Marketing tashqi muhiti omillari ...", "options": ["tashkilot va uning marketing xizmatlari tomonidan boshqarila olmaydigan faoliyatiga ta’sir ko’rsatuvchi tarkibiy qismlardir", "tashkilot va uning marketing xizmatlari tomonidan boshqarila olmaydigan faoliyatiga ta’sir ko’rsatmaydigan tarkibiy qismlardir", "tashkilot va uning marketing xizmatlari tomonidan nazorat qilinmaydigan faoliyatiga ta’sir ko’rsatuvchi tarkibiy qismlardir", "tashkilot va uning marketing xizmatlari tomonidan boshqarila olmaydigan, nazorat qilinmaydigan, faoliyatiga ta’sir ko’rsatuvchi tarkibiy qismlardir"], "correct_index": 3},
+    {"question": "25. Mikromuhitda quyidagi omillar nazorat qilinadi:", "options": ["firmaning infratuzIlmasini", "iste’molchining xatti-harakatini", "siyosiy muhitni", "raqobatchilarni"], "correct_index": 0},
+    {"question": "26. Marketing tizimi – bu...", "options": ["qo’yilgan maqsadlarga erishish uchun marketing qismlarining aniq birikuvidir", "qo’yilgan maqsadlarga erishish, maqsadli bozor talabini qondirish uchun marketing qismlarining aniq birikuvidir", "maqsadli bozor talabini qondirish uchun marketing qismlarining aniq birikuvidir", "maqsadli bozor talabini aniqlash va qondirish uchun marketing qismlarining aniq birikuvidir"], "correct_index": 1},
+    {"question": "27. Ta’minotchilar –", "options": ["alohida olingan tashkilot, uyushma, shaxslar yig’indisidan tarkib topib, firmani moddiy resurslari bilan ta’minlaydi", "alohida olingan tashkilot, uyushma, shaxslar yig’indisidan tarkib topib, firmani moliyaviy va mahsulot resurslari bilan ta’minlaydi", "alohida olingan tashkilot, uyushma, shaxslar yig’indisidan tarkib topib, firmani moddiy, moliyaviy va mahsulot resurslari bilan ta’minlaydi", "alohida olingan tashkilot, uyushma, shaxslar yig’indisidan tarkib topib, firmani moddiy, moliyaviy resurslari bilan ta’minlaydi"], "correct_index": 2},
+    {"question": "28. Bozor strategiyasini shakllantirish, amalga oshirish, axborot bilan ta'minlash qaysi boshqaruv funksiyasiga mos tushadi?", "options": ["ishlab chiqarishni boshqarish", "moliyaviy boshqarish", "kadrlarni boshqarish", "marketingni boshqarish"], "correct_index": 3},
+    {"question": "29. Marketing bo’yicha vositachilar –", "options": ["tashkilot uchun uning tovarlarini mijozlarga yetkazish, sotish, aloqa o’rnatish bo’yicha yordam ko’rsatuvchilardir", "tashkilot uchun uning tovarlarini mijozlarga yetkazish, aloqa o’rnatish bo’yicha yordam ko’rsatuvchilardir", "tashkilot uchun uning tovarlarini mijozlarga yetkazish sotish bo’yicha yordam ko’rsatuvchilardir", "tashkilot uchun uning tovarlarini sotish aloqa o’rnatish bo’yicha yordam ko’rsatuvchilardir"], "correct_index": 0},
+    {"question": "30. Iste’molchilar –", "options": ["alohida fizik shaxslar yoki ularni potentsial guruhi bo’lib ular bozorda mavjud bo’lgan tovar va xizmatlarni olishga tayyor", "firmalar, alohida fizik shaxslar yoki ularni potentsial guruhi bo’lib, ular bozorda mavjud bo’lgan tovar va xizmatlarni olishga tayyor", "firmalar ва ularni potentsial guruhi bo’lib ular bozorda mavjud bo’lgan tovar va xizmatlarni olishga tayyor", "alohida fizik va jismoniy shaxslar bo’lib ular bozorda mavjud bo’lgan tovar va xizmatlarni olishga tayyor"], "correct_index": 1},
+    {"question": "31. Raqobatchilar-…", "options": ["alohida olingan tashkilot ва uyushma,shaxslar guruhidan tashkil topib firmani moddiy moliyaviy va mahsulot resurslari bilan ta`minlaydi", "tashkilot uchun uning tovarlarini mijozlarga yetkazish bo`yicha yordam ko`rsatuvchilar", "istak bo`yicha,safdosh tovar bo`yicha,tovar turi bo`yicha turkumlanadi.", "innovatsiyalarni tadqiq etuvchilar"], "correct_index": 2},
+    {"question": "32. Vertikal marketing tizimi deganda nimani tushunasiz?", "options": ["bu taqsimot kanallarining shunday strukturasiki unda faqat ishlab chiqaruvchilar va ulgurji savdogarlar yagona bitta tizim sifatida faoliyat yuritadilar", "ishlab chiqaruvchilar xam ulgurji va chakana savdogarlar xam ва aloxida-aloxida tizim sifatida faoliyat yuritadilar", "brokerlar tizimi", "bu taqsimot kanallarining shunday strukturasiki, unda ishlab chiqaruvchilar, ulgurji va chakana savdogarlar yagona bitta tizim sifatida faoliyat yuritadilar."], "correct_index": 3},
+    {"question": "33. Vertikal marketing tizimining qanday shakllari mavjud?", "options": ["bevosita, bilvosita", "kuchli ва o`rta  kuchsiz.", "shartnoma asosidagi korporativ va ma`muriy", "muntazam va nomuntazam"], "correct_index": 0},
+    {"question": "34. Marketing tizimi tarkibiga qaysi elementlarni qamrab oladi?", "options": ["ta`minotchilar, iste`molchilar, auditorlar, vositachilar", "ta`minotchilar, raqobatchilar, iste`molchilar,vositachilar, firma", "iste`molchilar, auditorlar, firma, ta`minotchilar", "firma, raqobatchilar, vositachilar, auditorlar"], "correct_index": 1},
+    {"question": "35. Birlamchi ma'lumotlar manbaalari nimalardan iborat?", "options": ["so'rov", "eksperiment", "kuzatIsh", "shaxsiy uchrashuv"], "correct_index": 2},
+    {"question": "36. Qayd etilganlardan qaysi biri reklama vositalariga kirmaydi?", "options": ["bosma reklama", "transport vositalari yordamidagi reklama.", "televidenie va radio reklama vositalari.", "mexanik, fizik, bioreklamalar"], "correct_index": 3},
+    {"question": "37. Quyidagilardan qaysi biri reklama turlariga mansub emas?", "options": ["majburlovchi", "uyg`otuvchi (undovchi)", "ma`lumot beruvchi", "taqqoslama"], "correct_index": 0},
+    {"question": "38. Marketing dasturlari qanday muddatga mo`ljallangan bo`ladi?", "options": ["qisqa muddatli ва uzoq muddatli", "qisqa muddatli,o`rta muddatli,uzoq muddatli.", "qisqa muddatli", "faqat uzoq muddatli"], "correct_index": 1},
+    {"question": "39. Makromarketing nima degani?", "options": ["butun mamlakat bo`yicha  moddiy boyliklarni va xizmatlar okimini boshqarishni tartibga solishdan iborat.", "kontsern ва assotsiatsiya vazirliklar darajasidagi bozor muammolarining yechimini topish.", "makromarketing mamlakatning jami xo`jaligi miqyosidagi mahsulotlarni yaratish, uning pirovard iste`molchiga tomon ko`chishi", "korxona miqyosidagi bozor faoliyati."], "correct_index": 2},
+    {"question": "40. Marketing maqsadlarining to`g`risini aniqlang?", "options": ["korxona va tovarlar to`g`risida yaxshi fikrlarni shakllantirish.", "mo`ljallangan bozorni egallash va g`oyalar sotishni ko`paytirish", "ehtiyojni qondirish darajasini  ko`tarish ва foydani oshirish", "ehtiyojni qondirish darajasini  ko`tarish, foydani oshirish, bozorga yangi tovarlar chiqarish."], "correct_index": 3},
+    {"question": "41. Makromuhitning asosiy omillariga nimalr kiradi?", "options": ["iqtisodiyot, raqobatchilar, iste`molchilar, ta`minotchilar, demografik omillar, siyosiy omillar, hukumat, texnologiya", "demografik ma`lumotlar ва hukumat texnologiya", "iqtisodiy sharoitlar ва demografik omillar siyosiy omillar", "iste`molchilar ва iqtisodiyot raqobatchilar"], "correct_index": 0},
+    {"question": "42. Korxonaning ishlab chiqarishni shakllantirish,,tovarlar va xizmatlarningtayyorlovchidan iste`molchi yoki foydalanuvchiga borish oqimini boshqarish bilan bog`liq bo`lgan faoliyat bo`lib,korxona darajasidagi bozor faoliyatidan iborat-bu…", "options": ["muammoni qo`yish", "maqsadni aniqlash. ma`lumotlarni tanlash, xujjatlashtirish, nashrga berish", "ma`lumotlarga ishlov berish va ularni taxlil qilish", "maqsadni aniqlash."], "correct_index": 1},
+    {"question": "43. Nol bosqichli kanal ishtirokchilari kimlar", "options": ["vositachi va iste`molchi", "ishlab chiqaruvchi va vositachi", "ishlab chiqaruvchi, iste`molchi", "ishlab chiqaruvchi vositachi va ist`emolchi"], "correct_index": 2},
+    {"question": "44. Ob`ektga bog`liqligiga qarab marketing dastulari…", "options": ["5 turga bo`linadi", "3 turga bo`linadi", "4 turga bo`linadi", "2 turga bo`linadi."], "correct_index": 3},
+    {"question": "45. Tovar assortimenti uning harakat yo`nalishlari, reklama va sotish rejalashtirish rejasini tuzish kabilar marketing strategiyasining qaysi bir bosqichida o`rganiladi?", "options": ["marketing rejasini ishlab chiqish bosqichida", "bozorni tahlil qilish bosqichida", "korxonaning maqsad va imkoniyatlarini bosqichida", "mahsulotni bozorga chiqarish usulini tanlash bosqichida"], "correct_index": 0},
+    {"question": "46. Marketing strategiyasi-bu…", "options": ["ishlab chiqarishni tashkil etish", "maqsadga erishish uchun, qanday harakat qilish kerak?-degan savolga javob izlash", "sotishni ragbatlantirish", "iste`molchilarni qullab-quvvatlash"], "correct_index": 1},
+    {"question": "47. Marketing tadqiqotlari o’tkazish turlariga quyidagilarni kiritish mumkin:", "options": ["xaridorlarni  tahlil qilish ва sinama sotish", "segmentlarga ajratish, daromadlarni tahlil qilish", "kabinet, dala, shaxsiy savdo-sotiq", "kabinet, daromadlarni tahlil qilish"], "correct_index": 2},
+    {"question": "48. Taktika deganda nimani tushunasiz?", "options": ["marketing faoliyatini boshqarish", "mahsulot assortimenti rejalashtirish va savdoga rag’bat beradigan tadbirlarni shakllantirish", "savdo va taqsimot, marketing faoliyatini boshqarish va nazorat qilish", "marketing aniq yo’naltirilgan amaliyotini tanlash"], "correct_index": 3},
+    {"question": "49. Marketing faoliyatini bajarilishini nazorat qilishning qanday turlarini bilasiz?", "options": ["yillik rejani bajarilishini nazorat qilish,foydadorlikni nazorat qilish,strategik nazorat", "starategik nazorat", "foydadorlikni nazorat qilish", "yillik rejani bajarilishini nazorat qilish,strategic nazorat"], "correct_index": 0},
+    {"question": "50. Marketingni yopiq nazorat tizimida…", "options": ["aniq ko`rsatkichlarni kiritilayotgan korrektirovkasini baholash va maqsadga erishish darajasini tekshirishda marketing-menejment guruhini vakilini faol qatnashishi ko`zda tutiladi", "marketing-menejment guruhi vakilini to`g`ri aralashuvsiz reja, haqiqiy ko`rsatkichlarini solishtirish hamda ularni korrektirovka qilish amalga oshiriladi.", "yillik reja bajarilishini nazorat qilinadi", "foydadorlikni nazorat qilinadi"], "correct_index": 1},
+    {"question": "51. Marketing strategiyasining qaysi bir bosqichida mahsulotning sotish natijalari bir necha yol bo`yicha tahlil etilib, xato va yanglishlar aniqlanadi, marketologlarning fikri o`rganiladi?", "options": ["bozorni tahlil qilish bosqichida", "korxonaning maqsad va imkoniyatlarini o`rganish bosqichida", "marketing rejasini ishlab chiqish bosqichida", "yangi texnika va texnologiyani qo`llash bosqichida"], "correct_index": 2},
+    {"question": "52. Marketing–«MIKS»ning asosiy to`ldiruvchilarini aniqlang?", "options": ["tovar, pul, munosabat, mijoz, tadqiqot", "tovar, pul, ehtiyoj, talab, taklif", "narx, taklif, talab, ehtiyoj, haridorlar", "narx,mahsulot, o`rin joy, siljish harakat"], "correct_index": 3},
+    {"question": "53. Kon’yuktura nima?", "options": ["u bozorda  ma’lum bir vaqtda (talab va taklif nisbati, bilan bog’liq bo’lgan narxlar darajasi orqali) yuzaga keladigan iqtisodiy holat", "u bozorda  ma’lum bir vaqtda (talab va narx nisbati orqali) yuzaga keladigan iqtisodiy holat", "u bozorda (talab va narx nisbati orqali) vujudga kelayotgan talabdan iborat", "u bozorda (talab va narx nisbati orqali) vujudga keladigan taklifdan iborat"], "correct_index": 0},
+    {"question": "54. Konyuktura  so'zining  lug'aviy ma'nosi nima?", "options": ["ingllizcha  ,,masofa''", "lotincha ,,holat''", "lotincha  ,,oraliq''", "yunoncha  ,,masofa''"], "correct_index": 1},
+    {"question": "55. Konyuktura taxlili o'z ichiga oladi?", "options": ["istemolchilarning jami tarkibini bir tovarning boshqasini o'rnini egallay olishi narxning o'zgarishi va rejali xizmat", "ishlab chiqarishning jami tarkibini bir tovarning boshqasini o'rnini egallay olishi narxning o'zgarishi va rejali xizmat", "ishlab chiqarish va istemolchilarning jami tarkibini, bir tovarning boshqasini o'rnini egallay olishi, narxning o'zgarishi va rejali xizmat", "ishlab chiqarish va istemolchilarning jami tarkibini bir tovarning boshqasini o'rnini egallay olishi narxning o'zgarishi"], "correct_index": 2},
+    {"question": "56. Bozor innovatsiyasi deganda nima tushuniladi?", "options": ["yangi mahsulotlarni ishlab chiqish", "mahsulot bo'yicha yangi g'oyalar olish", "yangi mahsulot bo'yicha reklama uyushtirish", "yangI mahsulotlarni bozorga chiqarish"], "correct_index": 3},
+    {"question": "57. Bozor infrastrukturasi nima?", "options": ["bozor iqtisodiyoti uchun xizmat k o`rsatuvchi, har-xil sohalar tushuniladi.", "bozordagi talab va taklifni miqdordan va tarkiban bir-biriga muvofiq kelishib tushuniladi.", "bozor muvozanatining mavjudligi yoki buzulganligi tushuniladi.", "bozordagi talab va taklifni miqdordan va tarkiban bir-biriga nomuvofiq kelishib tushuniladi."], "correct_index": 0},
+    {"question": "58. Bozor moxiyatini aniqlang?", "options": ["bozor–tovarlarni taklif qilish joyi", "bozor- mavjud, potentsial haridorlarning majmui", "bozor–iqtisodiy ayriboshlash joyi", "oldi-sotdi munosabatlari yig`indisi"], "correct_index": 1},
+    {"question": "59. Bozor sig`imini shakllanishiga ta`sir etuvchi umumiy omillarni aniqlang?", "options": ["taklif xajmi va strukturasi", "mazkur tovar yoki tovar guruxi bo`yicha chetdan keltirilayotgan umumiy xajm", "ijtimoiy iqtisodiy, taklif xajmi va strukturasi, taklif xajmi va strukturasi", "iqtisodiy o`sish"], "correct_index": 2},
+    {"question": "60. Bozor turlaridan qaysilari to`g`ri?", "options": ["ishlab chiqarish vositalari bozori agrofirma va halq xo`jaligi ta`minoti.", "jahon bozori regional bozor va boshqalar.", "mahalliy bozor va dehqon bozori iste`molchi bozori.", "iste`mol tovarlari, ishlab chiqarish vositalari bozori va xizmatlar, qimmatli qog`ozlar, intellektual tovarlar va boshqalar"], "correct_index": 3},
+    {"question": "61. Bozorga «yorib kirish» strategiyasining mohiyatini aniqlang?", "options": ["tovarlarning boshlang`ich bahosi past o`rnatilib, talab rag`batlantiradi, bozorda asosiy ulushni egallab, narx oshiriladi", "tovarlar ko`p miqdorda ishlab chiqarilib, yuqori narx belgilanadi", "past bahoda, oz miqdorda tovarlar bilan bozorga kiriladi", "bozordagi narx bilan tovar ishlab chiqariladi va bozorda o`z o`rnini egallaydi"], "correct_index": 0},
+    {"question": "62. Bozorga sekin kirib olish strategiyasi qaysi xollarda samarali hisoblanadi?", "options": ["tovar ko`pchilik haridorlarga ma`lum.", "raqobat bozorda sezIlarli darajada emas.", "haridorlar yuqori narxda tovar harid qilishga tayyor.", "bozor sig`imi sezilarli darajada katta emas."], "correct_index": 1},
+    {"question": "63. Bozorga tez kirib borish strategiyasi qaysi xollarda samarali hisoblanadi?", "options": ["tovar ko`pchilik haridorlarga noma`lum", "ko`pchilik haridorlarning yuqori narx qanoatlantirmaydi", "bozor sig`imi katta", "raqobat keskinlashgan"], "correct_index": 2},
+    {"question": "64. Tovarning bozordagi xayotiy yo`lining o`sish bosqichida raqobatchilar soni qay tarzda bo`ladi?", "options": ["doimiy o`sib boruvchi bo`ladi", "kamayib boruvchi bo`ladi", "ko`p bo`lmaydi", "ko`p bo`ladi"], "correct_index": 3},
+    {"question": "65. Kundalik talab tovarlari nimalar bilan xarakterlanadi?", "options": ["sotuvchilar bilan qo`shimcha maslahatlar uchun zaruriyatini yo`qligi bilan", "maxsus do`konlar tarmog`i orqali tarqatilishni", "katta pul summasini egallashi bilan", "sotuvchilar bilan qo`shimcha maslahatlar uchun zaruriyatini borligi bilan"], "correct_index": 0},
+    {"question": "66. Tovarning yashash davri bosqichlarini ketma-ketligining to’g’riligini ko’rsating?", "options": ["to’yinish, tadbiq qilish, o’sish, yetuklik", "tatbiq qilish, o’sish, yetuklik, to’yinish, pasayish", "etuklik, o’sish, pasayish, tadbiq qilish", "o’sish, yetuklik, pasayish, to’yinish"], "correct_index": 1},
+    {"question": "67. Tovarning shtrix kodida birinchi 2 ta raqam yoki ba’zi hollarda 3 ta raqam nimani bildiradi?", "options": ["nazorat raqamini", "iste’mol xususiyatini", "ishlab chIqaruvchi mamlakatni", "ishlab chiqaruvchi firmani"], "correct_index": 2},
+    {"question": "68. Tovar ayirboshlashning asosiy sharti - ?", "options": ["ortiqcha tovarni paydo bo’lishi, ehtiyojning ortishi, ishlab chiqarishni kengaytirishi", "ortiqcha tovarni paydo bo’lishi, ishlab chiqarishni kengaytirishi va ixtisoslashuvi", "ortiqcha tovarni paydo bo’lishi, ehtiyojning ortishi, ishlab chiqarishni ixtisoslashuvi", "ortiqcha tovarni paydo bo’lishi, ehtiyojning ortishi, ishlab chiqarishni kengaytirishi va ixtisoslashuvi"], "correct_index": 3},
+    {"question": "69. Tovarlarning an’anaviy yashash davrida qanday bosqichlar bor?", "options": ["ishlab chiqarish, kirib kelish,o`sish, yetuklik, to`yinish, inqiroz", "ishlab chiqarish, sotish, foyda olish", "ishlab chiqarish, talabni shakillantirish,sotish,narx belgilash", "ishlab chiqarish, sotish, inqiroz"], "correct_index": 0},
+    {"question": "70. Tovar harakati turlari:", "options": ["tovar ishlabchiqaruvchilar bevosita o`zlari savdoni tashkil etadi.", "tovar ishlab chiqaruvchi vositalarsiz tovarni sotadi, tovar egasi vositachilar orqali tovarni sotadi, tovar egasi savdo tashkilotlari orqali tovarni sotadi.", "tovar egasi tovarni ulgurji va chakana savdo do`konlari orqali sotadi.", "tovar ishlab chiqaruvchi o`zi bevosita tovar sotish bilan shug`ullanmaydi."], "correct_index": 1},
+    {"question": "71. Tovar belgisi qanday vazifani bajaradi?", "options": ["marka nomi va marka belgisi", "tovar sifati va xizmat qilish muddati", "sifat kafolati, individuallik va himoya qilish", "individuallik va himoya qilish, kafolatlash"], "correct_index": 2},
+    {"question": "72. Mebel, gilam, telefon, kir yuvish mashinasi tovarning qaysi turiga mansub?", "options": ["alohida ehtiyojdagi tovarlar", "passiv tovarlar", "impulsiv tarzda sotib olinadigan tovarlar", "tanlab olinadigan tovarlar"], "correct_index": 3},
+    {"question": "73. Marketing tomonidan nazorat qilib bo’lmaydigan omillarga quyidagilar kiradi:", "options": ["iste’molchilar, raqobat, hokimiyat, iqtisodiyot, texnologiya", "bozorni tanlash, raqobat hokimiyat, iqtisodiyot", "maqsadli bozorni tanlash, marketing tashkil etish", "tovarlar,bozor, baho, reklama, raqobat"], "correct_index": 0},
+    {"question": "74. Tovarni qaysi hayotiylik davrida firma yuqori foyda oladi?", "options": ["pasayish", "yuksalish", "hayotga tadbiq etish", "etilish"], "correct_index": 1},
+    {"question": "75. \"General  Motors\" uchun \"GM\"- bu...", "options": ["tovar markasi", "marka nomi", "marka belgisi", "tovar belgisi"], "correct_index": 2},
+    {"question": "76. Coca-cola bu ...", "options": ["tovar belgisi", "tovar markasi", "marka belgisi", "marka nomi"], "correct_index": 3},
+    {"question": "77. Impul`siv tarzda sotib olinadigan tovarlarga qaysilar kiradi?", "options": ["saqich, gazeta, kitob", "oziq ovqat mahsulotlari", "zontik sharf", "mashina va uy"], "correct_index": 0},
+    {"question": "78. Narx belgilash siyosati qaysi javobda to’g’ri izohlangan?", "options": ["oliy rahbariyat tomonidan narxlarni shakllantirish bo’yicha qat’iy amal qiladigan printsiplar majmui", "korxonaning narx bo’yicha qaror qabul qilgandan so’ng,  kundalik hayotida rioya qiladigan umumiy qoidalar", "ishlab chiqaruvchi belgilagan narx so’ng  kundalik hayotida rioya qiladigan umumiy qoidalar", "tovarni ishlab chiqarish va sotish bo’yicha belgilangan narxlar majmuini tashkil qiladi"], "correct_index": 1},
+    {"question": "79. Narxni ko`tarish, servisni qisqartirish yo`li bilan talabni vaqtinchalik yoki surunkasiga pasaytirish qanday marketing hisoblanadi?", "options": ["sinxron marketing", "konversion marketing", "demarketIng", "qarama-qarshi xarakatlanuvchi marketing"], "correct_index": 2},
+    {"question": "80. Demping narx bu ...", "options": ["tovarni bozor narxida sotish", "ko'zlangan foydani keltiruvchi narx belgilash san'ati", "tovarni bozor narxidan qimmatga sotish", "tovarni o'z tannarxidan arzon sotish,"], "correct_index": 3},
+    {"question": "81. Jaxon bahosi –bu:", "options": ["muayyan tovarga ketgan baynalminal sarf harajatlarni o`zida aks ettIruvchi narx.", "tovarni jaxon standarti talabiga mos kelish darajasini o`zida aks ettiruvchi narx.", "jaxon bozorida talab va taklif nisbatini o`zida ifoda etuvchi narx", "jaxon bozorida raqobatbardosh narx"], "correct_index": 0},
+    {"question": "82. Limitlangan baxo- bu:", "options": ["davlat tomonidan chegaralanmagan narx.", "davlat tomonidan chegaralangan narx.", "dotatsiyalanmagan narx.", "sotuvchi uchun mo`ljallangan narx."], "correct_index": 1},
+    {"question": "83. Ishlab chiqarish bahosi- bu:", "options": ["haridor uchun muljal, preskurant narx.", "tovarning bittalab yoki kichik partiyalar bilan axoliga sotiladigan narx.", "korxonaning shu maxsulotni ishlab chiqarish, marketing harajatlariga kutiladigan daromad xajmining kushiladigan teng bulgan narx.", "iste`molchilarning sotib olishga rozi bulgan narx."], "correct_index": 2},
+    {"question": "84. Talab baxosi-bu:", "options": ["iste`molchining sotib olishga bo`lgan narx.", "haridorlar uchun mo`ljalangan preyskurant narx.", "tovarning bittalab yoki kichik partiyalar bilan aholiga sotiladigan narx.", "korxonaning shu maxsulotni ishlab chiqarish, marketing harajatlariga kutiladigan daromad xajmining qo`shilganiga teng bo`lgan narx"], "correct_index": 3},
+    {"question": "85. Erkin bozor ulgurji baxosi- bu:", "options": ["tannarx foyda va qqs yig`indIsi.", "iste`molchining sotib olishga rozi bulgan narx.", "tovarning bittalab yoki kichik partiyalar bilan axoliga sotiladigan narx.", "haridorlar uchun mo`ljallangan, preyskurant narx."], "correct_index": 0},
+    {"question": "86. Qat`iy belgilangan baxolar- bu:", "options": ["talab baxoning taklif baxoga tengligini aks ettiruvchi narx.", "oldi- sotdi bo`yicha shartnomada belgilab qo`yIlgan va o`zgartirilmaydigan narx.", "davlat tomonidan belgilangan baxo.", "iste`molchining sotib olishga bo`lgan narx."], "correct_index": 1},
+    {"question": "87. Sotish hajmining yuqoriligi hamda past bozor ulushi – bu...", "options": ["yulduzlar matritsasiga xos ko’rinish", "sog’in sigirlarga xos ko’rinish", "yovoyi mushuklarga xos ko’rinIsh", "itlarga xos ko’rinish"], "correct_index": 2},
+    {"question": "88. Savdo vositachilari-…", "options": ["bank kredit sug`urta va boshqa moliyaviy xizmatlarni amalga oshiradi", "savdo va logistik,marketing vositachilariga bo`linadi", "ombor tizimi xizmatlarida tovar va oqim holatlarini transportirovka qilish bilan shug`ullanadi", "ulgurji,  chakana savdogarlar."], "correct_index": 3},
+    {"question": "89. Moliyaviy vositachilar-….", "options": ["bank, kredit, sug`urta va boshqa moliyaviy xizmatlarni amalga oshiradi.", "savdo va logistik,marketing vositachilariga bo`linadi", "ulgurji va chakana savdogarlar", "ombor tizimi xizmatlarida tovar va oqim holatlarini transportirovka qilish bilan shug`ullanadi"], "correct_index": 0},
+    {"question": "90. Logistika vositachilari-…", "options": ["savdo,logistik,marketing vositachilariga bo`linadi", "ombor tizimi xizmatlarida tovar,   oqim holatlarini transportirovka qilish bilan shug`ullanadi.", "ulgurji va chakana savdogarlar", "bank kredit sug`urta va boshqa moliyaviy xizmatlarni amalga oshiradi"], "correct_index": 1},
+    {"question": "91. Barqaror va mustahkam bozor ulushi hamda bozor talabi – bu...", "options": ["yovoyi mushuklarga xos ko’rinish", "yulduzlar matritsasiga xos ko’rinish", "sog’in sigirlarga xos ko’rinish", "itlarga xos ko’rinish"], "correct_index": 2},
+    {"question": "92. Sotish hajmining va bozor ulushining pastligi – bu...", "options": ["yulduzlar matritsasiga xos ko’rinish", "yovoyi mushuklarga xos ko’rinish", "sog’in sigirlarga xos ko’rinish", "Itlarga xos ko’rinish"], "correct_index": 3},
+    {"question": "93. Talab bilan taklifni o`zaro ta`siri bu -", "options": ["alohida shaxslar yoki guruhning xohish-ehtiyojlari,  uzluksiz qondirish jarayoni", "mavjud resurslardan samarali foydalanish jarayoni", "ishlab chiqariuvchi kuchlarni joylashtirishdagi muvofiqlikni ta`minlash jarayoni", "kilolab sotasanu tonnalab foyda olasan degani"], "correct_index": 0},
+    {"question": "94. Yuqori talab hajmi va bozor ulushi – bu...", "options": ["sog’in sigirlarga xos ko’rinish", "yulduzlar matrItsasiga xos ko’rinish", "yovoyi mushuklarga xos ko’rinish", "itlarga xos ko’rinish"], "correct_index": 1},
+    {"question": "95. CHakana savdo bu…", "options": ["yuqori malakali tovarshunos bilan bozorni chuqur o’rganish", "umumlashgan vositachi hisoblanadi va ko’pchilik vazifalarni bajaradi", "aholIga to’g’ridan-to’g’ri tovarlar sotish", "baholarni o’rnatish, savdo madaniyatini shakllantirish"], "correct_index": 2},
+    {"question": "96. Brokerlar- bu  ...", "options": ["turli mamlakatlarda eksport ishlarini bajaradigan firmalar", "turli mamlakatlarda import ishlarini bajaradigan firmalar", "qimmatli qog’ozlar metallar oldi-sotdisi bilan shug’ullanadigan firmalar", "ishlab chiqaruvchi bilan iste’molchini uchrashtIruvchi firmalar"], "correct_index": 3},
+    {"question": "97. Narxsiz raqobat", "options": ["tovar zamonaviy dizayni, yuqori sifati, servis xizmati, ishlab chiqaruvchi korxonaning imidji asosiy omillariga aylanadi", "tovarlarga past narx belgilanadi", "tovarlarga yuqori narx belgilanadi", "tovarlarga muntazam narx belgilanadi"], "correct_index": 0},
+    {"question": "98. Raqobat so’zi qaysi tildan olingan va qanday ma’noni anglatadi?", "options": ["frantsuzcha, maqsad sari kurashish degani", "lotinchadan olingan, maqsadga erishish uchun kurash", "yunonchadan olingan musobaqa degani", "inglizchadan olingan maqsad sari yo’l"], "correct_index": 1},
+    {"question": "99. Raqobat – bu:", "options": ["Majburiy safarbarlik", "“sotsialistik musobaqa”", "bozor Iqtisodiyoti sharoitida o’z mavqeini mustahkamlash uchun kurash", "tovar ishlab chiqaruvchiga tanho hukmronlikni ta’minlab beruvchi dastak"], "correct_index": 2},
+    {"question": "100. Tovar raqobatbardoshligini baholash:", "options": ["o’xshash tovar namunasini topish;", "tovarlarning asosiy ko’rsatkichlarini belgilash;", "o’xshash tovar topish;", "tovarlarning asosiy ko’rsatkIchlarini belgilash o’xshash tovar namunasini topish"], "correct_index": 3},
+    {"question": "101. G`irrom raqobat", "options": ["sanoat josusligi, elementlaridan foydalanib, sifati past, qalbaki tovarlar ishlab chiqariladi", "tovarlarga past narx belgilanadi", "tovarlarga yuqori narx belgilanadi", "faqat yuqori sifatli tovarlar ishlab chiqariladi"], "correct_index": 0},
+    {"question": "102. Funktsional raqobat", "options": ["bir extiyojni qondirishning juda ko`p, har xil usullari mavjud bo`lishi bilan bog`liq", "bir maqsadga mo`ljallangan turlicha, ammo g`oyat muhim tomonlari bilan ajralib turadigan tovarlar mavjud shartida paydo bo`ladi", "turli ehtiyojlarni turli xil usullar yordamida qondirilishi holatida vujudga keladi.", "funktsional raqobat ehtiyojga bog`liq emas."], "correct_index": 1},
+    {"question": "103. Raqobatbardoshlik omillrini to`g`ri aniqlang", "options": ["tovar, baho, sotish yo`llari", "reklama", "tovar, baho, sotish yo`llari va tovarlarni bozorda harakatI", "tovar sifati"], "correct_index": 2},
+    {"question": "104. Raqobatni asosiy quroli nima?", "options": ["narxni shakllantirish", "ishlab chiqarish", "marketing siyosati", "talabni shakllantirish, sotishni rag`batlantirish"], "correct_index": 3},
+    {"question": "105. Mahsulot rentabellik darajasini aniqlang?", "options": ["yalpi foydani tovar mahsulotI tannarxiga nisbati.", "sof foydani aktivlar o`rtacha yillik qiymatiga nisbati.", "yalpi foydani mahsulot sotishdan tushumga nisbati.", "sof foydani muomaladagi aktsiya miqdoriga nisbati."], "correct_index": 0},
+    {"question": "106. SWOT tahlili-bu…", "options": ["ichki imkoniyatlar va ichki xavf-xatar", "ichki imkoniyatlar,ichki xavf-xatar,tashqi imkoniyatlar,tashqi xavf-xatar.", "tashqi imkoniyatlar va tashqi xavf-xatar", "ichki imkoniyatlar"], "correct_index": 1},
+    {"question": "107. Raqobat turlari:", "options": ["firmalararo, bozorlararo va sof monopoliya;", "mintaqaviy, konsernlararo, funksional va yashirin;", "Taqmoq ichIdagi va tarmoqlararo", "sof (erkin) raqobat, monopolistik, oligopoliya va monopoliya;"], "correct_index": 2},
+    {"question": "108. Monopoliya nima?", "options": ["Tadbirkorlarning erkinligi", "ko’p sonli kichik firmalarning raqobatlashuvi;", "bozorda  ishlab chiqaruvchilar soni juda ko’p bo’lib, xaridorlarga xizmat qiladilar;", "bozorda bitta ishlab chiqaruvchi ko’pchilik xaridorlarga xizmat ko’rsatadi;"], "correct_index": 3},
+    {"question": "109. Monopsoniya- bu..............................", "options": ["tanho iste’molchining hukmronligi;", "bozorda u qadar ko’p bo’lmagan iste’molchilarning hukmronligi;", "bozorda  ishlab chiqaruvchilar soni juda ko’p bo’lib, xaridorlarga xizmat qiladilar", "tarmoqda u qadar ko’p bo’lmagan korxonalarning hukmronlik qilishi;"], "correct_index": 0},
+    {"question": "110. Raqobat muhitida mahsulot sifati quyidagilarga mo’ljallangan", "options": ["Ishlab chiqaruvchi", "Iste’molchi", "Amalga oshirilishi", "Ishlab chiqarish"], "correct_index": 1},
+    {"question": "111. Raqobatda sifat darajasi quyidagi bosqichlarda belgilanadi:", "options": ["Amalga oshirish", "Ishlab chiqarish", "Loyihalashtirish, tadqiq etish, ishlab chiqarish, amalga oshirish", "Tadqiqot"], "correct_index": 2},
+    {"question": "112. Hech qanday mahsulot yaratilmaydigan mehnat jarayoni bu:", "options": ["Asosiy ishlab chiqarish jarayoni", "Yordamchi ishlab chiqarish jarayoni", "Texnik jarayon", "Xizmat ko’rsatuvchi jarayon"], "correct_index": 3},
+    {"question": "113. Marketing fanining asosiy maksadi nimadan iborat?", "options": ["Mamnun xaridorlardan foyda olish ilmlarini tashkillashtirish.", "Sotuv xajmini oshirish", "Reklama siyosatini rivojlantirish", "Xaridorlar etirozlarini maksimal bartaraf etish"], "correct_index": 0},
+    {"question": "114. Marketing turli ishtiyoklarni inobatga oladimi?", "options": ["inobatga olmaydi.", "inobatga oladi.", "umuman o’rganmaydi", "o’rganish tadqiqot sohasi hisoblanmaydi."], "correct_index": 1},
+    {"question": "115. Tovarlarning hayotiy tsikli qanday fazalardan iborat", "options": ["narx, manzil, tovar va reklama;", "moda, stil, fetish;", "vujudga kelish, o’sish, etuklik, so’nish;", "brend, marka, promoshn."], "correct_index": 2},
+    {"question": "116. Marketing qaysi jarayon tahlilidan boshlanadi", "options": ["moda va stil tahlilidan boshlanadi;", "narxlar tahlilidan boshlanadi;", "brendlar va reklamadagi ustivorlikni aniqlashdan boshlanadi.", "ehtiyojlar va  talab tahlili, makro, mikrosegmentlarga ajratish"], "correct_index": 3},
+    {"question": "117. “Marketing- inson faoliyati turi bo’lib, zarurat va ehtiyojlarni ayirboshlash vositasida qondirishga yo’naltirilgan”-degan ibora qaysi olimga taaluqli", "options": ["Filip Kotlerga", "Genri Fordga;", "Benedjamin Franklinga;", "Garri Kisenjerga."], "correct_index": 0},
+    {"question": "118. Marketing nazariyasi va amaliyoti qaysi davlatda ilk bor amaliy qaror topdi", "options": ["Xitoyda", "AQShda", "Buyuk Britaniyada", "Germaniyada"], "correct_index": 1},
+    {"question": "119. “Raqamli marketing davri” nechanchi yildan boshlab rivojlana boshladi", "options": ["2025 yilda boshlanishi bashorat etilmoqda", "1960 yildan boshlab", "2000 yildan boshlab", "1945 yildan boshlab"], "correct_index": 2},
+    {"question": "120. “Postindustrial davr” marketing amaliyoti nuqtai nazaridan nechanchi yillarni o’z ichiga oladi", "options": ["2025 yilda boshlanini bashorat etilmoqda", "1820 -1900 yillarni", "1945- 1946  yillarni", "1960- 2000 yillarni"], "correct_index": 3},
+    {"question": "121. “Nima sotilsa-shuni ishlab chiqaramiz, ishlab chiqarilgan narsani sotish emas” shiori....", "options": ["marketingning maqsadi sifatida e’tirof etiladi", "reklama tadbirlarining g’oyasi hisoblanadi", "marketing davri sifatida e’tirof etiladi", "tovarlar hatiy tsikli davri sifatida e’tirof etiladi"], "correct_index": 0},
+    {"question": "122. Qaysi asosiy tushunchalar  marketingda ustivor ahamiyatga ega", "options": ["diversifikatsiya, inflyatsiya, iste’mol savatchasi, deflyatsiya", "ehtiyoj, istak,  talab, bozor segmentlari, raqobat", "ekstropoltsiya, korrelyatsiya,determinant, konstantant", "renesans, avangard, klassitsizm, plyuralizm"], "correct_index": 1},
+    {"question": "123. Marketing nuqtai nazaridan bozorga berilgan qaysi tarif to’g’ri", "options": ["inson talabini qondirishga yo’naltirilgan tovarlar", "reklama qilinayotgan barcha tovar va xizmatlar", "turli tovarlarni amaldagi va salohiyatli, yalpi sotuvchilari va xaridorlaridan iborat", "renesans davridan boshlab yaratilgan barcha kashfiyotlar"], "correct_index": 2},
+    {"question": "124. Bozorda kim ustivorlik qilayotganligiga qarab ular qanday turkumlanadi", "options": ["oila ehtiyoji va tashkilotlar ehtiyoji uchun  tovar guruhi", "reklama va moda turlariga", "monopoliya va oligopoliya turlariga", "sotuvchi va xaridor bozori turkumlariga"], "correct_index": 3},
+    {"question": "125. “Xaridor bozori”ga berilgan qaysi tarif to’g’ri", "options": ["xaridor sotuvchiga nisbatan   bozorda ustivor mavqega ega bo’ladi", "oila ehtiyoji uchun xarid etilayotgan tovarlar past narxda bo’ladi", "narxlarni belgilashda sotuvchi ustivor o’rin egallaydi", "monopoliya va oligopoliya mavjud tovarlar bozori"], "correct_index": 0},
+    {"question": "126. “Sotuvchi  bozori”ga berilgan qaysi tarif to’g’ri", "options": ["oila ehtiyoji uchun xarid etilayotgan tovarlar past narxda bo’ladi;", "sotuvchi xaridorga nisbatan   bozorda ustivor mavqega ega bo’ladi;", "narxlarni belgilashda sotuvchi ustivor o’rin egallaydi;", "monopoliya va oligopoliya mavjud bshchlmagan  tovarlar bozori."], "correct_index": 1},
+    {"question": "127. Marketing tadqiqotlari tashkil etishda birinchi bo’lib nimalarga e’tibor berish kerak", "options": ["oila ehtiyojga mos kelishi, raqobatda ustivorlikka erishish,  tovarlar past narxda taklif etish qobiliyatiga;", "maqsad, intilish va modaga mos kelishi;", "muammoning aniq tafsilotiga, tadqiqot maqsadlari", "monografik va kabinet tadqiqotlariga."], "correct_index": 2},
+    {"question": "128. Marketing tadqiqotlari maqsadlari qanday bo’lishi mumkin", "options": ["birlamchi va ikkilamchi;", "kriminalistik, antogonistik, sxolastik;", "makro, ekologik, antropologik.", "qidiruv, sharhlovchi, eksperimental;"], "correct_index": 3},
+    {"question": "129. Marketing tadqiqotlari ma’lumotlar manbalari qanday turlarga bo’linadi", "options": ["birlamchi va ikkilamchi, ichki va tashqi.", "yozma va og’zaki  manbalar, ;", "kritik, ekstremik, maksimal;", "pochta orqali, televidenie orqali, internet orqali;"], "correct_index": 0},
+    {"question": "130. Marketing tadqiqotlari uslublariga qaysi uslublar  kiradi", "options": ["yozma va og’zaki  uslublar ;", "kuzatuv, so’rov, eksperiment, guruhli diskussiya.", "maksimal, minimal,  eksperimental;", "pochta orqali, televidenie orqali, internet orqali;"], "correct_index": 1},
+    {"question": "131. Marketing tadqiqotlarida tadqiqot qurollariga qaysilar  kiradi", "options": ["rasmiy va norasmiy qurollar ;", "el.pochta, telegramm, veb-portal;", "anketa, mexanik qurilmalar", "telefon, pochta, internet, ruchka;"], "correct_index": 2},
+    {"question": "132. Marketingni boshqarish jarayoni  qaysi jarayondan boshlanadi", "options": ["rasmiy ma’lumotlar tahlilidan;", "el.pochta, telegramm, veb-portal tahlilidan;", "PR rejasi tahlilidan;", "bozor imkoniyatlari tahlilidan"], "correct_index": 3},
+    {"question": "133. Marketing makromuhit omillari tarkibiga qanday omillar kiradi", "options": ["demografik, ijtimoiy, tabiiy-iqlim, ilmiy-texnikaviy, xalqaro - siyosiy, madaniy", "rasmiy, norasmiy, birlamchi va ikkilamchi omillar;", "reklama, PR, marketing rejasi, marketing kompleksi, marketing  tahlili omillari;", "el.pochta, telegramm, veb-portal, anonim murojat omillari;"], "correct_index": 0},
+    {"question": "134. Marketing makromuhit omillari tarkibiga kirmaydigan  omilni belgilang", "options": ["tabiiy-iqlim, xalqaro- siyosiy omillar;", "reklama, PR", "ilmiy-texnikaviy, madaniy omillar;", "demografik, ijtimoiy  omillar;"], "correct_index": 1},
+    {"question": "135. Marketing mikromuhit omillari tarkibiga qanday omillar kiradi", "options": ["elektron xukumat, banklar, pochta xizmati, xukumat portali;", "rasmiy, norasmiy, birlamchi va ikkilamchi omillar;", "ta’minotchilar, raqobatchilar, marketing vositachilari, mijozlar, muloqotdagi auditoriya;", "marketing rejasi, marketing kompleksi, reklama, PR, , marketing  tahlili omillari;"], "correct_index": 2},
+    {"question": "136. Marketing mikromuhit omillari tarkibiga qanday omillar kirmaydi", "options": ["marketing vositachilari;", "ta’minotchilar, raqobatchilar;", "mijozlar, muloqotdagi auditoriya;", "ijtimoiy-madaniy omillar;"], "correct_index": 3},
+    {"question": "137. Marketing boshqaruv tizimlari  tarkibiga qanday tuzilmalar  kiradi", "options": ["vertikal, korporativ, sharnomaviy (kartel) tizimlari;", "marketing vositachilari, marketing raqobatchilari, reklama beruvchilar;", "mijozlar, ta’minotchilar, raqobatchilar, davlat xarid inspektsiyasi;", "birlamchi va ikkilamchi mijozlar, muloqotdagi auditoriya;"], "correct_index": 0},
+    {"question": "138. Marketing  boshqaruv tizimida eng maqbul yo’nalish qaysi  boshqaruv  tuzilmasi hisoblanadi", "options": ["marketing raqobatchilari bilan hamkorlikdagi  boshqaruv tizimi;", "iste’molchi markazida, marketing esa  boshqaruvning integratsion kuchi sifatida bo’lgan boshqaruv tizimi;", "mijozlar, ta’minotchilar, raqobatchilar, davlat xarid inspektsiyasi mushtarakligi boshqaruv tizimi;", "birlamchi va ikkilamchi mijozlar va  muloqotdagi auditoriyaga e’tiborli boshqaruv tizimi;"], "correct_index": 1},
+    {"question": "139. Marketingda situatsion tahlil...", "options": ["tabiiy-iqlim, xalqaro- siyosiy omillarni guruhlarga ajratish demakdir;", "ilmiy-texnikaviy va  madaniy omillarni guruhlarga ajratish demakdir;", "muayyan vaqt davrida ishlab chiqarish-tijorat faoliyati va tashqi muhit omillarini kompleks tahlil qilish demakdir.", "demografik, ijtimoiy  omillarni guruhlarga ajratish demakdir;"], "correct_index": 2},
+    {"question": "140. Marketingda SWOT  tahlili...", "options": ["demografik, ijtimoiy  omillarni tahlili demakdir;", "strategik va operativ nazorat tahlilini bo’g’inlarga ajratish demakdir;", "inglizcha solution – ya’ni bir qarorga kelish demakdir;", "firmaning  barcha  faoliyat yo’nalishlari bo’yicha  kuchli va zaif jihatlar hamda vujudga kelayotgan imkoniyatlar va xavf-xatarlarni tahlili demakdir."], "correct_index": 3},
+    {"question": "141. Marketingda SWOT  tahlili  ingliz tilida  qanday so’zlarni anglatadi", "options": ["strengths, weakneses, opportunites, threates ;", "strategy, weater, opposition, threates ;", "solution, wear, options, threates ;", "solution, winter, occupation, territories;"], "correct_index": 0},
+    {"question": "142. Marketing nuqtai nazaridan almashtiruvchi tovarlar (substitutes) turkumiga nimalar  kiradi", "options": ["marketing vositachilari;", "muayyan tovarni xossasi, undan foydalanish maqsadiga ko’ra o’rni bosuvchi tovar yoki xom ashyo;", "mijozlar tomonidan ishlab chiqarilgan tovar;", "virtual tovar va xizmatlar;"], "correct_index": 1},
+    {"question": "143. “Kengaytirilgan raqobat kontseptsiya”si muallifi  kim", "options": ["Genri Ford;", "Adam Smit;", "Maykl Porter", "Garri Kisenjer."], "correct_index": 2},
+    {"question": "144. Sof oligopolistik bozor o’z tabiatiga ko’ra qanday namoyon bo’ladi", "options": ["uncha ko’p bo’lmagan xaridorlar va ko’plab sotuvchilardan tarkib topgan iste’mol bozoridir;", "yagona sotuvchi va uncha ko’p bo’lmagan xaridorlardan tarkib topgan bozor mexanizmidir;", "yagona sotuvchi va narx qat’iy nazorat etiladigan bozor shaklidir.", "uncha ko’p bo’lmagan sotuvchilar va tabaqalashtirilmagan mahsulotlar sotiluvchi bozor modelidir;"], "correct_index": 3},
+    {"question": "145. Tabaqalashgan oligopoliya bozori ta’rifi qanday", "options": ["kam sotuvchi, ko’plab xaridor va tabaqalashtirilgan mahsulotlar ayriboshlanuvchi bozor modelidir;", "uncha kam bo’lmagan sotuvchi va yagona xaridordan tarkib topgan iste’mol bozoridir;", "yagona iste’molchi va xaridordan tarkib topgan o’ziga xos raqobat bozoridir;", "erkin bozor munosabatlari sharoitida hech uchramaydigan nazariy tushunchadir."], "correct_index": 0},
+    {"question": "146. Sifat ko’rsatkichi o’rta bo’lganda baho ko’rsatkichi qanday bo’lishi kerak", "options": ["past bo’lishi kerak;", "o’rta bo’lishi kerak;", "yuqori bo’lishi kerak;", "to’g’ri javob yo’q."], "correct_index": 1},
+    {"question": "147. Raqobat namoyon bo’lishi shakliga ko’ra qanday turlarga ajratiladi", "options": ["monopoliya, oligopoliya, sof raqobat va noinsof raqobat shakllariga bo’linadi;", "sof oligopoliya, tabaqalashgan oligopoliya, sof va monopolistik raqobat bozorlariga bo’linadi;", "istakni qondirish (funktsional), safdosh mahsulot, mahsulot turi, mahsulot markasi kabi shakllarga bo’linadi;", "tarmoq ichidagi, tarmoqlararo, iqtisodiy va xalqaro shakllarga bo’linadi."], "correct_index": 2},
+    {"question": "148. Raqobat siyosati, uning amal qilish muhitini yaratib berish .....", "options": ["davlat iqtisodiy siyosatiga zid bo’lgan vazifadir;", "faqat monopolistik raqobat bozorini shakllantirishga zid keladigan iqtisodiy siyosatdir;", "mutlaq bozor iqtisodiyoti qonunlariga zid bo’lgan jarayondir.", "davlat iqtisodiy siyosatining negizini tashkil etuvchi, eng zaruriy vazifalardan biridir;"], "correct_index": 3},
+    {"question": "149. Firma mikromuhitida muloqotdagi auditoriyaga qaysi su’ektlar kiradi", "options": ["mahalliy va ichki auditoriya, tartibga soluvchi organlar, keng omma, moliyaviy guruhlar va shu kabi sub’ektlar;", "davlat iqtisodiy siyosat organlari;", "demografiya, oila, bojxona va soliq  organlari;", "mutlaq raqobatchilar, salbiy raqobatchilar va banklar."], "correct_index": 0},
+    {"question": "150. Firma mikromuhitida marketing vositachilariga  qanday sub’ektlar kiradi", "options": ["valyuta ayirboshlash shahobchalari, davlat savdo inspektsiyasi;", "reklama agentliklari, ulgurji va chakana sotuv shahobchalari, transport-ekspeditorlik korxonalari, sug’urta va transport xizmati ko’rsatuvchi korxonalar;", "demografiya, oila, bojxona va soliq  organlari;", "moda bilan shug’illanuvchi tadbirkorlar,  raqobatchilar, salbiy raqobatchilar va banklar."], "correct_index": 1},
+    {"question": "151. Qanday tashkilot, korxona maqsadli va samarali marketing faoliyatini uyushtirgan hisoblanadi", "options": ["bozorda ustun mavqeiga erishishni ta’minlash uchun raqobatchilar bilan muzokara olib boruvchi korxona;", "bozorga imkon qadar ko’p hajmda mahsulot ishlab chiqarish qobiliyatiga ega hamda reklamada ustivorlikka erishgan tashkilot;", "bozorda sotish imkonini o’rganib, mahsulot ishlab chiqarishni unumli va epchil tashkil eta olgan korxona;", "o’z imkoniyatiga qarab mahsulot import qiluvchi va bozorda erkin sotuvchi korxona."], "correct_index": 2},
+    {"question": "152. Iste’mol tovarlarini xaridorlik odatlariga ko’ra turkumlashda  quyidagi turkum tovarlarlar aniqlanadi", "options": ["doimiy, o’zgaruvchan iste’moldagi tovarlar, zaruriy va qimmat xizmat turlari, bir-biriga bog’liq tovarlar va xizmatlar;", "ijtimoiy va iqtisodiy tovarlar, kundalik iste’mol tovarlari, sanoat tovarlari, turli xizmatlar.", "ommaviy tovarlar, individual tovarlar, oilaviy tovarlar, zaruriy va bir marotabali xizmatlar, ko’chmas mulk shaklidagi tovarlar;", "ortiqcha harakatlarsiz xarid etiladigan tovarlar, axtarib va taqqoslab xarid etiladigan tovarlar, maxsus sotib olinadigan tovarlar, begonalashgan xarid (passiv talabdagi) tovarlar;"], "correct_index": 3},
+    {"question": "153. Korxona qanchalik yirik va texnologik jihatdan taraqqiy topgan bo’lsa, tovar assortimenti ko’payadimi", "options": ["shunchalik kengaya boradi va o’ta ko’p miqdordagi assortimentlarni o’zlashtirish imkoni tug’iladi;", "doimiy tarzda kamayib, tor ixtisoslashuv vujudga keladi va tovar tannarxi ortadi;", "yuqorida (quyida) ko’rsatilgan barcha javoblar to’g’ri.", "asta-sekinlik bilan turg’unlik davriga va undan so’ng pasayish (so’nish) davriga o’tadi;"], "correct_index": 0},
+    {"question": "154. Firmaning asosiy o’sish yo’nalishlari qanday", "options": ["kontseptsiya,diversifikatsiya va intensiv yo’nalishlarda ko’rib chiqish mumkin;", "intensiv, integratsion va diversifikatsiya yo’nalishlarida ko’rib chiqish mumkin;", "intensiv va diversifikatsiya yo’nalishlarida ko’rib chiqish mumkin;", "ekstensiv, intensiv va diversifikatsiya yo’nalishlarida ko’rib chiqish mumkin."], "correct_index": 1},
+    {"question": "155. Intensiv o’sish o’z navbatida nimani nazarda to’tadi", "options": ["umumiy strategik o’sish yo’nalishlarida namoyon bo’ladi.", "progressiv, intensiv va ekstensiv yo’nalishlarda namoyon bo’ladi;", "bozorga chuqurroq kirish, bozor chegaralarini kengaytirish, mahsulotni takomillashtirish yo’nalishlarida namoyon bo’ladi;", "gorizontal, vertikal, intensiv yo’nalishlarda namoyon bo’ladi;"], "correct_index": 2},
+    {"question": "156. Monopolistik raqobat bozori deb...", "options": ["bozorda yakka sotuvchi hukumron bo’lgan oligopolistik modeldagi bozorga aytiladi;", "bozorda yagona xaridor va ko’plab sotuvchilardan tarkib topgan, tabaqalashmagan mahsulotlar sotiluvchi bozorga aytiladi.", "bozorda yagona sotuvchi va tabaqalashgan mahsulotlar sotiluvchi bozorga aytiladi;", "bozorda ko’plab sotuvchidan tarkib topgan va unda tabaqalashgan mahsulotlar sotilayotgan bozorga aytiladi;"], "correct_index": 3},
+    {"question": "157. Raqobatni cheklash, uni bartaraf etish nimani anglatadi", "options": ["bozor munosabatlarini erkin rivojlanishiga zid bo’lgan, noqonuniy harakatlardir;", "bozor munosabatlarining asosidir;", "bozor munosabatlari uchun xos bo’lgan iqtisodiy vositadir;", "bozor munosabatlarini rivojlantirish uchun zarur bo’lgan shart-sharoitdir."], "correct_index": 0},
+    {"question": "158. Raqobat bozori modellariga nimalar kiradi", "options": ["sofdil va nopok yoki sofdil va insofsiz turlarga bo’linadi;", "cof raqobat, monopoliya, oligopoliya, monopolistik raqobat turlarga bo’linadi;", "milliy, mintaqaviy, xalqaro turlarga bo’linadi.", "joriy va istiqboldagi turlarga bo’linadi;"], "correct_index": 1},
+    {"question": "159. Tabiiy monopoliyalar mavjudmi va ular asosan qaysi tovar va xizmat ko’rsatish sohalarida nomoyon bo’ladi.", "options": ["bunday turkum bozorlar mavjud emas;", "bunday turkum monopoliyalar faqat AQShda mavjud.", "ha mavjud, ular odatda elektroenergiya, gaz ta’minoti, ommaviy pochta xizmati kabi sohalarda uchraydi va u asosan davlat tasarrufidagi korxonalar sanaladi;", "yo’q, mavjud emas, bunday monopoliyalar 1900 yillargacha bo’lgan;"], "correct_index": 2},
+    {"question": "160. Raqobat uslubi jihatidan nimalarga bo’linadi", "options": ["yashirin va oshkora; milliy va xalqaro uslublarga bo’linadi.", "doimiy va o’zgaruvchan uslublarga bo’linadi;", "joriy va istiqboldagi uslublarga bo’linadi;", "sofdil va nopok (sofdil va insofsiz); narx vositasida va narx vositasisiz uslublarga bo’linadi;"], "correct_index": 3},
+    {"question": "161. Salohiyatli (potentsial) bozor deb nimani aytiladi", "options": ["muayyan mahsulotga bir muncha qiziquvchi iste’molchilar yig’indisidan iborat;", "sof raqobat bozorida muayyan mahsulotni sotib olayotgan xaridorlar yig’indisidan iborat.", "muayyan mahsulotni iste’mol qilgan barcha iste’molchilardan iborat;", "muayyan firma mahsulotlarini sotib olgan iste’molchilar yig’indisidan iborat;"], "correct_index": 0},
+    {"question": "162. Marketingda tovarlarning hayotiy davri bosqichlari qanday   o’rganiladi?", "options": ["birinchi, ikkinchi, uchinchi xayotiy davr bosqichlari;", "vujudga kelish, o’sish, o’sishning pasayishi (turg’unlik), etuklik, so’nish davrlari;", "foyda keltiruvchi davr, turg’unlik davri, zarar keltiruvchi davr.", "yangi, eski tovarlar, moddiy va nomoddiy xizmatlar, qimmatbaho va noyob san’at asarlari;"], "correct_index": 1},
+    {"question": "163. Tovarlarning hayotiy davri kontseptsiyasiga ko’ra sarflangan  investitsiyalarning qoplanishi qachon vujudga keladi", "options": ["o’sish bosqichiga to’g’ri keladi;", "vujudga kelish davriga to’g’ri keladi;", "o’sishning pasayishi (turg’unlik) bosqichiga to’g’ri keladi;", "bozorga chiqarish davriga to’g’ri keladi."], "correct_index": 2},
+    {"question": "164. Raqobat tahlilida quyidagi jihatlar etakchi ahamiyat kasb etadi:", "options": ["raqobat qonunlarining mavjudligi, oshkora va yashirin raqobat turlarining mavjudligi, joriy va istiqboldagi raqobat, mexanik va iqtisodiy raqobat;", "tarmoqda yagona firmaning mavjudligi, ustun mavqeining yaratilishi, qonunlarni muvofiqlashtirish harakatlari;", "ikki yoki undan ortiq raqobatchining mavjudligi, doimiy va o’zgaruvchan raqobatning mavjudligi.", "raqobatchilar soni, mahsulot turi, baho (narx) ustidan nazorat, tarmoqqa kirib borish shartlari, narx vositasisiz raqobatning mavjudligi;"], "correct_index": 3},
+    {"question": "165. Mukammal (sof) raqobat bozori qanday", "options": ["tabaqalashmagan mahsulot va ko’p sotuvchidan tarkib topgan bozorni ifodalaydi;", "tabaqalashmagan mahsulot va yagona sotuvchidan tarkib topgan bozorni ifodalaydi;", "tabaqalashgan mahsulot va kam sotuvchidan tarkib topgan bozorni ifodalaydi;", "mehnat bozori, fond bozori va valyuta bozorlarida yagona sotuvchi bo’lgan bozor holatini ifodalaydi."], "correct_index": 0},
+    {"question": "166. M.Porterning kengaytirilgan raqobatqodirlik kontseptsiyasiga ko’ra tahlil quyidagi guruhlarga nisbatan amalga oshiriladi", "options": ["monopoliya, oligopoliya, sof raboqat, monopolistik raqobat bozorlardagi holat;", "salohiyatli raqobatchilar, ta’minotchilar, mijozlar, almashtiruvchi tovarlar hamda tarmoqdagi raqobatchilar;", "doimiy va o’zgaruvchan harajatlar, yalpi va sof foyda ko’lamlarida;", "xalqaro va milliy, o’tmishdagi va hozirgi paytdagi raqobat turlariga bo’lib o’rganiladi."], "correct_index": 1},
+    {"question": "167. Mahsulotning raqobatbardoshligini aks ettiruvchi ko’rsatkichlar turkumlari qanday?", "options": ["mexanik va texnik, biologik va kimyoviy, doimiy va o’zgaruvchan guruhlardan iborat;", "doimiy, o’zgaruvchan, iqtisodiy, ekologik turlardan iborat;", "tashqi shakllantiruvchi ko’rsatkichlar, sifat ko’rsatkichlar, iqtisodiy ko’rsatkichlardan iborat;", "bir, ikki, uch o’lchamli ko’rsatkichlar hamda sifat ko’rsatkichlar turkumidan iborat."], "correct_index": 2},
+    {"question": "168. Strategik   marketingga bo’lgan e’tibor qanday o’zgarmoqda", "options": ["pasyib bormoqda;", "hech qanday ahamiyatga ega bo’lmagan soha hisoblanadi;", "dastavval muhim bo’lgan, hozirda esa o’z ahamiyatini yo’qotgan hisoblanadi.", "ortib bormoqda;"], "correct_index": 3},
+    {"question": "169. Strategik  marketing jarayoni qanday davriy gorizontlarga ega", "options": ["o’rta va uzoq muddatli gorizontlarga ega;", "bevosita va bilvosita gorizontlarga ega;", "doimiy va o’zgaruvchan gorizontlarga ega;", "miqdoriy va sifat ko’rsatkichlariga ega."], "correct_index": 0},
+    {"question": "170. Almashtiruvchi tovarlar turkumiga...", "options": ["iste’mol jihatdan biri tovar  nomenklaturasida bo’lgan tovarlar assortimenti misol bo’la oladi;", "iste’mol jihatdan bir birini almashtirish xususiyati mavjud bo’lgan, lekin sifati va narxi bo’yicha farqlanuvchi tovarlar kiradi;", "iste’mol jihatdan umuman farqlanuvchi va bir xil narx diapazonida sotiluvchi tovarlar kiradi;", "to’rt va besh \"R\" marketing kompleksidagi tovarlar kiradi."], "correct_index": 1},
+    {"question": "171. Mijozlar - kengaytirilgan raqobat kontseptsiyasida...", "options": ["mavjud emas;", "salohiyatli raqobatchilar guruhiga mansub;", "mavjud bo’lib, o’zining savdolashish qobiliyatiga ko’ra ajralib turadi;", "almashtiruvchi va to’ldiruvchi kompaniyalar guruhiga mansub."], "correct_index": 2},
+    {"question": "172. Iqtisodiy tanazzul(krizis) davrida engil avtomobillarga bo’lgan talab uning yashnagan davriga nisbatan qanday nisbatda bo’ladi", "options": ["hech qanday nisbatda bo’lmaydi;", "yuqori bo’ladi, chunki iqtisodiy tanazzul (krizis) davrida yalpi talab ortadi;", "almashtiruvchi va to’ldiruvchi tovarlar paydo bo’ladi.", "past bo’ladi, chunki iqtisodiy tanazzul (krizis) davrida yalpi talab pasayadi;"], "correct_index": 3},
+    {"question": "173. Raqobatchilar guruhi qanday turkumlarga bo’linadi", "options": ["bozordagi lider (market leader), bozor pretendenti (market follower), bozor da’vogari ( market chalelenger) kabilar;", "hech qanday guruhlarga bo’linmaydi;", "birinchi o’lmali va ikkinchi o’lchamli xaridor va xizmatchilar guruhi (market firster, market seconder, market communicter) kabilar;", "almashtiruvchi va to’ldiruvchi tovarlarga kiruvchi raqobatchilar."], "correct_index": 0},
+    {"question": "174. “Bozor nishasi-g’orchasi”ga berilgan  qaysi tarif to’g’ri", "options": ["hech qanday to’siqlarsiz bozorda sotiladigan tovarlar;", "u segment ichidagi segment bo’lib, raqobatchilar ushbu nishani sezmaganlar yoki unga kirishni  manfaatli hisoblamaganlar;", "strategik marketingda yangi, raqamli iqtisodiyotga zid bo’lgan kontseptsiya sanaladi;", "almashtiruvchi va to’ldiruvchi tovarlar hisoblanadi."], "correct_index": 1},
+    {"question": "175. Marketingda ”Bozorni egallash” mezoni bo’yicha qaysi ko’rsatkichlar tahlil etiladi", "options": ["bozordagi raqobat rentabelligi, , savdo rastalari rentabelligi;", "tovar aylanmasi rentabelligi,  tovar qaytimi rentabelligi, soliq yuki rentabelligi, bojxona boji rentabelligi;", "foyda, oborot rentabelligi, o’z kapitali rentabelligi, yalpi kapital rentabelligi;", "trapetsion joylashuv rentabelligi , oligopoliya va  monopsoniya bo’yicha rentabellik."], "correct_index": 2},
+    {"question": "176. Marketingda SWOT  imkoniyatlar (opportunites)  qanday savollarga javob topishni talab etadi", "options": ["Biz o’z tashkilotimizda ijtimoiy mas’uliyat necha foizga ortdi?; Nima uchun  qadrli bo’lgan xizmatlar turi kamaymoqda;", "Bizning tashkilotimizda daromad qanday darajada? Amaliy va joriy foyda qanchaga  ortdi? ;", "Bizga qanday imkoniyatlar yaratilmoqda? Texnolgiyada nima o’zgarishlar ro’y beradi?", "Bizga kutilayotgan talab, ishlab chiqarish va texnologiyalardagi o’zgarishlar qanday yordam berishi mumkin?; Bo’layotgan tashqi o’zgarishlarning qay biri bizga keng imkoniyatlar yaratishi mumkin?;"], "correct_index": 3},
+    {"question": "177. Marketingda SWOT  xavf-xatarlar (threates)  qanday savollarga javob topishni talab etadi", "options": ["Talab, ishlab chiqarish va texnologiyadagi qanday o’zgarishlar Bizning tashkilotimiz faoliyat yuritishiga salbiy ta’sir etishi mumkin?; Tashqi muhitdagi qanday o’zgarishlar Bizning tashkilotimizga salbiy ta’sir etishi mumkin?;", "Bizning tashkilotimizda texnologik o’zgarish  qanday darajada? Amaldagi joriy mahsulotlar turi qanchaga  ortdi?  ;", "Biz o’z tashkilotimizda ijtimoiy mas’uliyat daromaddorligi necha foizga ortdi?; Nima uchun  qadrli bo’lgan xizmatlar turi kamaymoqda;", "Bizga qanday imkoniyatlar yaratilmoqda? Energiya sarfida qanday o’zgarishlar ro’y beradi?"], "correct_index": 0},
+    {"question": "178. Marketingda SWOT  tahlilida imkoniyatlar (opportunites)  va xavf-xatarlar (threates)  tashkilot uchun qanday omillar ta’sirida shakllanadi", "options": ["ichki omillar ta’sirida;", "tashqi omillar ta’sirida;", "xorijiy omillar ta’sirida;", "barcha yuqorida(quyidagi) omillar ta’sirida birgalikda;"], "correct_index": 1},
+    {"question": "179. Marketingda ichki omillar  tahlilidagi mezonlar turkumiga nimalar kiradi", "options": ["ichki,  xorijiy, madaniy omillar;", "strategiya, taktika, interventsiya yo’nalishida;", "marketing omillari, moliya, tayyorlov, personal boshqaruvi;", "barcha yuqorida(quyidagi) omillar ta’sirida birgalikda;"], "correct_index": 2},
+    {"question": "180. Korxona tashqi muhiti tahlilida “to’g’ridan-to’g’ri ta’sir kuchiga ega” omillarga  nimalar kiradi", "options": ["ichki va   xorijiy agentlar, madaniy xodimlar, ijtimoiy omillar;", "strategiya, taktika, interventsiya yo’nalishidagi omillar;", "barcha yuqorida(quyidagi) omillar ta’sirida birgalikda;", "raqobatchilar, iste’molchilar, mijozlar, qonun va davlat organlari, kasaba uyushmalar,  ta’minotchilar;"], "correct_index": 3},
+    {"question": "181. Cegmentlarga ajratish tub mohiyatiga ko’ra...", "options": ["xaridorlarni guruhlarga ajratish va maqsadli, jalb etuvchan bozor segmentini aniqlashni nazarda tutadi;", "yuqori xarajatlar, mahsulot tannarxi,    xorijiy strategiyalar asosida rivojlanishni nazarda tutadi;", "segmentatsiya, interventsiya va konfrantatsiya strategiyalari ishlab chiqish rejasi sanaladi;", "barcha yuqorida(quyidagi) ko’rsatilgan yo’nalishlar birgalikda to’g’ri;"], "correct_index": 0},
+    {"question": "182. Cegmentlarga ajratish...", "options": ["va uni qo’llash natijasida yuqori foyda olinadi;", "va uni chuqurlashtirish evaziga «jalb etuvchan», maqsadli va yuqori foyda olish uchun salohiyatli xaridorlar guruhi aniqlanadi;", "va uni qo’llash natijasida  interventsiya va konfrantatsiya brendlari aniqlanadi;", "barcha yuqorida(quyidagi) ko’rsatilgan yo’nalishlar birgalikda to’g’ri;"], "correct_index": 1},
+    {"question": "183. Cegmentlarga ajratishning asosiy tamoyillari bo’lib...", "options": ["kon’yuktiv, deduktiv va induktiv tamoyillari hisoblanadi;", "sxolastik, mexanik va simpement tamoyillari hisoblanadi;", "geografik, demografik, psixografik, hulq-atvor tamoyillari hisoblanadi;", "barcha yuqorida(quyidagi) ko’rsatilgan tamoyillar birgalikda to’g’ri;"], "correct_index": 2},
+    {"question": "184. Cegmentlarga ajratishning geografik  tamoyiliga ko’ra bozor segmentlari....", "options": ["aholi yoshi, jinsi, ijtimoiy kelib chiqishi va shu kabi belgilarga ko’ra kon’yuktiv, deduktiv va induktiv turlarga bo’linadi;", "aholi sxolastik, mexanik va simpementarlik  tamoyillarga ko’ra guruhlarga ajratiladi;", "barcha yuqorida(quyidagi) ko’rsatilgan tamoyillar birgalikda to’g’ri;", "shimoliy va janubiy, g’arbiy va sharqiy mintaqalar, katta va kichik shaharlar, aholi zichligi bo’yicha joylashuvi va shu kabi tafsilotlarga ko’ra guruhlanadi;"], "correct_index": 3},
+    {"question": "185. Cegmentlarga ajratishning demografik  tamoyiliga ko’ra bozor segmentlari....", "options": ["aholi yoshi, jinsi, irqi,  ijtimoiy kelib chiqishi, oilaviy ahvoli, oilaning hayotiy tsikli  va shu kabi demografik belgilarga ko’ra guruhlarga ajratiladi;", "shimoliy va janubiy, g’arbiy va sharqiy mintaqalar, katta va kichik shaharlar, ahli zichligi bo’yicha joylashuvi va shu kabi tafsilotlarga ko’ra guruhlanadi;", "aholi sxolastik, mexanik va simpementarlik  tamoyillarga ko’ra guruhlarga ajratiladi;", "barcha yuqorida(quyidagi) ko’rsatilgan tamoyillar birgalikda to’g’ri;"], "correct_index": 0},
+    {"question": "186. Cegmentlarga ajratishning psixografik  tamoyiliga ko’ra bozor segmentlari....", "options": ["shimoliy va janubiy, g’arbiy va sharqiy mintaqalar, katta va kichik shaharlar, ahli zichligi bo’yicha joylashuvi bo’yicha guruhlanadi;", "xaridorlarning u yoki bu ijtimoiy sinfga taaluqliligi, hayot stiliga ko’ra guruhlarga ajratiladi;", "aholi sxolastik, mexanik va simpementarlik  tamoyillarga ko’ra guruhlarga ajratiladi;", "aholi yoshi, jinsi, irqi,  ijtimoiy kelib chiqishi, oilaviy ahvoli  va shu kabi belgilarga ko’ra guruhlarga ajratiladi;"], "correct_index": 1},
+    {"question": "187. Cegmentlarga ajratishning qo’shimcha tamoyillariga....", "options": ["g’arbiy va sharqiy mintaqalar, katta va kichik shaharlar, ahli zichligi bo’yicha joylashuvi bo’yicha guruhlanadi;", "aholi everestik, sxolastik, mexanik va simpementarlik  guruhlarga ajratiladi;", "xariddan kutilayotgan naf, xaridorlik odatlariga ko’ra, xarid chog’idagi xulq-atvori kabi belgilarga ko’ra guruhlarga ajratiladi;", "aholi yoshi, daromadi, ijtimoiy sinfga taaluqliligi bo’yicha  guruhlarga ajratiladi;"], "correct_index": 2},
+    {"question": "188. Cegmentlarga ajratishning xaridorlik odatlariga ko’ra  segmentlarga ajratilganda tovarlar....", "options": ["xaridorlarning u yoki bu ijtimoiy sinfga taaluqliligi, hayot stiliga ko’ra guruhlarga ajratiladi;", "katta va kichik shaharlar, shimoliy va janubiy, g’arbiy va sharqiy mintaqalar, ahli zichligi bo’yicha joylashuvi bo’yicha guruhlanadi;", "aholi sxolastik, mexanik va simpementarlik  tamoyillarga ko’ra guruhlarga ajratiladi;", "ortiqcha urinishlarsiz, axtarish va taqqoslash asosida, mxsus xarid etiladigan tovarlar, begonalashgan xarid tovarlari guruhlariga bo’linadi;"], "correct_index": 3},
+    {"question": "189. Talab, texnologiya va tovar hayotiy tsikllari o’rtasida qanday bog’liqlik mavjud", "options": ["bog’liqlik mavjud bo’lib, talab o’zgarishi va chuqurlashuvi asosida yangi tovar va texnologiyalar vujudga keladi;", "mavjud emas, ularning hayotiy tsikllari  bir-birlariga bog’lanmagan tarzda kechadi;", "bog’liqlik faqat gastronomiya va baqqolllik tovarlaridagina uchraydi;", "mashhur brend ostida ishlab chiqarilgan va modaga kirgan tovarlar bo’yichagina mavjud bo’ladi xolos."], "correct_index": 0},
+    {"question": "190. Bozorni segmentlarga ajratish va uni xorijiy bozorlarda amalga oshirishning asosiy tamoyili bo’lib....", "options": ["«faqat texnologiya sotamiz», «past narxlarda oziq-ovqat mahsulotlarini taklif etamiz», «xorijda ishlab chiqarishni to’xtatamiz» tamoyillari hisoblanadi;", "«Nima ishlab chiqarsak shuni sotamiz», «Nima sotsak, shuni ishlab chiqaramiz», «Xorijiy iste’molchi ta’biga ko’ra ishlab chiqarilgan tovarni modernizatsiyalashtiramiz» tamoyillari hisoblanadi;", "«asosan xom ashyolar texnologiya sotamiz», «yarim fabrikatlarni past narxlarda taklif etamiz», «xorijda ishlab chiqarishni rivojlantiramiz» tamoyillari hisoblanadi;", "barcha yuqorida(quyidagi) ko’rsatilgan vaziyatlar  birgalikda to’g’ri;"], "correct_index": 1},
+    {"question": "191. Marketing Miks (Marketig- mix) kompleksida asosiy  ustivor yo’nalishlarni belgilang", "options": ["tovar (product),  mukofot (prise), iltimos( please),   ildamlantirish (promotion);", "1- 2 bosqichlarda  tovar (product),  mukofot (prise), 3-4 bosqichlarda iltimos  (please),   ildamlantirish (promotion);", "tovar (product),  narx (price),    joylashtirish- taqsimlash(place),   ildamlantirish (promotion)", "bosqich (step), strategiya (strategy), segmentatsiya (segmentation),  selektsiya (selection);"], "correct_index": 2},
+    {"question": "192. Marketing Miks (Marketig- mix) kompleksining tovar (product)   yo’nalishiga kiruvchi elementlarni  belgilang", "options": ["narx bo’yicha chegirtma, kreditga sotish,   ildamlantirish;", "mukofotlar, kuponlar, lotoreya o’yinlari, teleshou;", "qadoqlanishi, ekologik talabdarga javob berishi, imtiyozli sotilishi.", "tovar sifati, ajralib turuvchi belgilari, nomlanishi, qadoqlanishi, xususiyatlari, kafolatli xizmat ko’rsatish,"], "correct_index": 3},
+    {"question": "193. Marketing Miks (Marketig- mix) kompleksining narx (price)   yo’nalishiga kiruvchi elementlarni  belgilang", "options": ["narx varaqalari, chegirtmalar, imtiyozli narxlar, to’lov shakli, kreditga sotish;", "tovar sifati, ajralib turuvchi belgilari, nomlanishi, qadoqlanishi, kafolatli xizmat ko’rsatish;", "mukofotlar, kuponlar, lotoreya o’yinlari, teleshou;", "qadoqlanishi, ekologik talablarga javob berishi, imtiyozli sotilishi."], "correct_index": 0},
+    {"question": "194. Marketing Miks (Marketig- mix) kompleksining joylashtirish- taqsimlash (place) yo’nalishiga kiruvchi elementlarni  belgilang", "options": ["sotish kanallarini kamaytirish, narx varaqalari, chegirtmalar, imtiyozli narxlar, to’lov shakli, kreditga sotish;", "sotish kanallarini tanlash, bozorda taqdim etish, taqdim etish manzili, namoyish etish, zahiralarni bir ma’romda ta’minlash, tovar harakati;", "tovar sifati, ajralib turuvchi belgilari, nomlanishi, qadoqlanishi, kafolatli xizmat ko’rsatish,  mukofotlar, kuponlar, lotoreya o’yinlari, teleshou;", "qadoqlanishi, ekologik talabdarga javob berishi, imtiyozli sotilishi."], "correct_index": 1},
+    {"question": "195. Sotuvni rag’batlantirish, reklama, shaxsiy sotuvlar, propoganda qaysi Marketing Miks (Marketig- mix) kompleksi yo’nalishiga kiradi", "options": ["kreditga sotish,  sotish kanallarini kamaytirish yo’nalishiga;", "narx yo’nalishiga ;", "ildamlantirish (promotion) yo’nalishiga ;", "qadoqlanish yo’nalishiga."], "correct_index": 2},
+    {"question": "196. Marketing Miks (Marketig- mix) kompleksini xalqaro marketing miqyosida Geyl yana 3 ta komponet qo’shilishini asoslagan, ular qaysi yo’nalishlar", "options": ["tovar sifati (product quality) sotuvni rag’batlantirish (promotion), reklama (reklama);", "shaxsiy sotuvlar(personal sells), propoganda (propaganda), nomlanishi (brand name);", "qadoqlanishi (packaging),  kreditga (credit),  sotish kanallari (sells network);", "omma fikri (people-public opinion),   siyosat(politics),   foyda (profit);"], "correct_index": 3},
+    {"question": "197. Marketing nuqtai nazaridan tovar deb qaday ne’matga aytiladi", "options": ["bozorga taklif etilgan, e’tiborni jalb etuvchi, uni ishlatish va foydalanishga undovchi, va umuman istak va ehtiyojni qondirishga yo’naltirilgan barcha narsalardir;", "vizul ko’rinishi bo’yicha ajralib turuvchi barcha moddiy ne’matlarga aytiladi;", "shaxsiy ko’rinishi, sotuv jarayonida ko’rinishi, iste’molda ko’rinishiga ega xom ashyo va tayyor mahsulotlarga aytiladi;", "o’ziga xos qadoqlanishi, alohida iste’mol qiymatiga ega va bozorda rezidentlar tomonidan erkin sotiladigan tayyor mahsulotlarga aytiladi."], "correct_index": 0},
+    {"question": "198. Marketing nuqtai nazaridan tovar qaday ko’rinshlarda namoyon bo’ladi", "options": ["tovarning vizul ko’rinishi, tashqi ko’rinishi, ichki ko’rinishi;", "moddiy ob’ektlar, ko’satiladigan xizmatlar, alohida shaxslar, geografik manzilllar, tashkilotlar;", "shaxsiy ko’rinishi, sotuv jarayonida ko’rinishi, iste’molda ko’rinishi;", "qadoqlanishdan avval va keyin ko’rinishi, internetda ko’rinishi, iste’moldan keyin ko’rinishi ;"], "correct_index": 1},
+    {"question": "199. Marketing nuqtai nazaridan tovarning besh kontseptual darajasini belgilang", "options": ["tovarning vizul ko’rinishi, tashqi ko’rinishi, ichki ko’rinishi, xarid davrida ko’rinishi, iste’molda ko’rinishi;", "shaxsiy ko’rinishi, sotuv jarayonida ko’rinishi, iste’molda ko’rinishi, kafolat xizmatidan so’ng ko’rinishi, utilizatsiya;", "asosiy naf, tasavvurdagi tovar, kutilayotgan tovar, namoyish etiladigan tovar, potentsial tovar;", "qadoqlanishdan avval va keyin ko’rinishi, internetda ko’rinishi, iste’moldan keyin ko’rinishi, utilizatsiya qilishga qodirligi ;"], "correct_index": 2},
+    {"question": "200. Marketingda tovar ierarxiyasi o’z ichiga nimalarni oladi", "options": ["tovarning vizul ko’rinishi, tashqi ko’rinishi, ichki ko’rinishi, xarid davrida ko’rinishini o’z ichiga oladi", "shaxsiy ko’rinishi, sotuv jarayonida ko’rinishi, iste’molda ko’rinishini o’z ichiga oladi;", "qadoqlanishdan avval va keyin ko’rinishi, internetda ko’rinishini o’z ichiga oladi ;", "asosiy ehtiyojni qondirishga yo’naltirilgan barcha jihatlar va alohida tovar navi(sorti)ni o’z ichiga oladi;"], "correct_index": 3},
+    {"question": "201. Marketingda tovar sinfi  o’z ichiga nimalarni oladi", "options": ["bir tovar oilasi ichidagi tovarlar guruhi bo’lib, bir- biri bilan moddiy tarzda aloqada bo’ladi;", "tovarning vizul ko’rinishi, tashqi ko’rinishi, ichki ko’rinishi, xarid davrida ko’rinishini o’z ichiga oladi", "shaxsiy ko’rinishi, sotuv jarayonida ko’rinishi, iste’molda ko’rinishini o’z ichiga oladi;", "qadoqlanishdan avval va keyin ko’rinishi, internetda ko’rinishini o’z ichiga oladi ;"], "correct_index": 0},
+    {"question": "202. Bir tovar tipidagi konkret model, masalan, kattaligi, narxi, ko’rinishi, xizmat ko’rsatish uslubi bo’yicha bir xil, lekin faqatgina  boshqa ayrim detallar bo’yicha farqlanadigan tovar turkumi...", "options": ["tovarni vizullashtirish deyiladi;", "tovar artikuli deyiladi;", "tovar sinfi deyiladi;", "tovar fetishizmi deyiladi;"], "correct_index": 1},
+    {"question": "203. Marketingda tovar miks (product mix - product assortment)-", "options": ["tovarni natural va vizul ko’rinishi demakdir;", "tovar sinfi demakdir;", "xaridorga sotuvchi taklif etayotgan barcha mahsulot liniyalari, artikullari demakdir;", "tovar fetishizmi demakdir;"], "correct_index": 2},
+    {"question": "204. Korxona qanchalik yirik va texnologik jihatdan qudratli bo’lsa, ......", "options": ["narx varaqalari, chegirtmalar, imtiyozli narxlar pasayadi;", "ekologik talablarga javob berishi, imtiyozli sotilishi pasayadi;", "shunchalik tovar assortimenti kamayadi.", "tovar assortimenti va liniyalari shinchalik keng bo’ladi;"], "correct_index": 3},
+    {"question": "205. Kompaniya mahsulot nomenklaturasini qanday shaklda tavsiflash mumkin", "options": ["nomenklatura ko’lami, nomenklatura kengligi, nomenklatura bog’liqligi;", "narx varaqalari, chegirtmalar, imtiyozli narxlar bog’liqligi;", "ekologik talablarga javob berishi, imtiyozli sotilishi bog’liqligi;", "reklama va ildamlantirish nuqtai nazaridan."], "correct_index": 0},
+    {"question": "206. Mahsulot liniyasini ko’paytirish qanday yo’nalishlarda amalga oshiriladi", "options": ["nomenklaturani qisqarishi, narx varaqalarini ishlab chiqish yo’nalishlarida;", "«pastga», «yuqoriga», «ikki tomonlama»;", "xarajatlarni hisoblash, chegirtmalar, imtiyozli narxlar bog’liqligi;", "reklama va ildamlantirish nuqtai nazaridan."], "correct_index": 1},
+    {"question": "207. Mahsulot liniyasini ko’lamini kengaytirish qanday maqsadlarga yo’naltiriladi", "options": ["narx varaqalari, chegirtmalar, imtiyozli narxlarni joriy etish;", "xarajatlarni hisoblash, chegirtmalar va narx varaqalarini etishmasligi oldini olish;", "qo’shimcha foyda olish, dillerlarga keng  assortimentda tovar etkazish, ishlab chiqarish quvvatlardan unumli foydalanish, ilg’or  kompaniya bo’lish ishtiyoqi, kirib kelishi mumkin bo’lgan raqobatchilarni bartaf etish;", "reklama va ildamlantirishda ustivorlikka erishish."], "correct_index": 2},
+    {"question": "208. Tovar brendi (markasi)ga berilgan qaysi tarif to’g’ri", "options": ["narx vositasida raqobatchilarni chalg’itish maqsadida, raqamli iqtisodiyotga o’tish davrida kashf etilgan turli rasm, shior, ranglar majmuasidir;", "tovarni raqobatchilar tovaridan ajratish, xarajatlarni hisoblashda qulaylik yaratish , chegirtmalar va narx varaqalarini rasmiylashtirishda ishlatiladigan tovar tafsilotidir;", "reklama va ildamlantirishda ustivorlikka erishish maqsadida firmaning nomi, egasi va joylashgan manzili ifoda etiladigan rekvezitlar.", "nom, termin, belgi, simvol, rasm yoki ularning birgalikdagi ifodalanishi bo’lib, sotuvchi yoki sotuvchilar guruhining mahsulot yoki xizmatlarini  identifikatsiya qilish va raqobatchilarga nisbatan tabaqalashtirish (differentsiatsiya) demakdir;"], "correct_index": 3},
+    {"question": "209. Markaning nomi (brand name- marka nomi)ga berilgan qaysi tarif to’g’ri", "options": ["markaning qismi bo’lib, uni talaffuz qilish mumkin bo’ladi;", "Xalqaro standartlashtirish qo’mitasidan oligan sertifikat hisoblanadi;", "tovarni raqobatchilar tovaridan ajratish uchun xarid etilgan kupon hisoblanadi;", "reklama va ildamlantirish tadbirlari uchun o’ylab topilgan abstrakt rasm."], "correct_index": 0},
+    {"question": "210. Marka belgisi-emblemasi (brand symbol- emblema marki)ga berilgan qaysi tarif to’g’ri", "options": ["Xalqaro metrologiya tashkilotidan oligan sertifikat hisoblanadi;", "markaning qismi bo’lib, uni anglash, aniqlash mumkin, lekin talaffuz qilish mumkin emas, emblema rang yozuv  stili o’zgachaligi bilan ajralib turadi;", "tovarni raqobatchilar tovaridan ajratish uchun xarid etilgan kupon hisoblanadi;", "reklama va ildamlantirish tadbirlari uchun o’ylab topilgan abstrakt rasm."], "correct_index": 1},
+    {"question": "211. Tovar belgisiga berilgan qaysi tarif to’g’ri", "options": ["xalqaro metrologiya tashkilotidan oligan sertifikat hisoblanab, uni buzgan raqobatchilar javobgarlikka tortiladi;", "tovarni sohtalaridan ajratish uchun bojxona qo’mitasi tomonidan beriladigan aktsiz markasi;", "marka yoki uning qismi bo’lib, u huquqiy jihatdan himoyalangan bo’ladi va undan  foydalanish uchun uning egasiga va   sotuvchiga to’la qonli huquq beradi va uni himoyalaydi.;", "samarali reklama va ildamlantirish tadbirlari o’tkazish uchun milliy savdosanoat palatasining o’rnatgan tadbirlari sanaladi."], "correct_index": 2},
+    {"question": "212. Avtorlik huquqiga berilgan qaysi tarif to’g’ri", "options": ["Xalqaro moda tashkilotidan tomonidan olinadigan  sertifikat hisoblanab, uni buzgan raqobatchilar javobgarlikka tortiladi;", "musiqa asari, kitob, san’at asarlarini  sohtalaridan ajratish uchun bojxona qo’mitasi tomonidan beriladigan guvohnoma;", "samarali reklama va ildamlantirish tadbirlari o’tkazish uchun milliy savdosanoat palatasining buradigan litsenziyasi  sanaladi.", "adabiy, musiqiy yoki badiiy asarni mazmunini va shaklini namoyish etish, chop etish bo’yicha uning muallifiga to’la huquq beradi va xalqaro huquq me’yorlariga ko’ra u barcha jabhalarda  himoyalanadi;"], "correct_index": 3},
+    {"question": "213. Xalqaro doirada avtorlik huquqi qanday tasvirlanadi", "options": ["adabiy, musiqiy yoki badiiy asar avtorlik huquqiga ega ekanligi (Copyright) yozuvining bosh- S harfi doira ichida ifodaladi;", "xalqaro moda tashkilotidan tomonidan olinadigan  sertifikatda Autor- degan yozuv qo’shib qo’yiladi;", "musiqa asari, kitob, san’at asarlarini  sohtalaridan ajratish uchun bojxona qo’mitasi tomonidan beriladigan guvohnoma;", "samarali reklama va ildamlantirish tadbirlari o’tkazish uchun  savdo vazirligi hamda  milliy savdo-sanoat palatasining taomonidan beriladigan yorliq."], "correct_index": 0},
+    {"question": "214. Marka (brand)lar bo’yicha qaror qabul qilish yo’nalishlariga:", "options": ["bir yoki ikki mamlakatda ishlatish, xalqaro miqyosda ishlatish masalalari hisoblanadi;", "marka nomi va uni litsenziyalash, markani ishlatish chegarasini kengaytirish, ko’p markali yondoshuv masalalari hisoblanadi;", "tovarni raqobatchilar tovaridan ajratish, xalqaro savdo palatasiga ariza berish masalalari hisoblanadi;", "ko’p bosqichli reklama va sotuvni ildamlantirish tadbirlari uchun maxsus o’ylab topilgan tadbirlar rejalari kiradi."], "correct_index": 1},
+    {"question": "215. Marka (brand)lar oilasi bo’yicha qaror qabul qilish yo’nalishlariga:", "options": ["bir yoki ikki mamlakatda ishlatish, xalqaro miqyosda ishlatish masalalari kiradi;", "tovarni raqobatchilar tovaridan ajratish, xalqaro savdo palatasiga ariza berish masalalari kiradi;", "individual marka nomi, barcha tovarlar uchun yagona  marka omi, tovar oilasi uchun kollektiv marka nomini ishlatish kiradi;", "ko’p bosqichli reklama va sotuvni ildamlantirish tadbirlari uchun maxsus o’ylab topilgan tadbirlar kiradi."], "correct_index": 2},
+    {"question": "216. 2019 yil natijalariga ko’ra eng nufuzli marka  (brand) peshqadam uchligini belgilang.", "options": ["Facebook, Google, IBM;", "Coca Cola, Siemens, Google;", "Marlboro, Camel, Davidoff.", "Apple, Google, Amazon;"], "correct_index": 3},
+    {"question": "217. Avtomobilsozlik  sohasiga  kirmaydigan   nufuzli marka  (brand)larni  belgilang.", "options": ["IBM , Amazon , Google, Facebook;", "Ferrari, Mersedes, Honda acebook, Google,;", "Crysler, VW, Cetroen, Renault, Siemens;", "Volvo, Audi, BMW, Porsche."], "correct_index": 0},
+    {"question": "218. Avtomobilsozlik  sohasiga taaluqli    nufuzli marka  (brand)larni  belgilang.", "options": ["Persil , Ariel, Nesquik, Facebook, Google,;", "Mersedes, Volvo, Audi, BMW, Porsche;", "Schwarzkopf, Loreal, Henkel, Unilever, Siemens;", "IBM , Amazon , Google, Facebook"], "correct_index": 1},
+    {"question": "219. Marketingda bozor tahlili...", "options": ["tovarlarning narxinigina aniqlash bilan bog’liq;", "tovarlarni ishlab chiqaruvchilar va sotuvchilar joylashishini aniqlash bilan bog’liq;", "miqdoriy va sifat tafsilotlarning o’zgarishini aniqlash bilan bog’liq;", "mavsumiy va doimiy narxlarni tahlil qilish bilan bog’liq."], "correct_index": 2},
+    {"question": "220. Maqsadli bozor segmenti tanlash...", "options": ["strategik va operativ marketingda asosiy tadqiqot ob’ekti sanalmaydi;", "reklama uslublaridan biri sanaladi;", "narx belgilash uslublaridan biri sanaladi.", "strategik va operativ marketingda asosiy tadqiqot ob’ekti  hisoblanadi;"], "correct_index": 3},
+    {"question": "221. Marketing Miks (Marketig- mix) kompleksida qadoqlash (ruscha-upakovka, ingl. packaging) –qaysi  yo’nalishga kiradi", "options": ["tovar (product) yo’nalishiga;", "narx (price ) yo’nalishiga;", "joylashtirish-taqsimlash (place)yo’nalishiga;", "ildamlantirish (promotion) yo’nalishiga ."], "correct_index": 0},
+    {"question": "222. Marketing Miks (Marketig- mix) kompleksining tovar (product)   yo’nalishiga kirmaydigan  elementlarni  belgilang", "options": ["nomlanishi, stil, qadoqlanishi, xususiy jihatlari;", "oldindan kreditga sotish, internet orqali sotish, Amazon.com orqali buyurtma berish;", "kafolatli xizmat ko’rsatish, kafolat muddati o’tgandan so’ng xizmat;", "tovar sifati, ajralib turuvchi belgilari;"], "correct_index": 1},
+    {"question": "223. Qadoqlashni marketingning muhim dastagi sifatida foydalanishga undovchi omillar", "options": ["firma nomlanishini ommaviylashtirish, firma  stiliga urg’u berish, qadoqlanish vositasida katta foyda olish;", "kafolatli xizmat ko’rsatish uchun shart sharoitlar yaratish, kreditga tovar sotish uchun zamin yaratish, transport xarajatlarini oshirish;", "o’z-o’ziga xizmat ko’rsatish (samoobslujivanie), xaridorlar farovonligining ortishi, firma va marka imidji,  novatorlik imkoniyatlar  (shanslari) ning mavjudligi, logistikadagi  ratsionallik;", "savdo peshtaxtalarini to’ldirish, tovarni imkon qadar qimmat sotish, tovar  sifat yomonlashsa ham uni bartaraf etish;"], "correct_index": 2},
+    {"question": "224. Qadoqlashda besh muhim jabhani belgilang", "options": ["firma nomlanishi,  firma  stili,  transportda tashish, sug’urtalar, o’lchashda qulaylik;", "saqlashda qulaylik,  kafolatli xizmat ko’rsatishda qulaylik,   kreditga tovar sotishda qulaylik,  transport xarajatlarini tejash, logistika;", "savdo peshtaxtalariga joylashtirishda qulaylik, logistika, tovarni imkon qadar qimmat sotish, tovar  sifat yomonlashishini oldini olish;", "qadoqlash kontseptsiyasi, qadoqlash konstruktsiyasi , texnik sinov, savdo tizimida va iste’moldagi sinov;"], "correct_index": 3},
+    {"question": "225. Qadoqlashda etiketkalashning muhim vazifalari qanday", "options": ["identifikatsiyalash, nav(sort)larni ko’rsatish, tovarni tavsiflash(ishlab chiqarilgan manzili, vaqti, foydalanish bo’yicha ko’rsatma),propoganda qilish;", "firma mashhurligini oshirish, yuqori narx belgilashda foydalanish, reklama qilish maqsadlari;", "saqlashda qulaylik,  kafolatli xizmat ko’rsatishda qulaylik,   kreditga tovar sotishda qulaylik,  logistika;", "savdo peshtaxtalariga joylashtirishda qulaylik, narx belgilanadigan qog’ozlarni  tejash, logistika, tovarni imkon qadar qimmat sotish."], "correct_index": 0},
+    {"question": "226. Strategik marketingda qo’shilgan qiymat (ruscha – dobavlennaya tsennost, ing.- added value) mohiyati", "options": ["saqlashda qulaylik,  kafolatli xizmat ko’rsatishda qulaylik tuyg’usi demakdir;", "mahsulotning sifatliligi va boshqa raqobatchilardan ustunligiga ishonch tuyg’usi demakdir;", "savdo peshtaxtalariga doimo mavjudik tuyg’usi demakdir;", "savdo korxonalari to’laydigan soliq turi demakdir."], "correct_index": 1},
+    {"question": "227. Savdo  markasining imidji qanday namoyon bo’ladi", "options": ["reklamaga salbiy murojatnomalar orqali;", "marketing rejasini o’z vaqtda bajarish orqali;", "maqsadli auditoriya tomonidan mahsulot makasining qabul qilinishi, tan olinishi va ular orasida mashhur bo’lishi orqali;", "mavsumiy sotuvvlarni kechiktirish orqali."], "correct_index": 2},
+    {"question": "228. Savdo  markasining individualligi nimani anglatadi", "options": ["tovarlarni texnik sinash va jurnallardagi maqolalar soniga PR bo’limining tahlili orqali namoyon bo’ladi.", "sotuv hajmi, sotuv miqdori va reklamaxarajatlari yig’indisidan iborat bo’ladi.", "kuponlar, mukofotli musobaqalar va kompaniyaning homiylik (sporsorlik) qobiliyatida namoyon bo’ladi.", "mahsulotning maqsadli xaridorlarga murojati; bu murojat mahsulotning o’zida, nomida, vizual ko’rinishida va reklamasida  namoyon bo’ladi"], "correct_index": 3},
+    {"question": "229. Samarali savdo  markasini yaratish  4 ustunga tayanadi, ya’ni...", "options": ["mahsulot sifati, savdo markasi asosi, savdo markasini kengaytirish, savdo markasi  potentsiali;", "tovarlarni texnik sinash va jurnallardagi maqolalar soniga PR bo’limining tahlili.", "savdo bo’g’inlarida mashhurlik, sotuv miqdori va reklamaxarajatlari kamligi;", "kuponlarning ko’pligi, mukofotli musobaqalar va kompaniyaning homiylik (sporsorlik) qobiliyatida."], "correct_index": 0},
+    {"question": "230. Tez iste’mol qilinadigan tovarlarga talab qanday aniqlanadi", "options": ["talabni aniqlash imkoni mavjud emas.", "potentsial iste’mol birligi, potentsial iste’molchilar ichida real ite’molchilar ulushi, bir real iste’molchining iste’mol qilish darajasi yordamida aniqlanadi.", "talab elastikligi, everistik uslublar vositasida aniqlash mumkin.", "taklif elastikligi va narxning o’zgaruvchanligini aniqlash vositasida topish mumkin."], "correct_index": 1},
+    {"question": "231. Marketingda omma fikri va omma bilan aloqalar (ingl. Public relation) qaysi Marketing Miks kompleksiga taaluqli", "options": ["saqlashda qulaylik (product) kompleksiga;", "savdo peshtaxtalari (place) kompleksiga;", "ildamlantirish (promotion) kompleksiga;", "savdo korxonalari(sells network) kompleksiga."], "correct_index": 2},
+    {"question": "232. Savdo  markasining asosini nima tashkil etadi", "options": ["tovarlarni texnik sinash elementlarida.", "sotuv hajmi va  sotuv miqdori namoyon bo’ladi;", "kuponlar, mukofotli musobaqalarda namoyon bo’ladi;", "marka yadrosining elementlari bo’lib, ularda mahsulotning farqlanuvchi xususiyatlari va xarakterlari namoyon bo’ladi;"], "correct_index": 3},
+    {"question": "233. Kompaniyaning homiylik (sporsorlik) faoliyati  qaysi marketing miks kompleksiga tegishli", "options": ["ildamlantirish (promotion) kompleksiga;", "saqlashda qulaylik (product) kompleksiga;", "savdo peshtaxtalari (place) kompleksiga;", "savdo korxonalari(sells network) kompleksiga."], "correct_index": 0},
+    {"question": "234. Narx vositasida va narx vositasisiz raqobat nimani anglatadi ?", "options": ["xorijiy va mahalliy narxlar o’rtasidagi tafovutni", "bozordagi joriy tovar narxlari hamda tabaqalashgan tovarlarga belgilangan narxlar o’rtasidagi raqobat uslubini", "chakana va ulgurji narxlar o’rtasidagi raqobatni", "monopolistik va oligopolistik narxlar o’rtasidagi raqobatni"], "correct_index": 1},
+    {"question": "235. Iste’molchilar ishtiyoqi va talabning ortishi o’rtasidagi munosabat....", "options": ["mavjud emas va raqobat darajasi vositasida aniqlandi;", "mavjud, lekin uni aniqlash imkoni yo’q.", "uzviy bo’lib, firmalar bu bog’liqni seza bilish lozim;", "marketing tadqiqotlari ob’ekti sanalmaydi;"], "correct_index": 2},
+    {"question": "236. Ta’minotchilar tarkibiga qanday sub’ektlar kirad", "options": ["sotuv kanallarida sotish bo’yicha raqobat qiluvchi sub’ektlar kiradi;", "savdoda risk bilan ish kqruvchi vositachilar kiradi;", "mijozlar uchun kurashuvchi raqobatlashuvchi sub’ektlar kiradi.", "firma va uning raqobatchisini  kerakli tovarlar, xom ashyo bilan ta’minlovchi, savdolashish salohiyati bo’lgan sub’ektlar kiradi;"], "correct_index": 3},
+    {"question": "237. Raqobatning iqtisodiyot tarmoqlarida shakllanishiga ko’ra...", "options": ["tarmoq ichidagi va tarmoqlararo; milliy va xorijiy korxonalar o’rtasidagi raqobatni nazarda tutadi;", "mavjud emas;", "narx vositasida va narx vositasiz turlarga bo’linadi.", "takomilashgan va takomilashmagan turlarga bo’linadi;"], "correct_index": 0},
+    {"question": "238. Raqobat o’z ko’lamiga ko’ra qanday o’lchanadi", "options": ["oligopoliya, monopoliya, monopolistik raqobat, sof raqobat;", "mahalliy, mintaqaviy, mamlakat ichidagi, xamjamiyatdagi  (davlatlar hamdqstligi miqyosidagi), xalqaro;", "narx bo’yicha va narx vositasiz raqobat.", "milliy, mavsumiy, doimiy;"], "correct_index": 1},
+    {"question": "239. marketing nuqtai nazaridan Etiketkada qanday ma’lumotlar bo’lishi kerak", "options": ["narx va sotilish manzili", "ranglar jilosi va ishlab chiqaruvchi manzili", "identifikatsiyalash, nav(sort)larni ko’rsatish, tovarni tavsiflash(ishlab chiqarilgan manzili, vaqti, foydalanish bo’yicha ko’rsatma),propoganda qilish;", "Tovarning navi va ishlab chiqarish sanasi"], "correct_index": 2},
+    {"question": "240. Marketing muhiti nima?", "options": ["Kompaniya uchun xos bo’lib egalar ishchilar va mashinalarni o’z ichiga oladi", "Biznesga to’g’ridan to’g’ri tasir etuvchi tashqi omillar hisoblanadi", "Barcha ichki imkoniyatlar majmuasi", "Kompaniyaning munosabatini o’rnatish va mijozlariga xizmat ko’rsatish qobiliyatiga tasir etuvchi omillar va kuchlarning kombinatsiyasi"], "correct_index": 3},
+    {"question": "241. Ijtimoiy sinfi, hayot tarzi, shaxsiy xususiyatlariga qarab bozorni turli toifalarga ajratishga asoslangan segmentlash bu", "options": ["psixologik yondoshuvga asoslangan segmentlash", "geografik yondoshuvga asoslangan segmentlash", "tovar yondoshuvga asoslangan segmentlash", "siyosiy yondoshuvga asoslangan segmentlash"], "correct_index": 0},
+    {"question": "242. Demografik segmentlash bu....", "options": ["Bozordagi mijozlarning yashash joyi va daromadlariga asoslanib toifalash", "Bozordagi mijozlarning yoshi, jinsi, daromadi, kasbi, ma’lumoti, dini, millati va avlodi kabi ko’rsatkichlari asosida toifalash", "Iste’molchilarning mahsulot haqidagi bilimlari, mahsulotdan foydalanish yoki mahsulotga bo’lgan munosabatlari asosida bozorni toifalarga ajratish", "iste’molchilarni daromadlari, xaridorlik odatlari  va migratsiyasi asosida bozorni toifalarga ajratish"], "correct_index": 1},
+    {"question": "243. Novatorlik imkoniyatlarni oshirish qaysi marketing kompleksi elementiga taaluqli", "options": ["narx", "manzil", "tovar- qadoqlash", "ildamlantirish (promotion) yo’nalishiga ."], "correct_index": 2},
+    {"question": "244. Mahsulot liniyasini kengaytirish...", "options": ["ishlab chiqarishga taaluqli reklama siyosati hisoblanadi", "xizmat ko’rsatishga  taaluqli reklama siyosati hisoblanadi", "distribyutsiyaga  taaluqli reklama siyosati hisoblanadi", "tovar siyosatiga taaluqli asosiy rivojlanish yo’li hisoblanadi."], "correct_index": 3},
+    {"question": "245. Mahsulot liniyasini kengaytirishdan ko’zlanayotgan maqsad...", "options": ["foyda olish, assortimentni kengaytirish, ishlab chiqarish kuvvatlaridan foydalanish, kirib kelishi mumkin bo’lgan raqobatichiga to’sqinlik qilish", "raqobatchilar bilan til biriktirish va savdo kartelini tuzish", "davlatga to’lanadigan soliqlar miqdorini kamaytirish, import tovarlar uchun bojxona engilliklariga erishish", "javob yo'q"], "correct_index": 0},
+    {"question": "246. Marketingda tovar tipi deb-", "options": ["bir tovar oilasi ichidagi moslashtirilgan tovarlar sanaladi.", "bir tovar liniyasi ichida bir xil turdagi(navdagi) tovarlar sanaladi", "bir tovar turkumi ichidagi safdosh tovarlar sanaladi.", "qadoqlangan tovarlar sinfiga aytiladi"], "correct_index": 1},
+    {"question": "247. Marketingda mahsulot oilasi…", "options": ["bir tovar oilasi ichidagi moslashtirilgan tovarlar sanaladi.", "bir tovar sinfi ichidagi o’xshash tovarlarni o’z ichiga oladi", "asosiy ehtiyojlarni u yoki bu tarzda qondiruvchi barcha  tovar sinflarini o’z ichiga oladi", "bir tovar nomenklaturasi ichidagi to’ldiruvchi tovarlarni o’z ichiga oladi."], "correct_index": 2},
+    {"question": "248. Marketing nuqtai nazaridan \"potentsial tovar\"..", "options": ["bir tovar oilasi ichidagi moslashtirilgan tovarlar sanaladi.", "bir tovar sinfi ichidagi o’xshash tovarlarni o’z ichiga oladi", "qadoqlangan tovarlar sinfiga dlemakdir", "kelgusida iste’molchining istaklarini  to’liqroq qondirishga qaratilgan qo’shimchalar xizmatlar demakdir"], "correct_index": 3},
+    {"question": "249. Marketing nuqtai nazaridan \"tasavvurdagi tovar \"..", "options": ["\"mahsulot vizual qanday namoyish etiladi\"- degan savolga javob topish uchun barcha harakatlar", "bir tovar oilasi ichidagi moslashtirilgan tovarlar sanaladi.", "bir tovar sinfi ichidagi o’xshash tovarlarni o’z ichiga oladi", "bir tovar nomenklaturasi ichidagi to’ldiruvchi tovarlarni o’z ichiga oladi."], "correct_index": 0},
+    {"question": "250. Marketingda narx belgilashda ichki omillar bo’lib-", "options": ["davlat iqtisodiy siyosati, antikartel talablari, jahon iqtisodiyoti konyunkturasi hisoblanadi", "marketing maqsadlari, markting kompleksi elementlarining maqsad va strategiyalari, xarajatlar, qo’llaniladigan narx belilash uslublari va x.k hisoblanadi", "raqobatchi kompaniyalar tovar hajmi, tegishli tovar bozori salmog’i, import narxlar hisoblanadi", "barcha javoblar birgalikda to’g’ri"], "correct_index": 1},
+    {"question": "251. Marketingda narx belgilashda tashqi  omillar bo’lib-", "options": ["tannarx, savdo chegirtmasi miqdori, tovar zaxiralari hajmi, ombordagi xom ashyo materiallar miqdori hisoblanadi.", "menejment maqsadlari, markting kompleksi elementlarining maqsad va strategiyalari, xarajatlar, qo’llaniladigan narx belilash uslublari va x.k hisoblanadi", "marketing maqsadlari, markting kompleksi elementlarining maqsad va strategiyalari, xarajatlar, qo’llaniladigan narx belilash uslublari va x.k hisoblanadi", "barcha javoblar birgalikda to’g’ri"], "correct_index": 2},
+    {"question": "252. Narxnni shakllanishidagi strategik maqsadlar (strategicheskie tseli tsenoobrazovaniya) bo’lib...", "options": ["raqobatchilar bilan til biriktirish va savdo kartelini tuzish, past narxda sotuvchi kompaniyalarni bozorga kiritmaslik, tovar zaxiralarini maksimallashtirish hisoblanadi", "joriy raqobatni sindirish, soliqlar to’lashdan xufyona yo’llar bilan o’tish, sanoat mahsulotlari tovarlarini ko’proq ishlab chiqarish hisoblanadi", "barcha javoblar birgalikda to’g’ri", "kompaniya umrboqiyligini ta’minlash, joriy foydani maksimallashtirish, bozordagi ulush bo’yicha liderlikka erishish, tovar sifati bo’yicha liderlikni egallash hisoblanadi"], "correct_index": 3},
+    {"question": "253. Tovar sifati va narxi o’rtasida qanday bog’liqlik bor?", "options": ["narx muqarrar ravishda sifat bilan bog’liq va shu bois, savdo markasi imidjining komponenti-qismi bo’lib hisoblanadi.", "Narx va sifat bir biri bilan umuman bog’lanmagan kategoriyalardir.", "tovar narxi past bo’lsa sifat ortadi va aksincha, sifat ortsa, narx pasayadi", "tovar narxi past bo’lishi bilan sifat nazorati kuchayadi"], "correct_index": 0},
+    {"question": "254. Narx belgilashda qanday pozitsiyaga rioya qilish kerak?", "options": ["past narx yuqori savdo chegirtmasi pozitsiyasi", "yuqori sifat va yuqori narx pozitsiyasi", "yuqori narx va yuqori savdo chegirtmasi pozitsiyasi", "tovar narxi past bo’lishi bilan sifat nazorati kuchayadi"], "correct_index": 1},
+    {"question": "255. Narx belgilash necha bosqichdan iborat?", "options": ["19 ta", "1 ta", "6 ta", "28 ta"], "correct_index": 2},
+    {"question": "256. Narxga ta’sir etuvchi omillar qatorida qanday effektlarni ham inobatga olish kerak?", "options": ["Kartel va sindikat effektlari", "korrelyatsiya va regressiya effektlar", "piramida va tarmoq effektlari", "Masshtab va tajriba effektlari"], "correct_index": 3},
+    {"question": "257. Tajriba effekti qanday ustivorlikka erishish imkonini beradi?", "options": ["u bevosita raqobatchilardan xarajatlarni pastligi bo’yicha ustivorlikka erishish imkonini beradi", "u import narxlarni tejash imkonini beradi", "u eksport narxlarni tejash imkonini beradi", "bunday effekt marketingda o’rganilmaydi"], "correct_index": 0},
+    {"question": "258. Marketingda, tovar aylanuvchanligi (tovarooborachivaemost),  qanday o’lchanadi", "options": ["sotuv hajmi (savdo tushumini)/ foydaga nisbati bilan", "tovar oborotini/ tovar zaxiralariga nisbati bilan", "yalpi daromadni/sotuv hajmi (savdo tushumi)  nisbati bilan", "bunday tushuncha  marketingda o’rganilmaydi"], "correct_index": 1},
+    {"question": "259. Marketingda, tovar aylanuvchanligi (tovarooborachivaemost),  qanday birliklarda o’lchanadi", "options": ["likvidik va rentabellik ko’rsatkichlarida", "gradus va dyumda", "marotabada va kunlarda", "so’mda va xorijiy valyutada"], "correct_index": 2},
+    {"question": "260. Marketingda tashqi muhit omillarini narx bo’yicha qaror qabul qilish jarayoniga ta’sir etish xususiyatlariga ko’ra...", "options": ["birinchi, ikkinchi faza va bojxona to’lovlari va yig’imlari guruhlariga turkumlanadi", "bosh direktor, bosh buxgalter, bosh moliyachi hisoblariga ososlangan hisob-kitoblari sinflariga bo’linadi", "import va eksport narxlar,  bojxona to’lovlari va yig’imlari guruhlariga turkumlanadi", "xukumat, sotish kanallari a’zolari, iste’molchilar, ishlab chiqarish xarajatlari, raqobatchilar guruhlariga turkumlanadi"], "correct_index": 3},
+    {"question": "261. Narx vositasida va narx vositasisisiz raqobat...", "options": ["mavjud bo’lib, ulr ichida narx vositasisisiz raqobat sifatli tovar, ijobiy differentsiatsiya, segmentatsiya asosida ish tutayotgan firmalarga xos", "o’xtin- o’xtin vujudga keladigan savdo qilish jarayonidir", "faqat monopoliya bozorini shakllantirishga yo’naltirilgan qtisodiy siyosatdir", "bunday tushunchalar  marketingda o’rganilmaydi"], "correct_index": 0},
+    {"question": "262. Marketingda tovar tannarxi va sotuv narxini hisoblashda eng muhimi..", "options": ["raqobatchini sindirish hisoblanadi.", "zararsizlik nuqtasi(tochka bezubitochnosti; break evant point)ni aniqlash hisoblanadi.", "rentabellikni tannarxga ko’patmasini aniqlash hisoblanadi.", "likvidlilikni rentabellikka nisbatini aniqlash hisoblanadi"], "correct_index": 1},
+    {"question": "263. Marketingda narx liniyalari deb...", "options": ["tovarlarni bir xil narxda sotish demakdir", "tovarlarni ishlab chiqaruvchilar va sotuvchilar o’rtasidagi tafovutidir", "bu bitta tovar assortimenti (mahsulot chizig’i) chegaralaridagi narxlar diapazoni.", "narx belgilashda ko’llanilmaydigan uslub sanaladi."], "correct_index": 2},
+    {"question": "264. Marketingda bonus chegirtmalar deb...", "options": ["yangi yil arafasida barcha xaridorlarga yuklama tarzida majburiy sotiladigan tovarlardir.", "shisha idishlar va qog’oz paket vositalarini utilizatsiyaga topshirgani uchun chegirtma", "narx belgilashda ko’llanilmaydigan uslub sanaladi.", "doimiy xaridorlar yoki vositachilarga, ular muayyan davr ichida tovarning kelishilgan miqdorini sotib olgan taqdirda beriladi."], "correct_index": 3},
+    {"question": "265. Marketingda ulgurji skidkalar  deb..", "options": ["katta partiyadagi tovarlarni oladigan xaridorlarga beriladi chegirtmalar hisoblanadi.", "kichik partiyada tovar xarid etuvchi mijozlarga beriladi.", "shisha idishlar va qog’oz paket vositalarini utilizatsiyaga topshirgani uchun chegirtma", "narx belgilashda ko’llanilmaydigan uslub sanaladi."], "correct_index": 0},
+    {"question": "266. Marketingda «Sodiqlik uchun» chegirmalar...", "options": ["kichik partiyada tovar xarid etuvchi mijozlarga beriladi.", "uzoq muddatli hamkorlik uchun asos yaratadi va asosan tovar ishlab chiqaruvchi va sotish bo’yicha vositachi o’rtasida amal qiladi", "shisha idishlar va qog’oz paket vositalarini utilizatsiyaga topshirgani uchun chegirtma", "narx belgilashda ko’llanilmaydigan uslub sanaladi."], "correct_index": 1},
+    {"question": "267. Marketingda demping narxlar...", "options": ["yangi yil arafasida barcha xaridorlarga yuklama tarzida majburiy sotiladigan tovarlardir.", "yangi narx belgilash uslubidir", "xaridorlarni raqobatchilardan o’ziga jalb qilish va sotish hajmini ko’paytirish maqsadida sun’iy pasaytirilgan narxlardir.", "bunday narx belgilash uslubi faqat AQShda qo’llaniladi"], "correct_index": 2},
+    {"question": "268. Marketingda «Geografik» narxlashtirish ...", "options": ["umuman qo’llanilmaydigan uslubdir", "faqat Yaponida qo’llaniladigan narx uslubidir", "bunday narx belgilash uslubi faqat AQShda qo’llaniladi", "bu har xil geografik hududlar, sotish  bozorining segmentlarida bir joydan ikkinchi joyga etkazib berish qiymati omilini hisobga oladigan narx differentsiatsiyasidir."], "correct_index": 3},
+    {"question": "269. Taqsimot (sotuv) kanali...", "options": ["o’z mohiyatiga ko’ra tovarni ishlab chiqaruvchidan xaridorgacha bo’lgan yo’lini anglatadi", "o’z mohiyatiga ko’ra franchayzing va advertayzing kanallarini anglatadi", "o’z mohiyatiga ko’ra savdo chegirtmalarini anglatadi", "bunday sotuv uslubi faqat AQShda qo’llaniladi"], "correct_index": 0},
+    {"question": "270. Sotuv kanallari asosan...", "options": ["bir shaharda va ko’p shaharda sotishni uyushtirishni nazarda tutadi", "vositachilar orqali sotuv (kosvenniy sbit) yoki vositachilarsiz sotuv(pryamoy sbit) masalasini hal etishni talab etadi.", "demping va antidemping narxlarda tovar sotishni nazarda tutadi", "bunday sotuv uslubi faqat Yaponiyada qo’llaniladi"], "correct_index": 1},
+    {"question": "271. Ayirboshlash(sbit, ing.- sell)...", "options": ["tovarni yangisiga almashtirishni nazarda tutadi", "ishlab chiqaruvchiga belgilanadigan soliq turi hisoblanadi", "sotish,  tovarni imkon qadar tez, samarali yo’llar, uslublar vositasida so’nggi xaridorga- iste’molchiga etkazishdan iborat.", "internet va elektorn savdo kanali hisoblanadi"], "correct_index": 2},
+    {"question": "272. Taqsimot (sotuv)ning bosh iqtisodiy  funktsiyasi...", "options": ["xufyona iqtisodiyot sub’ektlarini qo’llab-quvvatlash", "bojxona to’lovlari va yig’imlarini kechiktirish chora-tadbirlarini belgilash", "AQSh savdo kanallarini qo’llab-quvvatlash", "kanallarda taklif va talab o’rtasidagi nomuvofiqliklarni yo’qotish, xaridorlarga qo’shimcha xizmatlar ko’rsatish"], "correct_index": 3},
+    {"question": "273. Taqsimot(sotuv) kanallarining maxsus funktsiyalari..", "options": ["bozor va marketing tadqiqotlarini uyushtirish, sotuvni rag’batlantirish, tovarni moslashtirish, muzokaralar o’tkazish, tovar harakatini tashkil etish va x.k", "tovarni sifatini sertifikatsiyalash, akkreditatsiyadan o’tkazish, savdo litsenziyasini olish", "mexanik qurilmalar asosida tovar saqlovchilar o’rtasida tendr o’tkazish va yarmarkalarni uyushtirish", "AQShdagi  savdo kanallarini qo’llab-quvvatlash"], "correct_index": 0},
+    {"question": "274. Sotuv kanalidagi \"besh oqim\" bo’lib...", "options": ["import va eksport oqimi, demping va antidemping oqimi", "mulkka egalik huquqi, moddiy-fizik oqim, pul oqimi, buyurtmalar oqimi, axborot informatsion oqim", "yarmarka va ko’rgazma oqimlari", "chakana, ulgurji, bojnona va siyosiy oqimlar"], "correct_index": 1},
+    {"question": "275. Tortish pull) ctrategiyasida asosiy e’tibor...", "options": ["chakana sotuvchiga qaratiladi", "ulgurji sotuvchiga qaratiladi", "iste’molchiga qaratiladi", "bojxona organlariga qaratiladi"], "correct_index": 2},
+    {"question": "276. Turtish push) ctrategiyasida asosiy e’tibor...", "options": ["chakana sotuvchiga qaratiladi", "davlat tassarufidagi korxonalarga qaratiladi", "bojxona organlariga qaratiladi", "tovarni ulgurji sotuvchiga agressiv o’tkazishga qaratiladi"], "correct_index": 3},
+    {"question": "277. To’g’ridan-to’g’ri marketing kanallariga ...", "options": ["internet, telefon, pochta va kataloglar orqali sotish nazarda tutiladi", "chakana sotuv kanallari tushiniladi", "davlat tassarufidagi korxonalar tushiniladi", "birjalar tushiniladi."], "correct_index": 0},
+    {"question": "278. Hozirgi paytda rivojlanayotgan marketing sotuv tizimlari bo’lib...", "options": ["sentamental, antisentamental kanallar tizimi hisoblanadi", "konventsion, vertikal va gorizontal marketing tizimlari hisoblanadi", "regressiv, integratsion va verifikatsion kanallar hisoblanadi", "ratsional, irratsional va eksklyuziv kanallar hisoblanadi"], "correct_index": 1},
+    {"question": "279. To’g’ridan-to’g’ri marketing kanali bu-", "options": ["bu ulgurji savdo kanali hisoblanadi", "bu chakana savdo kanali hisoblanadi", "bu interaktiv tizim bo’lib, unda bir yoki bir nechta reklama vositalari qo’llanib, xaridor qaerda bo’lishidan qat’iy nazar, undan javob olish(otklik) va/yoki xarid etishga istagini bilish hisoblanadi.", "bu bojxona orqali  savdo kanali hisoblanadi"], "correct_index": 2},
+    {"question": "280. Opel, BMW, Toyota, GMC, Renault, Ford kompaniyalari sotuv tizimi.....", "options": ["chakana savdo va iste’molchi  rusumida franshiza hisoblanadi", "ishlab chiqaruvchi va bojxona organi  rusumida franshiza hisoblanadi", "ulgurji savdo hisoblanadi", "Ishlab chiqaruvchi va chakana sotuvchi rusumida franshiza hisoblanadi"], "correct_index": 3},
+    {"question": "281. Coca Cola, Pepsi kompaniyalari sotuv tizimi.....", "options": ["Ishlab chiqaruvchi va ulgurji sotuvchi rusumida franshiza hisoblanadi", "chakana savdo va iste’molchi  rusumida franshiza hisoblanadi", "ishlab chiqaruvchi va bojxona organi  rusumida franshiza hisoblanadi", "internet orqali  savdo hisoblanadi"], "correct_index": 0},
+    {"question": "282. Delta Motorworks o’z avtomobillarini mijozlarning yoshi, jinsi va daromadiga qarab sotadi. Bozor segmentatsiyasining quyidagi turlaridan qaysi biri bu erda yaqqol ko’rinadi?", "options": ["psixografiksegmentatsiya", "demografik segmentatsiya", "geografik segmentatsiya", "Foyda segmentatsiyasi"], "correct_index": 1},
+    {"question": "283. Ta’minot zanjiri qaysi oqimlardan iborat", "options": ["ichki va tashqi qism", "yuqori va ichki oqimlar", "yuqori va quyi oqimlardan", "barcha javoblar to’g’ri"], "correct_index": 2},
+    {"question": "284. Yuqori oqimga berilgan ta’rifni toping.", "options": ["xaridorga qaraydigan sotuv kanallariga (yoki tarqatish kanallariga) e’tibor qaratadigan firmalar to’plami.", "mahsulotlarni kerakli joyga etkazib berish bilan shug’ullanadigan firmalar faoliyati", "mahsulot yoki xizmatni yaratish uchun zarur bo’lgan narsalarni ishlab chiquvchi korxonalar to’plami.", "mahsulot yoki xizmatni yaratish uchun zarur bo’lgan xom-ashyo, butlovchi qismlar, ehtiyot qismlar, ma’lumot, moliya va tajribani etkazib beradigan firmalar to’plami"], "correct_index": 3},
+    {"question": "285. Quyi oqim bu ….", "options": ["xaridorga qaraydigan sotuv kanallariga (yoki tarqatish kanallariga) e’tibor qaratuvchi firmalar faoliyati", "mahsulot yoki xizmatni yaratish uchun zarur bo’lgan xom-ashyo, butlovchi qismlar, ehtiyot qismlar, ma’lumot, moliya va tajribani etkazib beradigan firmalar faoliyati.", "mahsulotlarni kerakli joyga etkazib berish bilan shug’ullanadigan firmalar faoliyati", "mahsulot yoki xizmatni yaratish uchun zarur bo’lgan narsalarni ishlab chiquvchi korxonalar to’plami."], "correct_index": 0},
+    {"question": "286. Qiymat etkazib berish tarmogi bu kaysilar?", "options": ["ma’lum bir maqsad uchun etkazib berishni yo’lga qo’ygan jarayon", "kompaniya, etkazib beruvchilar, distribyutorlar va mijozlardan tashkil topgan tarmoq,", "xaridorga mahsulot yoki xizmatni etkazib berish bilan shug’llanadigan faqat tashkilotlar tushuniladi.", "ulgurji va chakana sotuvchilarga xizmat ko’rsatish jarayoni"], "correct_index": 1},
+    {"question": "287. Tarqatish kanali bu -", "options": ["xaridorga qaraydigan sotuv kanallariga (yoki tarqatish kanallariga) e’tibor qaratadigan firmalar to’plami.", "mahsulotlarni kerakli joyga etkazib berish bilan shug’ullanadigan firmalar faoliyati", "mahsulot yoki xizmatni iste’molchi yoki korxona foydalanuvchisi foydalanishi yoki iste’mol qilishiga yordam beradigan o’zaro bog’liq tashkilotlar to’plami.", "mahsulot yoki xizmatni yaratish uchun zarur bo’lgan narsalarni ishlab chiquvchi korxonalar to’plami."], "correct_index": 2},
+    {"question": "288. Sotuv kanali a’zolari qaysi funksiyalarni bajaradi", "options": ["ma’lumot, tashish, aloqa, muomila, muzokara,", "rag’batlantirish, aloqa, xavf olish, vositachi, liderlik,", "moslashtirish, aloqa, moliyalashtirish, vositachi, ma’lumot,", "ma’lumot, rag’batlantirish, aloqa, moslashtirish va muzokara,"], "correct_index": 3},
+    {"question": "289. To’g’ridan-to’g’ri sotuv kanali bu -", "options": ["vositachilik darajasiga ega bo’lmagan marketing kanali", "vositachiilik darajasi bilan to’g’ridan-to’g’ri aloqador kanali", "bir yoki bir necha vosita darajalarni o’z ichiga olgan marketing kanali", "mahsulot yoki uning egaligini yakuniy xaridorga etkazish bo’yicha ba’zi ishlarni bajaradigan vositachilar qatlami."], "correct_index": 0},
+    {"question": "290. Bilvosita sotuv kanali bu -", "options": ["vositachilik darajasiga ega bo’lmagan marketing kanali", "bir yoki bir nechta vosita darajalarini o’z ichiga olgan marketing kanali,", "mahsulotlarni kerakli joyga etkazib berish bilan shug’ullanadigan firmalar faoliyati", "mahsulot yoki xizmatni yaratish uchun zarur bo’lgan narsalarni ishlab chiquvchi korxonalar to’plami"], "correct_index": 1},
+    {"question": "291. Kanal darajasiga berilgan eng yaxshi ta’rifni belgilang.", "options": ["vositachilik darajasiga ega bo’lmagan marketing kanali", "mahsulotlarni kerakli joyga etkazib berish bilan shug’ullanadigan firmalar faoliyati", "mahsulot va uning egaligini yakuniy xaridorga etkazish bo’yicha ba’zi ishlarni bajaradigan vositachilar qatlami.", "mahsulot yoki xizmatni yaratish uchun zarur bo’lgan narsalarni ishlab chiquvchi korxonalar to’plami"], "correct_index": 2},
+    {"question": "292. Sotuv kanali mojarosi nima", "options": ["sotuv kanalning bir xil darajasidagi firmalar urtasida yuzaga keladi.", "bitta kanalning turli darajalari urtasidagi ziddiyat.", "umumiy manfaat uchun hamkorlik qiladigan firmalardan iborat tizim.", "maqsad, rol va mukofotlar buyicha sotuv kanali a’zolari urtasidagi kelishmovchiliklar."], "correct_index": 3},
+    {"question": "293. Gorizontal ziddiyat – bu", "options": ["sotuv kanalining bir xil darajasidagi firmalar o’rtasida yuzaga keladigan ziddiyat.", "bitta kanalning turli darajalari o’rtasidagi ziddiyat.", "maqsad, rol va mukofotlar bo’yicha sotuv kanali a’zolari o’rtasidagi kelishmovchiliklar.", "vositachilik darajasiga ega bo’lmagan marketing kanali"], "correct_index": 0},
+    {"question": "294. Vertikal ziddiyat – bu", "options": ["sotuv kanalining bir xil darajasidagi firmalar o’rtasida yuzaga keladigan ziddiyat.", "bitta kanalning turli darajalari o’rtasidagi ziddiyat,", "maqsad, rol va mukofotlar bo’yicha sotuv kanali a’zolari o’rtasidagi kelishmovchiliklar.", "vositachilik darajasiga ega bo’lmagan marketing kanali"], "correct_index": 1},
+    {"question": "295. An’anaviy tarqatish kanali – bu", "options": ["bir yoki bir nechta bir-biriga bog’liq ulgurji va chakana sotuvchilardan iborat kanal,", "kanal tuzilishi, unda ishlab chiqaruvchilar, ulgurji sotuvchilar va chakana sotuvchilar yagona tizim sifatida ishlash tizimi", "bir yoki bir nechta mustaqil ishlab chiqaruvchilardan, ulgurji va chakana sotuvchilardan iborat kanal,", "barcha javoblar to’g’ri."], "correct_index": 2},
+    {"question": "296. Vertikal sotuv tizimi – bu", "options": ["bir yoki bir nechta mustaqil ishlab chiqaruvchilardan, ulgurji va chakana sotuvchilardan iborat kanal,", "bir yoki bir nechta bir-biriga bog’liq ulgurji va chakana sotuvchilardan iborat kanal,", "barcha javoblar tu’g’ri", "kanal tuzilishi, unda ishlab chiqaruvchilar, ulgurji sotuvchilar va chakana sotuvchilar yagona tizim sifatida ishlash tizimi"], "correct_index": 3},
+    {"question": "297. Vertikal sotuv tizimining nechta shakli bor", "options": ["3", "2", "5", "6"], "correct_index": 0},
+    {"question": "298. Vertikal sotuv tizimi qaysi turlarga bo’linadi", "options": ["strategik, korporativ va boshqaruv,", "korporativ, shartnomaviy va boshqaruv,", "strategik, boshqaruv va shartnomaviy,", "boshqaruv, korporativ va parallel,"], "correct_index": 1},
+    {"question": "299. Korporativ vertical sotuv tizimi qanday xususiyatlarga ega", "options": ["ushbu tizimda tarqatish kanalining har bir a’zosi mustaqil shaxs sifatida ishlaydi,", "ishlab chiqarish va tarqatishning ketma-ket bosqichlarini tomonlardan birining hajmi va kuch orqali muvofiqlashtiradigan vertical marketing tizimi.", "bu tur ta’minot zanjirining barcha bosqichlarida egalik qiladigan bitta kompaniyani o’z ichiga oladi.", "yuqorida tugri javob berilmagan."], "correct_index": 2},
+    {"question": "300. Boshqaruv verkital sotuv tizimi – bu", "options": ["bu tur ta’minot zanjirining barcha bosqichlarida egalik qiladigan bitta kompaniyani o’z ichiga oladi.", "ushbu tizimda tarqatish kanalining har bir a’zosi mustaqil shaxs sifatida ishlaydi,", "yuqorida tug’ri javob berilmagan.", "ishlab chiqarish va tarqatishning ketma-ket bosqichlarini tomonlardan birining hajmi va kuch orqali muvofiqlashtiradigan vertical marketing tizimi"], "correct_index": 3},
+    {"question": "301. Franchayzing tashkiloti qanday xususiyatga ega", "options": ["shartnomali vertikal marketing tizimi.", "mustaqil vertikal marketing tizimi", "shartnomali gorizontal marketing tizimi", "barcha javob tug’ri"], "correct_index": 0},
+    {"question": "302. Franchayzingning nechta turi mavjud", "options": ["5", "3", "2", "4"], "correct_index": 1},
+    {"question": "303. Franchayzing qaysi vertikal sotuv tizimiga misol bula oladi", "options": ["korporativ", "boshkaruv", "shartnomaviy", "barcha javoblar tugri"], "correct_index": 2},
+    {"question": "304. Gorizontal sotuv tizimi qanday shaklga ega", "options": ["har xil darajadagi faqat ikki kompaniyalar birlashib, yangi marketing imkoniyatini qo’lga kiritadigan kanal tuzilishi;", "faqat bir turdagi kompaniyalar birlashib, yangi marketing imkoniyatini qo’lga kiritadigan kanal tuzilishi;", "yuqoridagi barcha javoblar tugri;", "bir darajadagi ikki yoki undan ortiq kompaniyalar birlashib, yangi marketing imkoniyatini qo’lga kiritadigan kanal tuzilishi;"], "correct_index": 3},
+    {"question": "305. Franchayzing vertikal savdo tarmogiga berilgan to’g’ri misolni toping", "options": ["MS Donalds", "KFS", "Apple kompaniyasi", "Toyota kompaniyasi"], "correct_index": 0},
+    {"question": "306. Kup kanalli tarqatish tizimi deganda nimani tushunasiz", "options": ["ikki firmalarning bir mijozlar segmentiga erishish uchun faqat bir sotuv kanallarini o’rnatadigan tarqatish tizimi;", "bitta firma bir yoki bir nechta mijozlar segmentiga erishish uchun ikki yoki undan ortiq sotuv kanallarini o’rnatadigan tarqatish tizimi;", "har xil darajadagi faqat ikki kompaniyalar birlashib, yangi marketing imkoniyatini qo’lga kiritadigan kanal tuzilishi;", "bir darajadagi ikki yoki undan ortiq kompaniyalar birlashib, yangi marketing imkoniyatini qo’lga kiritadigan kanal tuzilishi;"], "correct_index": 1},
+    {"question": "307. Mijozlarning ehtiyojlarini tahlil qilish, kanal maqsadlarini belgilash, asosiy kanal muqobillarini aniqlash va shu muqobillarni baholash orqali samarali sotuv kanallarini loyihalash – bu", "options": ["kup kanalli tarqatish tizimi;", "gorizontal sotuv tizimi;", "sotuv kanali dizayni;", "boshqaruv vertikal sotuv tizimi;"], "correct_index": 2},
+    {"question": "308. Sotuv kanallarining nechta strategiyasi mavjud", "options": ["4", "5", "2", "3"], "correct_index": 3},
+    {"question": "309. Sotuv kanallarining strategiyalari berilgan qatorni toping.", "options": ["intensiv, eksklyuziv va selektiv tarqatish;", "faol, qushma va eksklyuziv tarqatish;", "selektiv, intensive va kompleks tarqatish;", "intensive, selektiv va qushma savdo tarkatish"], "correct_index": 0},
+    {"question": "310. Eksklyuziv tarqatish – bu", "options": ["bir nechta, ammo kompaniya mahsulotlarini tashishga tayyor bo’lgan barcha vositachilardan kamroq foydalanish;", "ishlab chiqaruvchi faqat cheklangan miqdordagi dilerga o’z mahsulotlarini o’z hududlarida tarqatish shakli;", "ishlab chiqaruvchi faqat cheklanmagan miqdordagi dilerga o’z mahsulotlarini o’z hududlarida tarqatish kanali;", "yuqoridagilarni hammasi tugri;"], "correct_index": 1},
+    {"question": "311. Selektiv taqsimotga berilgan tugri tasnifni belgilang.", "options": ["ishlab chiqaruvchi faqat cheklangan miqdordagi dilerga uz mahsulotlarini uz hududlarida tarqatish shakli;", "ishlab chiqaruvchi faqat cheklangan miqdordagi dilerga uz mahsulotini hududlarida tarqatish kanali;", "bir nechta, ammo kompaniya mahsulotlarini tashishga tayyor bo’lgan barcha vositachilardan kamroq foydalanish;", "yuqoridagilarni hammasi tugri"], "correct_index": 2},
+    {"question": "312. Kompaniya sotuv kanallarini muqobillari orasida qaysi mezonlar bilan baholaydi", "options": ["iqtisodiy, nazorat va likvidlilik;", "nazorat, likvidlilik va iqtisodiy;", "moslashuvchanlik, iqtisodiy va likvidlilik;", "iqtisodiy, nazorat va moslashuvchanlik;"], "correct_index": 3},
+    {"question": "313. Reklama, jamoatchilik bilan aloqalar, shaxsiy sotish va tug’ridan-tug’ri marketing vositalarining uziga xos aralashmasi bulib, kompaniya mijozlarga qiymatni ishonchli tarzda etkazish jarayoni… bu", "options": ["Promotion mix;", "virusli marketing;", "an’anaviy tug’ridan- tug’ri marketing;", "digital va online marketing;"], "correct_index": 0},
+    {"question": "314. Aniq belgilangan auditoriyani jalb qilish va saqlab qolish uchun qimmatli, dolzarb va izchil kontentni yaratish va tarqatishga yunaltirilgan strategik marketing yondashuvi deb nimaga aytiladi", "options": ["virusli marketing;", "kontent marketing;", "direct marketing;", "online marketing;"], "correct_index": 1},
+    {"question": "315. Marketing rejalashtirish nima?", "options": ["Mahsulotning narxini belgilovchi jarayon.", "Faqat reklamani tuzish jarayoni.", "Tovar va xizmatlarning bozorda muvaffaqiyatli taraqqiyotini ta’minlash uchun strategiyalarni ishlab chiqish jarayoni.", "Faqat mahsulotning savdosini tashkil etish jarayoni."], "correct_index": 2},
+    {"question": "316. Marketing rejasining birinchi bosqichi nimadan iborat?", "options": ["Mahsulotni tanlash.", "Narxi belgilash.", "Reklama kampaniyasini tashkil etish.", "Ma’lumotlarni yig‘ish va tahlil qilish."], "correct_index": 3},
+    {"question": "317. Marketing maqsadlari qanday bo‘lishi kerak?", "options": ["Yasalgan va o‘lchangan.", "Umuman qabul qilingan.", "Har xil tahminlarga asoslangan.", "Har xil qarorlarga asoslangan."], "correct_index": 0},
+    {"question": "318. Bozor segmentatsiyasining maqsadi nimadan iborat?", "options": ["Faqat reklama strategiyasini belgilash.", "Mahsulotni turli bozorlarga moslashtirish.", "Narxlarni pastga tushirish.", "Mahsulotni ta’riflash."], "correct_index": 1},
+    {"question": "319. Marketing strategiyasi qachon ishlab chiqiladi?", "options": ["Mahsulot bir marta ishlab chiqilganidan keyin.", "Faqat reklamalar tuzilgandan keyin.", "Maqsadlar aniqlangach.", "Bozordagi raqobat sezilayotganda."], "correct_index": 2},
+    {"question": "320. Bozor tadqiqotlari qanday ahamiyatga ega?", "options": ["Tovarni juda qimmat qilishga yordam beradi.", "Maxsus reklamalarni targ‘ib qilishga yordam beradi.", "Bozorni o‘rganishni taqiqlaydi.", "Mahsulotning mijozlar uchun yoqimli bo‘lishini ta’minlaydi."], "correct_index": 3},
+    {"question": "321. Marketing qo‘llanmasi kim uchun tayyorlanadi?", "options": ["Biznes rahbarlari va marketing mutaxassislari.", "Talabalar va oquvchilar.", "Faqat reklama agentliklari uchun.", "Mahsulot ishlab chiqaruvchilar uchun."], "correct_index": 0},
+    {"question": "322. Marketingda narx belgilashning asosiy omillari qaysilar?", "options": ["Tovarning dizayn va yangi xususiyatlari.", "Raqobat, talab, xarajatlar va foyda.", "Mahsulotning targ‘iboti va reklama.", "Faqat brend haqidagi ma’lumot."], "correct_index": 1},
+    {"question": "323. Marketingda tovar pozitsiyasining ahamiyati nimada?", "options": ["Tovarning vizual ko‘rinishi va logo.", "Tovarning savdosi va tarqatilishi.", "Tovarning bozordagi o‘rni va uning mijozlar orasidagi qiymati.", "Tovarning reklama to‘g‘risidagi ma’lumotlar."], "correct_index": 2},
+    {"question": "324. Marketing rejasini ishlab chiqishda qaysi omillar hisobga olinadi?", "options": ["Faqat reklama kampaniyasining tugash vaqti.", "Maxsus brend konseptlari.", "Mahsulotni ishlab chiqarish vaqti.", "Ma’lumotlar, marketing maqsadlari, resurslar, vaqt va byudjet."], "correct_index": 3},
+    {"question": "325. Korxona missiyasi nimani anglatadi?", "options": ["Korxonaning asosiy maqsadi va uning faoliyatining asosiy yo‘nalishi.", "Korxona tartibini belgilash.", "Mahsulotlarning narxini aniqlash.", "Korxona uchun reklamalarni tuzish."], "correct_index": 0},
+    {"question": "326. Korxona missiyasining asosiy maqsadi nimadan iborat?", "options": ["Qisqa muddatli foyda olish.", "Korxonaning uzoq muddatli yo‘nalishini belgilash va uning strategiyasini shakllantirish.", "Har yili yangi mahsulotlarni chiqarish.", "Mahsulotni qimmatlashtirish."], "correct_index": 1},
+    {"question": "327. Korxona missiyasini aniqlashda qaysi omillar e’tiborga olinadi?", "options": ["Faqat korporativ qimmatlar.", "Mahsulotning dizayni.", "Korxonaning maqsadi, ishlab chiqarish yo‘nalishi va mijozlarning talablari.", "Korxona xajmi va ta’sirini ko‘rsatish."], "correct_index": 2},
+    {"question": "328. Korxona missiyasi qanday vazifani bajaradi?", "options": ["Faqat o‘zgarishlarni joriy qilish.", "Har doim yangi mahsulotlar ishlab chiqarish.", "Kelajakdagi marketing strategiyasini belgilash.", "Korxonaning kundalik faoliyatiga yo‘nalish va aniqlik berish."], "correct_index": 3},
+    {"question": "329. Korxona missiyasini belgilashning asosiy ahamiyati qanday?", "options": ["Korxonaning barcha faoliyatlariga yo‘nalish berish va uning maqsadlari bilan birlashtirish.", "Mahsulotlarning narxini belgilovchi jarayon.", "Tovarni faqat targ‘ib qilish.", "Raqobatga qarshi kurashish."], "correct_index": 0},
+    {"question": "330. Korxona missiyasini belgilashda eng muhimi qanday talablarga javob berishdir?", "options": ["Faqat korxonaning reklamasiga diqqat berish.", "Korxona o‘zining ish faoliyatini aniq belgilash va ushbu maqsadga erishish uchun strategiyalar ishlab chiqish.", "Mahsulotlarni juda arzon qilish.", "Ko‘proq tushum olish."], "correct_index": 1},
+    {"question": "331. Korxona missiyasi qaysi jihatlarga asoslanishi kerak?", "options": ["Maxsus reklama strategiyalariga.", "Mahsulotning narxini aniqlash.", "Qimmatlar, ijtimoiy mas’uliyat, mijozlar ehtiyojlari.", "Ko‘p foyda olish."], "correct_index": 2},
+    {"question": "332. Korxona missiyasi aniq va tushunarli bo‘lishi kerak, chunki u:", "options": ["Faqat marketing jamoasi uchun foydalidir.", "O‘zgarishlarning tezkor amalga oshirishini ta’minlaydi.", "Faqat ishlab chiqarish jarayoniga oid.", "Barcha xodimlar va manfaatdor tomonlar uchun yo‘nalish va asosiy maqsadlarni belgilaydi."], "correct_index": 3},
+    {"question": "333. Korxona missiyasining o‘zgarishlarga munosabati qanday bo‘lishi kerak?", "options": ["Korxona missiyasi tez o‘zgaruvchan sharoitlarga moslashishi kerak.", "Ungatizmga rioya qilish kerak.", "O‘zgarishlarga nisbatan passiv bo‘lishi kerak.", "Missiya quyi bosqichda qolishi kerak."], "correct_index": 0},
+    {"question": "334. Korxona missiyasini belgilashda korxona rahbarlari qaysi amaliyotni amalga oshirishadi?", "options": ["Mahsulotlarni reklamalash.", "Quyi darajadagi xodimlarning fikrlarini hisobga olish va ularga yordam berish.", "Faqat moliyaviy natijalarga asoslanish.", "Ko‘p reklama kampansiyalarini ishlab chiqish."], "correct_index": 1},
+    {"question": "335. Makro muhit deganda nimani tushunasiz?", "options": ["Korxonaning ichki jarayonlari va xodimlari.", "Maxsus reklama kampaniyalari.", "Korxonadan tashqari omillar, jumladan iqtisodiy, siyosiy, ijtimoiy va texnologiyaviy faktorlar.", "Faqat reklama natijalari."], "correct_index": 2},
+    {"question": "336. Mikro muhit deganda nimani tushunasiz?", "options": ["Korxonaning ichki dasturlari va siyosatlari.", "Hududiy rivojlanish va joylashish.", "Ijtimoiy xavf-xatarlar.", "Korxonaning tashqi manfaatdor tomonlari va raqobat muhiti."], "correct_index": 3},
+    {"question": "337. Ichki muhitga qanday omillar kirishi mumkin?", "options": ["Korxona ichki resurslari, xodimlar, tashkilot strukturasi.", "Tashqi reklama kampaniyalari.", "Raqobatchilarning strategiyalari.", "Hukumat siyosatlari."], "correct_index": 0},
+    {"question": "338. Makro muhitning qaysi omillari korxonalar uchun muhimdir?", "options": ["Raqobat va mijozlar.", "Iqtisodiy, siyosiy, ijtimoiy va texnologiyaviy omillar.", "Xodimlar o‘rtasidagi munosabatlar.", "To‘g‘ridan-to‘g‘ri reklama yoki yangiliklar."], "correct_index": 1},
+    {"question": "339. Mikro muhitga qaysi omillar kirishi mumkin?", "options": ["Mahsulotni ishlab chiqarish jarayoni.", "Texnologiya va ijtimoiy holat.", "Raqobatchilar, mijozlar, tarkibiy tomonlar va manfaatdor tomonlar.", "Davlatning iqtisodiy siyosatlari."], "correct_index": 2},
+    {"question": "340. Makro muhitga qanday faktorlar ta’sir qiladi?", "options": ["Raqobat va talab.", "Mahsulot ishlab chiqaruvchilari.", "Mehnat bozori.", "Davlat siyosati, iqtisodiy inqiroz, texnologiyalar."], "correct_index": 3},
+    {"question": "341. Korxona ichki muhitiga qaysi omillar kirishi mumkin?", "options": ["Korxonadagi xodimlar, ularning ko‘nikmalari va ishlashi.", "Hududiy talablar.", "Tashqi reklama.", "Iqtisodiy xavf-xatarlar."], "correct_index": 0},
+    {"question": "342. Mikro muhitda joylashgan manfaatdor tomonlar kimlardan iborat?", "options": ["O‘zgarishlar va yangi texnologiyalar.", "Mijozlar, tarkibiy tomonlar, ikki tomonlama munosabatlar, turli davlat organlari.", "Iqtisodiy xavflar.", "Davlatning tashqi savdosi."], "correct_index": 1},
+    {"question": "343. Ichki muhitda korxona rahbariyati qanday rol o‘ynaydi?", "options": ["Faqat mijozlarga xizmat ko‘rsatish.", "Yangiliklarni kiritish va tahlil qilish.", "Korxonaning strategiyasini belgilash va xodimlar bilan ishlash.", "Mahsulotlar ishlab chiqarish."], "correct_index": 2},
+    {"question": "344. Mikro muhitning qaysi xususiyati korxonalar uchun muhimdir?", "options": ["Tashqi reklama.", "Faqat iqtisodiy omillar.", "Dovtalab biznes turlari.", "Mijozlarning talablari va raqobat ta’siri."], "correct_index": 3},
+    {"question": "345. Makro muhitning qanday aniq xususiyatlari bor?", "options": ["Ushbu omillar korxona strategiyasining uzoq muddatli muvaffaqiyatiga ta’sir qiladi.", "Ular faqat ichki omillarga ta’sir qiladi.", "Ular faqat yangi mahsulotlar ishlab chiqarishni talab qiladi.", "Ushbu omillar korxonaning mahalliy ishlab chiqarishini belgilaydi."], "correct_index": 0},
+    {"question": "346. Ichki muhitni tahlil qilishning asosiy maqsadi qanday?", "options": ["Mahsulotni reklama qilish.", "Korxonadagi resurslar va xodimlarning potensialini baholash.", "Iqtisodiy tahlil.", "Bozor tahlilini amalga oshirish."], "correct_index": 1},
+    {"question": "347. Korxona mikro muhitida qaysi omillar asosiy ahamiyatga ega?", "options": ["Hukumat siyosatlari va iqtisodiy omillar.", "Ijtimoiy talablar.", "Raqobat, mijozlar, tarkibiy tomonlar va xomashyo ta’minlovchilari.", "Milliy standartlar."], "correct_index": 2},
+    {"question": "348. Makro muhitni tahlil qilish korxonalarga qanday yordam beradi?", "options": ["Mahsulotni ishlab chiqarishning yangi usullarini aniqlash.", "Boshqa korxonalar bilan raqobatni aniqlash.", "Ishlab chiqarishni o‘rganish.", "Tashqi omillardan kelib chiqqan xavflar va imkoniyatlarni aniqlash."], "correct_index": 3},
+    {"question": "349. Ichki muhit tahlil qilish korxonalarga nimani ta’minlaydi?", "options": ["Korxonaning ichki saloxiyati va muammolarini tushunish.", "Raqobat muhitini.", "Iqtisodiy o‘sish prognozini.", "Yangi texnologiyalar yordamida ishlab chiqarish."], "correct_index": 0},
+    {"question": "350. Makro muhitni tashkil etuvchi omillar qaysi tutashganlardan iborat?", "options": ["Mahsulotning dizayni va ishlab chiqarish.", "Iqtisodiy, siyosiy, ijtimoiy, texnologik va ekologik omillar.", "Mijozlarning ehtiyojlari.", "Tarkibiy omillar va ishlab chiqarish."], "correct_index": 1},
+    {"question": "351. Mikro muhitda raqobat omillari qanday rol o‘ynaydi?", "options": ["Faqat mijozlarni jalb qilish.", "Mahsulotni ishlab chiqarish.", "Raqobatchilarning strategiyalari korxona strategiyasini belgilashga ta’sir qiladi.", "Savdo va marketing."], "correct_index": 2},
+    {"question": "352. Makro muhitdagi iqtisodiy omillar qanday ta’sir ko‘rsatadi?", "options": ["Raqobat omillari va tadbirkorlik.", "Tarkibiy tomonlar.", "Mehnat bozori.", "Iqtisodiy o‘sish, inflyatsiya, ishsizlik va qurslar orasidagi bog‘lanishlar."], "correct_index": 3},
+    {"question": "353. Ichki muhit tahlilining qanday ijobiy tomonlari bor?", "options": ["Ishlab chiqarish jarayonidagi imkoniyatlar va muammolarni aniqlash.", "Tashqi bozorlar tahlili.", "Yangiliklarning marketingda ta’siri.", "Raqobat muhiti."], "correct_index": 0},
+    {"question": "354. Mikro muhitning qaysi omillari korxona uchun muhimdir?", "options": ["Xalqaro bozor va savdo.", "Mijozlar, raqobatchilar, xomashyo ta’minlovchilar.", "Iqtisodiy inflyatsiya.", "Milliy va jahon siyosati."], "correct_index": 1},
+    {"question": "355. SWOT tahlilining maqsadi nima?", "options": ["Mahsulotni ishlab chiqarish jarayonini optimallashtirish.", "Faqat raqobatni tahlil qilish.", "Korxonaning kuchli va zaif tomonlarini, imkoniyatlar va xavf-xatarlarni aniqlash.", "Faqat marketing strategiyasini belgilash."], "correct_index": 2},
+    {"question": "356. SWOT tahlilining \"S\" harfi nimani anglatadi?", "options": ["Zaif tomonlar (Weaknesses).", "Imkoniyatlar (Opportunities).", "Xavf-xatarlar (Threats).", "Kuchli tomonlar (Strengths)."], "correct_index": 3},
+    {"question": "357. SWOT tahlilida \"W\" harfi nimani anglatadi?", "options": ["Zaif tomonlar (Weaknesses).", "Kuchli tomonlar (Strengths).", "Imkoniyatlar (Opportunities).", "Xavf-xatarlar (Threats)."], "correct_index": 0},
+    {"question": "358. SWOT tahlilida \"O\" harfi nimani anglatadi?", "options": ["Zaif tomonlar (Weaknesses).", "Imkoniyatlar (Opportunities).", "Xavf-xatarlar (Threats).", "Kuchli tomonlar (Strengths)."], "correct_index": 1},
+    {"question": "359. SWOT tahlilida \"T\" harfi nimani anglatadi?", "options": ["Imkoniyatlar (Opportunities).", "Zaif tomonlar (Weaknesses).", "Xavf-xatarlar (Threats).", "Kuchli tomonlar (Strengths)."], "correct_index": 2},
+    {"question": "360. SWOT tahlilining qaysi qismi korxona strategiyasini belgilashda muhim rol o‘ynaydi?", "options": ["Faqat reklamalarni ishlab chiqish.", "Mahsulotning dizayni va ishlab chiqarish jarayoni.", "Mehnat bozori tahlili.", "Kuchli va zaif tomonlarni tahlil qilish, imkoniyatlar va xavf-xatarlarni aniqlash."], "correct_index": 3},
+    {"question": "361. SWOT tahlilining \"Kuchli tomonlar\" (Strengths) qatoriga qanday elementlar kiradi?", "options": ["Korxona resurslari, ekspert xo‘jaligi, bozordagi malaka.", "Mahsulotning narxi.", "Maxsus reklamalar.", "Mehnat shartlari."], "correct_index": 0},
+    {"question": "362. \"Zaif tomonlar\" (Weaknesses) qatoriga qanday omillar kiradi?", "options": ["Bozordagi yuqori talab.", "Korxonadagi ichki muammolar, kamchiliklar va resurslar yetmasligi.", "Raqobatga nisbatan kuchli javob.", "Tashqi bozor shartlari."], "correct_index": 1},
+    {"question": "363. SWOT tahlilida \"Imkoniyatlar\" (Opportunities) qanday omillardir?", "options": ["Mahsulotning qimmatlashuvi.", "Raqobatni o‘zgartish.", "Bozordagi yangi imkoniyatlar, ijtimoiy, iqtisodiy va texnologiyaviy o‘zgarishlar.", "Korxona ichki yo‘nalishlari."], "correct_index": 2},
+    {"question": "364. SWOT tahlilida \"Xavf-xatarlar\" (Threats) qanday omillardir?", "options": ["Yangi mahsulotlarni ishlab chiqish.", "Korxonaning targ‘ibot kampaniyalari.", "Ko‘p narxlarni belgilash.", "Raqobat, bozordagi o‘zgarishlar, hukumat siyosatlari, iqtisodiy inqirozlar."], "correct_index": 3},
+    {"question": "365. Bozor segmentatsiyasi nimani anglatadi?", "options": ["Bozorni turli omillar asosida kichik qismlarga bo‘lish jarayoni.", "Mahsulotni narxlash.", "Mahsulotni ishlab chiqarish jarayoni.", "Bozordagi raqobatni aniqlash."], "correct_index": 0},
+    {"question": "366. Bozor segmentatsiyasining asosiy maqsadi nimada?", "options": ["Mahsulotni ishlab chiqarish jarayonini tezlashtirish.", "Bozorni turli ehtiyojlarga ega bo‘lgan kichik segmentlarga bo‘lish.", "Bozordagi raqobatni orttirish.", "To‘liq marketing strategiyasini ishlab chiqish."], "correct_index": 1},
+    {"question": "367. Bozor segmentatsiyasini amalga oshirishda qaysi omillar asosiy ahamiyatga ega?", "options": ["Ishlab chiqarish jarayonining uzoqligi.", "Mahsulotlarning texnik xususiyatlari.", "Mijozlarning ehtiyojlari, xulq-atvorlari va talablari.", "Davlat siyosati."], "correct_index": 2},
+    {"question": "368. Bozor segmentatsiyasining sabablari qanday?", "options": ["Faqat bozordagi raqobatni ko‘rsatish.", "Mahsulotlarning o‘zgarishi.", "Ishlab chiqarish xom ashyosining kamligi.", "Mijozlar talabining turlichaligi va maqsadlarga moslashish."], "correct_index": 3},
+    {"question": "369. Bozor segmentatsiyasining bir necha turlari bor, ulardan qaysisi to‘g‘ri?", "options": ["Geografik, demografik, psixografik, bixeviorik.", "Mahsulotning dizayni.", "Raqobatga qarshi strategiyalar.", "Targ‘ibot kampaniyalari."], "correct_index": 0},
+    {"question": "370. Geografik segmentatsiya deganda nimani tushunasiz?", "options": ["Mahsulot narxining o‘zgarishi.", "Bozorning turli geografik hududlarga bo‘linishi.", "Ishlab chiqarish jarayonining hajmi.", "Texnologik o‘zgarishlar."], "correct_index": 1},
+    {"question": "371. Demografik segmentatsiya qanday tushuncha?", "options": ["Bozordagi tovarlar yoki xidmatlar narxi.", "Mahsulotlarning ijtimoiy ta’siri.", "Bozorning jismoniy, yosh, oila holati va ma’lumotlariga asoslangan bo‘lishi.", "Texnologik yetuklik."], "correct_index": 2},
+    {"question": "372. Psixografik segmentatsiyaning asosiy mohiyati nima?", "options": ["Faqat ichki bozor tahlili.", "Mahsulotlarning arzonligini belgilash.", "Mijozlar tartibi.", "Mijozlarning quvonchlari, qiymatlari va layfstayllariga asoslangan segmentatsiya."], "correct_index": 3},
+    {"question": "373. Bixeviorik segmentatsiya deganda nimani tushunasiz?", "options": ["Mijozlarning xulq-atvori, savdo xatti-harakatlari va talablari asosida segmentatsiya.", "Mahsulotning narxini belgilash.", "Targ‘ibot va reklama.", "Ishlab chiqarish jarayoni."], "correct_index": 0},
+    {"question": "374. Bozor segmentatsiyasini amalga oshirishda qaysi omillar muhim?", "options": ["Faqat mahsulotning narxi.", "Mijozlarning ehtiyojlari, bozordagi ehtimoliy talablar, resurslar.", "Targ‘ibot uchun ma’lumotlar.", "Mehnat bozori."], "correct_index": 1},
+    {"question": "375. Bozor segmentatsiyasining qanday maqsadlari bor?", "options": ["Mahsulotni barcha bozorlarga teng taqsimlash.", "Bozordagi raqobatni kuchaytirish.", "Mijozlar uchun maksimal qoniqishni ta’minlash va undan foyda olish.", "Ishlab chiqarishni yoritish."], "correct_index": 2},
+    {"question": "376. Bozor segmentatsiyasining asosiy turlari quyidagilardan qaysisi?", "options": ["Mahsulotning qimmatini belgilash.", "Maxsus reklama kampaniyalari.", "Ishlab chiqarish jarayoni.", "Geografik, demografik, psixografik, bixeviorik."], "correct_index": 3},
+    {"question": "377. Geografik segmentatsiyaning ahamiyati qanday?", "options": ["Turli hududlardagi talablarni va shunga mos mahsulotlarni tahlil qilish.", "Mahsulot narxi belgilash.", "Raqobatchi tahlili.", "Targ‘ibotni kuchaytirish."], "correct_index": 0},
+    {"question": "378. Demografik segmentatsiyaning asosiy elementlari qanday?", "options": ["Targ‘ibot va reklama.", "Yosh, jins, oila holati va daromad darajasi.", "Texnologik saviya.", "Ishlab chiqarish jarayoni."], "correct_index": 1},
+    {"question": "379. Psixografik segmentatsiya qanday asoslarga ega?", "options": ["Faqat mahsulot narxi.", "Ishlab chiqarish jarayoni.", "Mijozlarning xulq-atvori, xohishlari, quvonchlari va turmush tarzi.", "Xalqaro biznes strategiyalari."], "correct_index": 2},
+    {"question": "380. Bixeviorik segmentatsiyada qaysi omillar asosiydir?", "options": ["Raqobat va reklama strategiyalari.", "Xalqaro to‘lov tizimlari.", "Hududiy bozor.", "Mijozlarning xarid qilish harakatlari va ularning ehtiyojlariga mos mahsulotlar."], "correct_index": 3},
+    {"question": "381. Bozor segmentatsiyasining ishlash samarasi qanday?", "options": ["Mijozlarga aniq yetarli mahsulotlarni taklif etish va ularga ko‘proq qoniqish berish.", "Bozordagi yagona mahsulotni ishlab chiqarish.", "Mahsulot narxini qimmatlashtirish.", "Mahsulotni arzonlashtirish."], "correct_index": 0},
+    {"question": "382. Bozor segmentatsiyasining imkoniyatlari qanday?", "options": ["Targ‘ibotlarni yo‘naltirish.", "Mijozlar uchun yangi mahsulot va xidmatlar ishlab chiqish.", "Texnologiyalarni yangilash.", "Ishlab chiqarish jarayonini tezlashtirish."], "correct_index": 1},
+    {"question": "383. Bozor segmentatsiyasining qanday xatarlari bor?", "options": ["Mahsulotlar arzonlashishi.", "Raqobatni sezish.", "Nishanga olingan segmentlar tarkibi to‘g‘ri belgilashning murakkabligi.", "Hududiy bozorni targ‘ib qilish."], "correct_index": 2},
+    {"question": "384. Bozor segmentatsiyasining ahamiyati qaysi yo‘nalishlarda seziladi?", "options": ["Mahsulot narxining oshishi.", "Maxsus reklamalarning samarasi.", "Raqobatni yo‘q qilish.", "Mijozlar talabini aniq tushunish va unga mos mahsulotlarni taklif qilish."], "correct_index": 3},
+    {"question": "385. Bozor segmentatsiyasini amalga oshirishning asosiy foydalari qanday?", "options": ["Mijozlarga moslashgan mahsulotlarni ishlab chiqish va undan foyda olish.", "Raqobatchi tahlili.", "Mahsulotlarni arzonlashtirish.", "Ishlab chiqarish jarayonini uzaytirish."], "correct_index": 0},
+    {"question": "386. Geografik segmentatsiyada qaysi omillar ahamiyatli?", "options": ["Mahsulot dizayni.", "Joylashuv, iqlim, hududiy talablar.", "Narxi va reklama.", "Ishlab chiqarish jarayoni."], "correct_index": 1},
+    {"question": "387. Demografik segmentatsiyada kimlarning ehtiyojlari hisobga olinadi?", "options": ["Mahsulotning qimmatlashuvi.", "Bozordagi reklama kampaniyalari.", "Yosh, jins, oila holati va daromad darajasi.", "Texnologik yetuklik."], "correct_index": 2},
+    {"question": "388. Psixografik segmentatsiyaning asosiy maqsadi nimada?", "options": ["Raqobatni yoqoti.", "Mahsulot narxini belgilash.", "Reklama va marketing taktikalarini joriy etish.", "Mijozlarning shaxsiy ehtiyojlari va layfstayllariga mos mahsulotlar taklif etish."], "correct_index": 3},
+    {"question": "389. Bozor segmentatsiyasi qanday vaziyatlarda samarali bo‘ladi?", "options": ["Bozordagi turli talablarga moslashish va mijozlarga aniq mahsulotlarni taklif etish.", "Mahsulot narxini balandlashtirish.", "Faqat mahsulot ishlab chiqarish jarayoni.", "Targ‘ibot strategiyalari."], "correct_index": 0},
+    {"question": "390. Bozor segmentatsiyasining samaradorligini qanday baholash mumkin?", "options": ["Mahsulot narxi.", "Mijozlardan olingan qoniqish va mahsulot talabining oshishi.", "Raqobatchi tahlili.", "Texnologik yangiliklar."], "correct_index": 1},
+    {"question": "391. Bozor segmentatsiyasini amalga oshirishda qanday bo‘limlar ko‘pincha ishtirok etadi?", "options": ["Faqat reklamalar bo‘limi.", "Mahsulot ishlab chiqarish bo‘limi.", "Marketing, ishlab chiqarish va tadqiqot bo‘limlari.", "Texnik dasturlar bo‘limi."], "correct_index": 2},
+    {"question": "392. Geografik segmentatsiyada qaysi omillar eng asosiydir?", "options": ["Maxsus tashkilotlar.", "Ishlab chiqarish jarayoni.", "Raqobatga nisbatan foyda.", "Mahsulot talabining geografik xosliklari."], "correct_index": 3},
+    {"question": "393. Bozor segmentatsiyasining ijobiy tomonlari quyidagilardan qaysisi?", "options": ["Mijozlar uchun aniq va moslashgan mahsulotlarni ishlab chiqish.", "Raqobatni yoqotish.", "Mahsulotlarni arzonlashtirish.", "Xalqaro bozordagi muammolar."], "correct_index": 0},
+    {"question": "394. Targeting nimani anglatadi?", "options": ["Butun bozorga reklama yuborish", "Maqsadli auditoriyani aniqlash va ularga reklama yo‘naltirish", "Reklama kampaniyasini butun jamoa uchun tashkil qilish", "Reklamalarni hammaga ko‘rsatish"], "correct_index": 1},
+    {"question": "395. Yaxshi targeting strategiyasi qanday xususiyatlarga ega?", "options": ["Butun aholini qamrab olish", "Reklama byudjetini maksimal darajada foydalanish", "Auditoriyani to‘g‘ri aniqlash va ularning ehtiyojlariga mos reklama to‘plash", "Faqat mahalliy bozorga yo‘naltirish"], "correct_index": 2},
+    {"question": "396. Har kimga yo‘naltirilgan reklama qanday natijaga olib kelishi mumkin?", "options": ["Keng tarqalgan tanishtirish", "Reklama oxirida yangi mijozlar paydo bo‘lish", "Maqsadli auditoriyaning ko‘pligi", "Kam foyda va auditoriyaning aloqasizligi"], "correct_index": 3},
+    {"question": "397. Nima uchun demografik targeting muhim?", "options": ["U mijozlarning yoshi, jinsi, daromad darajasiga ko‘ra aniqlash imkonini beradi", "Ungariyadagi reklama kampaniyasini aniqlashga yordam beradi", "Reklama kampaniyasini mamlakat bo‘yicha yo‘naltirish", "Butun aholiga yo‘naltirish"], "correct_index": 0},
+    {"question": "398. Kontekstual targetingning afzalligi nimada?", "options": ["Barcha saytlarda reklama ko‘rsatiladi", "Reklama kontentga mos kelgan saytlarga yo‘naltiriladi", "Reklama faqat xususiy bloglarda ko‘rsatiladi", "Bozorning tashqi tomonidan reklama ko‘rsatiladi"], "correct_index": 1},
+    {"question": "399. Har bir targeting turining asosiy maqsadi nimada?", "options": ["Reklamalarni barcha odamlarga tarqatish", "Reklama kampaniyasini kengaytirish", "Reklamalarni maqsadli auditoriyaga to‘g‘ri yo‘naltirish", "Reklama ishlab chiqarish jarayonini tezlashtirish"], "correct_index": 2},
+    {"question": "400. Sotsio-demografik targeting qanday asosiy ma’lumotlarga ega?", "options": ["Saytdagi yuzberishlar", "Mahsulotlarning retsenziyalari", "Internet trafikining omillari", "Yosh, jins, oilaviy ahvol, kasb va boshqa ijtimoiy ma’lumotlar"], "correct_index": 3},
+    {"question": "401. Retargetingning maqsadi nimani anglatadi?", "options": ["Eslangan va undan foydalangan mijozlarga qayta reklama yo‘naltirish", "Yangi mijozlarni aniqlash", "Butun bozorga reklama berish", "O‘tgan reklamalarni qayta ishlab chiqish"], "correct_index": 0},
+    {"question": "402. Xavfsiz targetingni qanday amalga oshirish mumkin?", "options": ["Ma’lumotlaringizni umumiy ravishda tarqatish", "Faqat aniq, qonuniy ma’lumotlar bilan ishlash", "Targetingni umumiy reklamaga o‘zgartish", "Ma’lumotlar haqida fikr bildirishdan ko‘ra, undan foydalanish"], "correct_index": 1},
+    {"question": "403. Mobil targeting nimani qamrab oladi?", "options": ["Barcha onlayn reklama uchun umumiy reklama", "Kompyuter foydalanuvchilarini maqsad qilib ko‘rsatish", "Mobil qurilmalardan foydalanuvchilarga moslashtirilgan reklama", "Mobil qurilmalarda faqat videolar ko‘rsatish"], "correct_index": 2},
+    {"question": "404. Mahsulot hayot sikli (PL= nimani anglatadi?", "options": ["Mahsulotning reklama strategiyasini", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotni tahlil qilish uchun vaqt tafsiloti", "Mahsulotning bozorga kirishi va uning hayoti davomidagi turli bosqichlarni"], "correct_index": 3},
+    {"question": "405. Mahsulot hayotining ilk bosqichi qanday nomlanadi?", "options": ["Kirish bosqichi", "Uzoq muddatli rivojlanish", "Ta’sir yoki qimmatlik bosqichi", "Chuqur tusdagi faoliyat"], "correct_index": 0},
+    {"question": "406. Kirish bosqichidagi asosiy xosiyatlardan biri nimadan iborat?", "options": ["Mahsulot uje ko‘p miqdorda sotiladi", "Mahsulot bozorga yangi kiritiladi va unga xo‘jalik talablari kam bo‘ladi", "Foyda yuqori bo‘ladi", "Reklama kam bo‘ladi"], "correct_index": 1},
+    {"question": "407. Tavar hayotining o‘sish bosqichidagi asosiy xususiyat nimani anglatadi?", "options": ["Mahsulotni ishlab chiqarish to‘xtaydi", "Mahsulot arzonlashadi", "Sotuvlar tez o‘sadi, foyda olinadi", "Mahsulotning talab yuqori bo‘lmaydi"], "correct_index": 2},
+    {"question": "408. Mahsulotning pikovi qaysi bosqichga to‘g‘ri keladi?", "options": ["Tavar hayotining foydasiz bosqichi", "Qiymat yo‘qotish bosqichi", "Reklama va tanishtirish bosqichi", "Rivojlanish bosqichi"], "correct_index": 3},
+    {"question": "409. Kamayish bosqichi bo‘yicha quyidagi eng asosiy xosiyatdan biri nimadan iborat?", "options": ["Mahsulotning talab va satishining kamayishi", "Mahsulotning xajmning ko‘payishi", "Yangi xususiyatlar qo‘shilishi", "Foydaning oshishi"], "correct_index": 0},
+    {"question": "410. \"Tavar\" tushunchasi nimani anglatadi?", "options": ["Ma’lum bir servis xizmati", "Ishlab chiqarilgan va foydalanish uchun mo‘ljallangan mahsulot", "Reklama kontent", "Boshqa kompaniyaning mahsuloti"], "correct_index": 1},
+    {"question": "411. Mahsulotni turli rivojlanish strategiyasiga qo‘shishning maqsadi nimada?", "options": ["Bozordagi raqobatni yo‘qotish", "Mahsulotni arzonlashtirish", "Mahsulotni bozorda har xil auditoriyaga taqdim qilish", "Mahsulot faqat belgilangan tarmoqlarda bo‘lish"], "correct_index": 2},
+    {"question": "412. Nima uchun \"daimiy ta’minot\" mahsuliyotining hayotini belgilovchi bosqichda bo‘ladi?", "options": ["Yangi mahsulot ko‘plab talablarga ega", "Reklama va marketing strategik omillari qo‘llaniladi", "Mahsulotning o‘ndan ortiq xususiyatlari qo‘shiladi", "Mahsulotning sotuvlari o‘rtacha saqlanadi va foyda kamayadi"], "correct_index": 3},
+    {"question": "413. Yangi mahsulot bo‘lganida bozorda raqobat qanday ko‘rinishga ega?", "options": ["Raqobat faqat yangi kompaniyalar bilan yuqori bo‘ladi", "Raqobat kam va bozorda eng yaxshi narx yo‘naltiriladi", "Raqobat faqat nazariy darajada", "Raqobat aholining ko‘pligidan tushib ketadi"], "correct_index": 0},
+    {"question": "414. Bozorga yangi mahsulotni kiritishda asosiy strategiya qo‘llanilsa, bu qanday bo‘ladi?", "options": ["Mahsulotni faqat oilaviy saqlash", "Maxsus marketing tadbirlari bilan mahsulotni muvaffaqiyatli kiritish", "Yangi mahsulotni arzon qilish", "Faqat onlayn tartibda olib chiqish"], "correct_index": 1},
+    {"question": "415. Pablik rivojlanish va satishda qanday haddan tashqari miqdor bo‘lsa, u qanday natijaga olib keladi?", "options": ["Savdoning aniq ko‘payishi", "Reklama va reklama ishlarining kuchayishi", "Foyda kamayishi", "Mahsulotning barcha tarmoqlarda ko‘rsatilishi"], "correct_index": 2},
+    {"question": "416. Mahsulot turlarining ishlab chiqarish va targeting strategiyasini belgilashning asosiy maqsadi nimada?", "options": ["Mahsulotning qolgan xislatlarini kengaytirish", "Barcha umumiy jamoani jalb qilish", "Har xil bozorda reklamani faollashtirish", "Mahsulotni maqsadli auditoriyaga yetkazish"], "correct_index": 3},
+    {"question": "417. Tovar hayoti bosqichining rivojlanish bosqichi nimani anglatadi?", "options": ["Mahsulotning talabini oshirish va uning bilan foyda olish", "Mahsulotning xajmini kamaytirish", "Bozordagi reklama kamayishi", "Bozordan chiqish"], "correct_index": 0},
+    {"question": "418. Mahsulotning sifati qaysi bosqichda asosiy omilga aylanadi?", "options": ["Rivojlanish bosqichi", "Kirish bosqichi", "Qamayish bosqichi", "Pikovi va tovar tahlili"], "correct_index": 1},
+    {"question": "419. Ma’lum bir tovar hayotida narxni belgilovchi muhim omil qanday?", "options": ["Mahsulotning xususiyatlari", "Mahsulotning o‘zi", "Bozordagi raqobat va talab", "Paydo bo‘lish vaqti"], "correct_index": 2},
+    {"question": "420. Yangi mahsulotlar muvaffaqiyatli qabul qilinganda asosiy bosqich qanday bo‘ladi?", "options": ["Uzoq muddatli rivojlanish", "Foyda kamayish bosqichi", "Ta’sir yoki yuqori satish", "Rivojlanish bosqichi"], "correct_index": 3},
+    {"question": "421. Retargeting strategiyasi qanday ahamiyatga ega?", "options": ["Mahsulotni aniq maqsadga yo‘naltirish", "Mahsulotning qaytishi va takrorlanishi", "Mahsulotning xususiyatlarini kengaytirish", "Bozorda qayta narxlar ishlab chiqarish"], "correct_index": 0},
+    {"question": "422. Bozorda eng yuqori talabga ega bo‘lgan mahsulot qaysi hayot bosqichida bo‘ladi?", "options": ["Ko‘plab reklama bosqichi", "Rivojlanish bosqichi", "Yangilanish bosqichi", "Kichik hajmda satish"], "correct_index": 1},
+    {"question": "423. Mahsulotning hayotining past bosqichiga qo‘shilgan qo‘shimcha ma’lumotlar nimani anglatadi?", "options": ["Tovarning so‘ngi natija yoki kamayish bosqichiga yordam berish", "Boshqa mahsulotlardan ko‘proq ommaga yetkazish", "Mahsulotning talablari va xosiyatlarini aniqlash", "Hamma bo‘limlarning qayta ko‘rib chiqilishi"], "correct_index": 2},
+    {"question": "424. Brend nimani anglatadi?", "options": ["Ishlab chiqarish jarayoni", "Mahsulotlarning reklama strategiyasi", "Brendning tashkiliy strukturasi", "Kompaniya yoki mahsulotning o‘zgacha tasviri, nomlari, belgisi va xususiyatlari"], "correct_index": 3},
+    {"question": "425. Brend kapitali nima?", "options": ["Brendning bozordagi o‘rni, tanilishi va mijozlar o‘rtasidagi ishonch hosil qilishdan kelib chiqadigan qiymat", "Brendning marketing xarajatlari", "Brendning ishlab chiqarish xarajatlari", "Brendning faqat reklamasi"], "correct_index": 0},
+    {"question": "426. Brend kapitalining asosiy komponentlari qanday bo‘ladi?", "options": ["Mahsulotning ishlab chiqarilishi", "Brendning tanilishi, ishonch, munosabat va sodiqlik", "Brendning ishlab chiqarish samaradorligi", "Mahsulotning xaridorlar o‘rtasidagi narxi"], "correct_index": 1},
+    {"question": "427. Brendning qanday xossalari uning qimmatini belgilaydi?", "options": ["Tanish bo‘lmagan reklama kampaniyalari", "Brendning qimmatini pasaytirish", "Mijozlar bilan bog‘liq ishonch va yuqori tanishlik", "Mahsulotning har bir foydalanuvchiga mos kelish"], "correct_index": 2},
+    {"question": "428. Brend tanilishining asosiy tarzi qanday?", "options": ["Barcha xidmatlar bilan mavjud bo‘lish", "Reklamaga sarflanadigan mablag‘lar", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulot yoki xizmatning bozordagi faolligi va tanilganligi"], "correct_index": 3},
+    {"question": "429. Brend kapitali qanday asosiy omillarga bog‘liq?", "options": ["Brendning tanilishi, mijozlar bilan munosabatlar, sodiqlik va imij", "Brendning ishlab chiqarish ko‘rsatkichlari", "Mahsulotning narxi", "Reklama xarajatlari"], "correct_index": 0},
+    {"question": "430. Brend kapitaliga ega bo‘lishning qanday afzalliklari bor?", "options": ["Brendni tez ko‘paytirish", "Mijozlardan yanada ishonch va sodiqlik olish, bozorda ko‘p o‘rin topish", "Mahsulot narxini aniqlash", "Brendning kichikligini yo‘qotish"], "correct_index": 1},
+    {"question": "431. Brendning munosabatlari va sodiqligi qaysi bosqichda muhim rol o‘ynaydi?", "options": ["Reklama kampaniyasini ommalashtirishda", "Mahsulotning ishlab chiqarish bosqichida", "Brend kapitali shakllanishida", "Maxsus mijozlarga xizmat ko‘rsatishda"], "correct_index": 2},
+    {"question": "432. Nima uchun brendning tanilishi muhim?", "options": ["Faqat reklamaga sarflangan mablag‘lar bilan bog‘liq", "Mahsulotni ishlab chiqarishga zarar yetkazishi mumkin", "Brendning reklama byudjeti kam bo‘ladi", "U brendiga bo‘lgan ishonchni kuchaytirib, bozordagi raqobatda afzallik yaratadi"], "correct_index": 3},
+    {"question": "433. Brend kapitalining yuqori bo‘lishi nimaga olib keladi?", "options": ["Brend uchun yuqori baho, mijozlardan ishonch va barqaror foyda", "Mahsulotning ishlab chiqarish samaradorligini kamaytiradi", "Brendga nisbatan salbiy munosabatlar hosil qilishi", "Mijozlar uchun reklama bilan bog‘liq qiyinchiliklar"], "correct_index": 0},
+    {"question": "434. Brend kapitalining asosiy xususiyati qanday?", "options": ["Brendning ishlab chiqarish jarayonining samaradorligi", "Brendning bozordagi imidji va mijozlar bilan munosabatlardan kelib chiqqan qiymati", "Brendning arzon bo‘lishini ta’minlash", "Reklama byudjeti kamaytirish"], "correct_index": 1},
+    {"question": "435. Mijozlar brendiga bo‘lgan ishonch qanday holatlarda kuchayadi?", "options": ["Brendning arzonlashishi", "Brendni reklama bilan haddan tashqari ko‘rsatish", "Brendning tanilishi va ijobiy imidji orqali", "Mahsulotni faqat bir marotaba sotish"], "correct_index": 2},
+    {"question": "436. Brend kapitalining shakllanishiga qanday omillar ta’sir etadi?", "options": ["Mahsulotning ishlab chiqarish jarayoni", "Reklama byudjeti", "Brendni faqat belgilangan jamoatga moslashtirish", "Brendga bo‘lgan ishonch va sodiqlik"], "correct_index": 3},
+    {"question": "437. Brend imidji va brendiga bo‘lgan ishonch o‘rtasida qanday bog‘liqlik bor?", "options": ["Ijobiy brend imidji ishonchni oshiradi, bu esa brend kapitaliga ta’sir qiladi", "Brend imidji ishonchga ta’sir qilmaydi", "Brend imidji faqat reklama bilan bog‘liq", "Ijobiy brend imidji foydasiz"], "correct_index": 0},
+    {"question": "438. Brend kapitali qanday o‘lchanadi?", "options": ["To‘g‘ridan-to‘g‘ri reklama byudjeti bilan", "Mijozlardan olingan fikrlar, brending va sotuvlar asosida", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning narx belgisi"], "correct_index": 1},
+    {"question": "439. Brendning sodiqligini oshirishda qanday usullardan foydalanish mumkin?", "options": ["Mahsulotning narxini bir marta pasaytirish", "Brendni faqat jamoat ishlarida qo‘llash", "Mijozlar bilan to‘g‘ri va doimiy aloqalar, ularning ehtiyojlarini qondirish", "Reklamalarni kamaytiradigan harakatlar"], "correct_index": 2},
+    {"question": "440. Brend kapitalining boyishi bozorga qanday ta’sir ko‘rsatadi?", "options": ["Bozordagi reklama kamayadi", "Mahsulot narxini pasaytirishga olib keladi", "Brendning eng yuqori narxni talab qilishi", "Brendning tanilishi va ishonchini oshiradi, bozordagi raqobatni yengishga yordam beradi"], "correct_index": 3},
+    {"question": "441. Nima uchun brend kapitali o‘zaro muhokama qilinishi kerak?", "options": ["Brendning jahon bozoridagi mavqeini yoki ahamiyatini baholash uchun", "Mahsulotning ishlab chiqarish jarayonini oshirish uchun", "Reklama byudjetini belgilash uchun", "Brendni arzonlashtirish uchun"], "correct_index": 0},
+    {"question": "442. Brend kapitaliga asoslangan strategiyalar qanday natijalarga olib kelishi mumkin?", "options": ["Brendning barqaror emas bo‘lishiga", "Brendning qimmati oshadi, mijozlardan ishonch va sodiqlik ortaga kiradi", "Mahsulotning ishlab chiqarish jarayonini to‘sishga", "Reklamani kamaytirishga"], "correct_index": 1},
+    {"question": "443. Brend kapitalini yaratishda asosiy e’tibor qanday jihatlarga qaratiladi?", "options": ["Mahsulotning ishlab chiqarish jarayoniga", "Reklama byudjetining ko‘payishiga", "Brendning ishonchliligi, mijozlar bilan munosabatlar va tanilishiga", "Mahsulot narxining ortishiga"], "correct_index": 2},
+    {"question": "444. \"Personal brend\" nima?", "options": ["Qaror qabul qilish jarayoni", "Faqat ma’muriy brending", "Mahsulotning reklama tartibi", "Shaxsning o‘ziga xos xususiyatlari va uning bozordagi tasviri"], "correct_index": 3},
+    {"question": "445. Korporativ brendni qanday ta’riflash mumkin?", "options": ["Kompaniya yoki tashkilotning umumiy tasviri va u bilan bog‘liq mavjud bo‘lgan mahsulotlar", "Bir mahsulotning marketing strategiyasi", "Bir savdo belgisi", "Mahsulot ishlab chiqarishdagi ishlab chiqarish texnologiyasi"], "correct_index": 0},
+    {"question": "446. Shaxsiy brend) nimani anglatadi?", "options": ["Mahsulotning texnologik xususiyatlari", "Shaxsning professional imidji va uning atrofidagi tasvirlar", "Ko‘plab mahsulotlarning qo‘shilishi", "Mahsulotning raqobatga qarshi strategiyasi"], "correct_index": 1},
+    {"question": "447. \"Tovar brendi\" qanday qilib shakllanadi?", "options": ["Ishlab chiqarishning yozishmasi", "Savdo belgisining reklama tartibi", "Mahsulotning nomini, belgisi va xususiyatlarini o‘zida jamlaydi", "Brendingga sarflanadigan mablag‘lar"], "correct_index": 2},
+    {"question": "448. \"Lyuks brend\"ning asosiy xususiyati qanday?", "options": ["Mahsulotning arzon narxlari", "Tanilmagan bozorda mahsulotni joriy qilish", "Barcha ishlab chiqarishning ommaviyligi", "Qimmat va eksklyuziv mahsulotlar, yuqori darajadagi imij"], "correct_index": 3},
+    {"question": "449. Narx nimani anglatadi?", "options": ["Mahsulot yoki xizmat uchun mijozlardan olingan pul mablag‘i", "Mahsulotning ishlab chiqarish xarajatlari", "Mahsulotning fizik ko‘rsatkichlari", "Mahsulotning reklama byudjeti"], "correct_index": 0},
+    {"question": "450. Narxga ta’sir etuvchi asosiy omillar qanday bo‘ladi?", "options": ["Mahsulotning ishlab chiqarish jarayoni", "Ta’minot va talab, raqobat, ijtimoiy va iqtisodiy sharoitlar", "Mahsulotning xom ashyosi", "Mahsulotning marketing strategiyasi"], "correct_index": 1},
+    {"question": "451. Narxni belgilashda qaysi omil eng muhim ahamiyatga ega?", "options": ["Mahsulotning ishlab chiqarish xom ashyosining narxi", "Mahsulotning turli bozorlarga mos kelishi", "Talabi va ta’minotining munosabatlari", "Brendning tanilishi"], "correct_index": 2},
+    {"question": "452. Mahsulot narxi qanday belgilash jarayoniga bog‘liq?", "options": ["Mahsulotning ishlab chiqarish jarayoniga", "Reklama byudjetiga", "Mahsulotning ishlab chiqarish samaradorligiga", "Bozordagi raqobat va talabga bog‘liq"], "correct_index": 3},
+    {"question": "453. Narxlarni belgilashda qanday strategiyalar mavjud?", "options": ["Ommaviy, premium va diskont strategiyalari", "Mahsulotning ishlab chiqarish strategiyasi", "Mahsulotning ommaviy reklamasi", "Mahsulot xom ashyosining qayta ishlash strategii"], "correct_index": 0},
+    {"question": "454. \"Ommaviy narx belgilash\" strategiyasi qanday xususiyatga ega?", "options": ["Mahsulotning qimmati yuqori bo‘ladi", "Mahsulot narxi past bo‘ladi, bir vaqtda ko‘p miqdorda sotiladi", "Mahsulotning xususiyatlari kamaytiladi", "Mahsulotning reklama byudjetini oshiradi"], "correct_index": 1},
+    {"question": "455. \"Premium narx belgilash\" strategiyasini qanday taqdim etsa bo‘ladi?", "options": ["Mahsulotning arzonlashishi uchun harakat qilish", "Mahsulotning xom ashyosi kamaytiradi", "Mahsulotning narxi yuqori bo‘ladi va eksklyuziv xizmatlar ta’minotlanadi", "Mahsulotning reklama kampaniyasini qisqartirish"], "correct_index": 2},
+    {"question": "456. \"Diskont strategiyasi\" qanday amalga oshiriladi?", "options": ["Mahsulotning narxini doimiy ravishda oshirish", "Mahsulotning o‘zgarishi uchun yangi tadqiqotlar olib borish", "Mahsulotni barcha tarmoqlarda har xil narxda sotish", "Mahsulotni arzon narxlarda va targ‘ibot orqali sotish"], "correct_index": 3},
+    {"question": "457. Narx belgilash strategiyasini tanlashda qaysi omillar asosiydir?", "options": ["Mahsulotning bozordagi o‘rni, talab va raqobat", "Reklama byudjetining yuqori bo‘lishi", "Mahsulotning qimmatli xom ashyosi", "Mahsulotning ishlab chiqarish jarayoni"], "correct_index": 0},
+    {"question": "458. Narxni belgilashning \"skidka strategiyasi\" qanday shakllanadi?", "options": ["Mahsulotning barcha xususiyatlarini oshirish", "Mahsulotga muddatli kamayish yoki aksiyalar orqali arzonlashtirish", "Mahsulotning faqat reklamasiga e’tibor qaratish", "Brendning tanilishiga e’tibor qaratish"], "correct_index": 1},
+    {"question": "459. \"Psixologik narx belgilash\" strategiyasini qanday amalga oshirish mumkin?", "options": ["Mahsulotning narxini katta summamen belgilash", "Mahsulotni arzon narxda sotish", "Mahsulotning narxi 9.99 yoki 19.99 shaklida ko‘rsatish", "Mahsulotni raqobatchilarga nisbatan arzonlashtirish"], "correct_index": 2},
+    {"question": "460. \"Narxi yoki arzon narx strategiyasi\" qaysi holda qo‘llaniladi?", "options": ["Mahsulotning narxi har doim yuqori bo‘ladi", "Mahsulot har bir bozor uchun uzoq muddatda belgilash", "Brendning faqat rivojlanishida", "Mahsulotning kuchli raqobat holatda bo‘lganda, arzon narxda taklif etiladi"], "correct_index": 3},
+    {"question": "461. Narxni belgilashning \"perspektivali narx\" turi nimani anglatadi?", "options": ["Mahsulotning narxi yangi bozorlarda raqobatga moslashgan holda belgilanadi", "Mahsulotning ishlab chiqarish xarajatlari oshganligida belgilash", "Mahsulotni faqat mamlakat ichida satish", "Mahsulotga reklama byudjeti belgilash"], "correct_index": 0},
+    {"question": "462. Mahsulotning narxini belgilashda iqtisodiy omillar qanday rol o‘ynaydi?", "options": ["Mahsulotning ishlab chiqarish jarayonining samaradorligi", "Iqtisodiy sharoitlar va mijozlarning xarid qobiliyati narx belgilashga ta’sir qiladi", "Mahsulotning reklama byudjeti", "Mahsulotning xom ashyosi"], "correct_index": 1},
+    {"question": "463. Narxni belgilashda ijtimoiy omillar qanday ta’sir ko‘rsatadi?", "options": ["Mahsulotning ishlab chiqarish vaqti", "Reklamalardagi maxsus takliflar", "Mijozlar toifasi, ularning ehtiyojlari va ijtimoiy maqomi narx belgilashda muhim", "Mahsulotning raqobatga moslashish"], "correct_index": 2},
+    {"question": "464. Narx belgilashda \"okkupatsion narx\" strategiyasi qanday bo‘ladi?", "options": ["Mahsulot faqat arzon narxda taklif etiladi", "Mahsulot narxi har doim yuqori bo‘ladi", "Mahsulotning arzonlashishi uchun har bir qadam hisoblanadi", "Mahsulotning narxi hammasini qayta sarflagan holda belgilanadi"], "correct_index": 3},
+    {"question": "465. Mahsulot narxini belgilashda risq va xavf omillari qanday ta’sir ko‘rsatadi?", "options": ["Iqtisodiy yoki raqobat bo‘lishida narx belgilashda ehtiyotkorlik talab etiladi", "Mahsulotning ishlab chiqarish jarayonini tezlashtirish", "Mahsulotning xaridoriga mos narxni belgilash", "Brendning tanilishida"], "correct_index": 0},
+    {"question": "466. \"Tovarning narxining yuqorilishi\" qanday natijaga olib keladi?", "options": ["Reklamadagi e’lonlar ko‘paytiradi", "Mahsulotning eksklyuzivlik xossasi oshadi", "Mahsulotning arzon narxini belgilashga", "Mahsulotni faqat mahalliy bozorga moslash"], "correct_index": 1},
+    {"question": "467. Narxni belgilashda tashqi omillar (masalan, inflyatsiya) qanday ahamiyatga ega?", "options": ["Mahsulotning hududdagi reklama kampaniyasi", "Mahsulotning ishlab chiqarish jarayoni", "Inflyatsiya va iqtisodiy o‘zgarishlar narxlarga ta’sir ko‘rsatishi mumkin", "Brendning ichki siyosatlari"], "correct_index": 2},
+    {"question": "468. Narx belgilashda \"qattiq narx siyosati\" qanday bo‘ladi?", "options": ["Mahsulotning narxini har vaqt arzonlashtirish", "Mahsulotning narxini ortishiga moslashish", "Mahsulotning barcha bozorlarda har xil narxda sotish", "Mahsulotning narxi faqat belgilangan darajada saqlanadi va raqobatga moslashmaydi"], "correct_index": 3},
+    {"question": "469. Tarqatish kanali nima?", "options": ["Mahsulotning ishlab chiqaruvchi korxonaning mijozga yetkazib berish yo‘li", "Mahsulotning marketing strategiyasi", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning reklamasi"], "correct_index": 0},
+    {"question": "470. Tarqatish kanali qanday tashkil etiladi?", "options": ["Mahsulotning ishlab chiqarish jarayoniga muvofiq", "Ishlab chiqaruvchi, wholesaler (bo‘lim), roznichnыy savdoning (chakana savdo) va mijoz orqali", "Mahsulotning faqat onlayn platformada sotilishi", "Mahsulotning so‘rovlarga asoslangan savdosi"], "correct_index": 1},
+    {"question": "471. Tarqatish kanalining to‘rtta asosiy turi qanday?", "options": ["Savdo belgilarining targ‘iboti", "Mahsulotning fizik shakllanishi", "Bevosita, ortiqcha, aralash va ommaviy kanallar", "Brendning yuksalishi"], "correct_index": 2},
+    {"question": "472. \"Bevosita tarqatish kanali\" qanday amalga oshiriladi?", "options": ["Mahsulot marketing sohasidagi yagona yo‘nalishga asoslanadi", "Mahsulot faqat reklamalarga asoslanadi", "Mahsulotdagi xizmatlarning xususiyatlari belgilanadi", "Ishlab chiqaruvchi mustaqil tarzda mijozga mahsulot yetkazib beradi"], "correct_index": 3},
+    {"question": "473. \"Neposredstvennaya distributsiya\"ni tanlashning afzalliklari nimada?", "options": ["Mijoz bilan bevosita aloqa o‘rnatish va arzonlashtirish imkoniyati", "Raqobatga qarshi kurashish", "Brendning global o‘rni", "Tarqatish kanaliga yangi strategiyalar qo‘shish"], "correct_index": 0},
+    {"question": "474. \"Aralash tarqatish kanali\"ni qanday tushunish mumkin?", "options": ["Mahsulot faqat birgina mijozga yetkazib beriladi", "Ishlab chiqaruvchi va savdogarlar o‘rtasidagi hamkorlik orqali mahsulot tarqatilishi", "Mahsulot ishlab chiqarish jarayoniga to‘liq bog‘liq", "Mahsulotning faqat reklamasiga asoslanadi"], "correct_index": 1},
+    {"question": "475. \"Ommaviy tarqatish kanali\"ni qanday ta’riflash mumkin?", "options": ["Mahsulot faqat eksklyuziv tarmoqlarda tarqatiladi", "Mahsulotning arzonlashishiga asoslanadi", "Mahsulot keng ommaviy to‘plangan tarmoqlarda tarqatilishi", "Mahsulotning marketing takliflari"], "correct_index": 2},
+    {"question": "476. Chakana savdo nima?", "options": ["Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning xizmat ko‘rsatish imkoniyatlari", "Mahsulotning arzonlashtirish", "Mahsulotlarni bir oz foyda bilan o‘tkazish va mijozlarga yetkazish jarayoni"], "correct_index": 3},
+    {"question": "477. Chakana savdoning asosiy vazifalari nimalar?", "options": ["Mahsulotlarni mijozlarga yetkazib berish va ularni to‘g‘ri va o‘rnatilgan narxda taklif etish", "Mahsulot ishlab chiqarish jarayonini boshqarish", "Savdo belgilarining reklama strategiyasini ishlab chiqish", "Texnologiyalarning ijobiy ta’sirini oshirish"], "correct_index": 0},
+    {"question": "478. Chakana savdoda qanday kanallar mavjud?", "options": ["Mahsulotning xom ashyosi", "Mobil, elektron va an’anaviy do‘konlar", "Mahsulotning ishlab chiqarish texnologiyalari", "Mahsulotning faqat onlayn savdosi"], "correct_index": 1},
+    {"question": "479. \"Bo‘lim savdosi\" qanday amalga oshiriladi?", "options": ["Mahsulotning mahsulot yuklarini tarqatish", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulot wholesaler (bo‘lim) orqali chakana savdogarga yetkaziladi", "Mahsulotning narx belgilash jarayoni"], "correct_index": 2},
+    {"question": "480. \"Chakana savdoning ko‘plashgan kanali\" nima?", "options": ["Mahsulot faqat bir do‘konda savdoga qo‘yiladi", "Mahsulotning xom ashyosi yoki ishlab chiqarish jarayoni", "Mahsulotning reklamasi", "Mahsulot turli do‘konlarda va onlayn platformalarda sotiladi"], "correct_index": 3},
+    {"question": "481. Chakana savdoning \"franchayzing\" kanali qanday bo‘ladi?", "options": ["Mahsulotni maxsus kelishuvlar orqali ko‘plab do‘konlar va tadbirkorlarga yetkazish", "Mahsulot faqat yangi mahsulotlardan tashkil topadi", "Mahsulotning targ‘iboti uchun reklamalar yaratish", "Mahsulotning eksport yoki importini oshirish"], "correct_index": 0},
+    {"question": "482. Mahsulotlar qanday tartibda chakana savdoga kiritiladi?", "options": ["Mahsulotning marketing strategiyasiga muvofiq", "Mahsulot ishlab chiqarilganidan keyin, tarmoqlarga tarqatilishi uchun tayyor bo‘ladi", "Mahsulot reklama kampaniyasidan keyin tarqatiladi", "Mahsulotning qimmatli xom ashyosini oshirish"], "correct_index": 1},
+    {"question": "483. Mobil platformalarda savdo (e-commerce) qanday amalga oshiriladi?", "options": ["Mahsulotning ishlab chiqarish jarayonining internetda tarqatilishi", "Mahsulotning marketing strategiyasini sayt orqali amalga oshirish", "Onlayn do‘konlar orqali mahsulotlarni internet orqali savdoga qo‘yish", "Mahsulotning ishlab chiqarish xom ashyosini internet orqali yetkazish"], "correct_index": 2},
+    {"question": "484. \"Chakana savdo ombori\" kanali qanday bo‘ladi?", "options": ["Mahsulotning reklama jarayoni", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning xom ashyosini tanlash", "Savdoga qo‘yish uchun mahsulotlarning ombori yoki ta’minoti"], "correct_index": 3},
+    {"question": "485. Tarqatish kanalida \"rezerv\" strategiyasini qanday belgilash mumkin?", "options": ["Raqobatga qarshi turish va mahsulotni keng tarqatish", "Mahsulot faqat mahalliy bozorda tarqatish", "Mahsulotni faqat reklamalarga moslashtirish", "Mahsulotning bevosita ommaviy takliflarini yaratish"], "correct_index": 0},
+    {"question": "486. Chakana savdoda \"pokupka\" bo‘yicha strategiya nima?", "options": ["Mahsulotning ishlab chiqarishdagi yangi variantlari", "Mijozga mahsulotni ishonchli va to‘g‘ri yetkazish", "Mahsulotning reklama kampaniyasini oshirish", "Mahsulotning eng past narxi belgilash"], "correct_index": 1},
+    {"question": "487. Tarqatish kanalidagi \"barcha uchun\" strategiyasini qanday amalga oshirish mumkin?", "options": ["Mahsulotning eng yaxshi versiyasini ishlab chiqish", "Mahsulotning reklama strategiasini faqat katta byudjet bilan belgilash", "Mahsulotni keng auditoriyaga tarqatish uchun ko‘plab kanallarni foydalanish", "Mahsulotni yangi bozorlardagi reklama strategiyasini ishlab chiqish"], "correct_index": 2},
+    {"question": "488. Chakana savdo kanalining asosiy maqsadi qanday?", "options": ["Raqobatga moslashish uchun arzonlashtirish", "Savdo belgisini ko‘rsatish", "Brendning tanilishi", "Mahsulotni mijozlarga samarali yetkazib berish va ularni zadovolik darajasini oshirish"], "correct_index": 3},
+    {"question": "489. Marketing kommunikatsiyalari nima?", "options": ["Mahsulot va xizmatlar haqidagi axborotni mijozlarga yetkazish jarayoni", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulot narxi belgilash jarayoni", "Mahsulotning distribyutsiya strategiyasini belgilash"], "correct_index": 0},
+    {"question": "490. Marketing kommunikatsiyalari qanday kanallar orqali amalga oshiriladi?", "options": ["Faqat televizor orqali", "Reklama, yangiliklar, ommaviy axborot vositalari va shu kobil", "Mahsulotning fizik savdosi orqali", "Mahsulot ishlab chiqarish jarayoni orqali"], "correct_index": 1},
+    {"question": "491. Reklama vositalarining asosiy maqsadi nimada?", "options": ["Mahsulot ishlab chiqarish jarayonini optimizatsiya qilish", "Mahsulotning raqobatga moslashish", "Mahsulotni yoki xizmatni mijozlarga tanitish va xabardor qilish", "Mahsulotning qimmatini belgilash"], "correct_index": 2},
+    {"question": "492. Reklama vositalarining qaysisi ommaviy axborot vositalaridan foydalanadi?", "options": ["Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning raqobatga moslashishi", "Maxsus tadbirlar va forumlar", "Televizor, radio, gazetalar, jurnallar"], "correct_index": 3},
+    {"question": "493. Marketing kommunikatsiyalarining \"interaktiv reklama\" turi qanday amalga oshiriladi?", "options": ["Mijozlar bilan aloqaga kirishish va ularning fikrlarini olish", "Mahsulotning faqat savdoga qo‘yilishi", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning eng yuqori narxi"], "correct_index": 0},
+    {"question": "494. Marketing kommunikatsiyalarida \"PR\" (Jamoatchilik bilan aloqa)ning rolini qanday tushunish mumkin?", "options": ["Mahsulot ishlab chiqarish jarayonini marketingga integratsiyalash", "Brendning ijobiy obrazini yaratish va jamoatchilik bilan munosabatlar o‘rnatish", "Mahsulotning reklama kampaniyasini yo‘naltirish", "Mahsulotning arzonlashtirish kampaniyasini boshlash"], "correct_index": 1},
+    {"question": "495. Reklamadan foydalanishda qanday maqsadlar ko‘zda tutiladi?", "options": ["Mahsulotning ishlab chiqarish jarayonini oshirish", "Mahsulotning texnik ko‘rsatkichlarini oshirish", "Mahsulotning tanilishini oshirish va mijozlarni jalb qilish", "Mahsulotning faqat reklamasi"], "correct_index": 2},
+    {"question": "496. Reklama vositalari qanday shakllarda bo‘lishi mumkin?", "options": ["Mahsulot ishlab chiqarish jarayonida", "Mahsulotni arzonlashtirish orqali", "Raqobat bilan kurashish", "Televizion, radio, internet va an’anaviy reklama shakllari"], "correct_index": 3},
+    {"question": "497. Marketing kommunikatsiyalarida \"direkt marketing\" turi nimani anglatadi?", "options": ["Mahsulot va xizmatlarni to‘g‘ridan-to‘g‘ri mijozlarga yetkazish", "Mahsulotni faqat reklamalar orqali targ‘ib qilish", "Mahsulotning marketing strategiyasini ommaviy yoritish", "Mahsulotning arzonlashishi"], "correct_index": 0},
+    {"question": "498. Reklamani tarqatishda qaysi vosita ommaviy axborot vositalarini o‘z ichiga oladi?", "options": ["Mahsulotning targ‘ib qilishining yangi usullari", "Televizor, radio, gazetalar va jurnallar", "Mahsulotning to‘g‘ridan-to‘g‘ri marketing strategiyasi", "Mahsulotning xom ashyosi"], "correct_index": 1},
+    {"question": "499. \"Sotsial media marketing\" nima?", "options": ["Mahsulotning reklama tizimini televizorda bajarish", "Mahsulotni faqat do‘konlarda sotish", "Internetdagi ijtimoiy tarmoqlar orqali marketing faoliyatlari", "Mahsulotning onlayn savdosini bir darajada oshirish"], "correct_index": 2},
+    {"question": "500. Marketing kommunikatsiyalarida \"konsalting\" va \"trening\"ni qanday tushunish mumkin?", "options": ["Mahsulotning reklama strategiasini yaratish", "Mahsulot ishlab chiqarish jarayonini optimizatsiya qilish", "Mahsulotning narxi belgilash jarayoni", "Mijozlarga yordam ko‘rsatish va ularga maqsadga muvofiq qarorlar qabul qilishda yordam berish"], "correct_index": 3},
+    {"question": "501. Reklamani amalga oshirishda qanday jamoatchilik aloqalari instrumentlaridan foydalaniladi?", "options": ["Press-relizlar, intervyular, yordam kampaniyalari", "Mahsulotni reklama kampaniyasidan ishlab chiqish", "Mahsulotning ichki bozori uchun maxsus strategialar", "Mahsulotning xom ashyosi"], "correct_index": 0},
+    {"question": "502. \"Virus reklama\" qanday amalga oshiriladi?", "options": ["Mahsulotning ishlab chiqarish jarayonida paydo bo‘ladigan reklama", "Mijozlar tomonidan tarqatiladigan va tez taraydigan reklama turi", "Mahsulotning shu vaqtda ommaviy yoritilishi", "Mahsulotni faqat an’anaviy do‘konlarda sotayotgan reklama"], "correct_index": 1},
+    {"question": "503. Reklamada \"afishalar\" qanday maqsadga xizmat qiladi?", "options": ["Mahsulotning tizimini yaratish", "Mahsulotning ishlab chiqarish jarayonini ko‘rsatish", "Mahsulotni ommaviy ko‘rsatish va hushyorlikni oshirish", "Mahsulotning sof xatolarini ko‘rsatish"], "correct_index": 2},
+    {"question": "504. Reklamadan foydalanishda \"xayotiy sikl\"ni qanday tushunish mumkin?", "options": ["Mahsulotning ishlab chiqarish fazasini qisqartirish", "Mahsulotning reklama kampaniyasini oshirish", "Mahsulotni arzonlashtirish", "Mahsulotning turli marralar va fazalarga qo‘shilishi"], "correct_index": 3},
+    {"question": "505. \"Kreativ reklama\" nima?", "options": ["Reklamalarda yangiliklarni joriy qilish va mijozlarni jalb qilish", "Mahsulotning ishlab chiqarish jarayonining eng yaxshi shakli", "Mahsulotning faqat do‘konlarda tarqatilishi", "Mahsulotning qimmatini oshirish"], "correct_index": 0},
+    {"question": "506. \"Reklama kampaniyasini baholash\"da qanday omillar muhim?", "options": ["Mahsulotning ishlab chiqarish jarayoni", "Targ‘ibotning samaradorligi, maqsadga erishish darajasi", "Mahsulotning raqobatga moslashish", "Mahsulotning faqat reklamasi"], "correct_index": 1},
+    {"question": "507. Jamoatchilik bilan aloqalar (PR) nima?", "options": ["Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning marketing strategiyasi", "Kompaniya va jamoatchilik o‘rtasida ijobiy aloqalarni o‘rnatish jarayoni", "Mahsulotning raqobatga moslashishi"], "correct_index": 2},
+    {"question": "508. Jamoatchilik bilan aloqalarning asosiy maqsadi nimada?", "options": ["Mahsulot narxini belgilash", "Savdo strategiyasini belgilash", "Mahsulot ishlab chiqarishni yoritish", "Kompaniyaning ijobiy imidjini yaratish va saqlash"], "correct_index": 3},
+    {"question": "509. PR qanday kanallar orqali amalga oshiriladi?", "options": ["Press-relizlar, intervyular, ommaviy axborot vositalari", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning reklama kampaniyasi", "Mahsulotning arzonlashtirish jarayoni"], "correct_index": 0},
+    {"question": "510. PR qanday holatlarda muhim ahamiyatga ega?", "options": ["Mahsulotning texnik tavsifini berishda", "Kompaniyaning imidji yoki nomini mustahkamlashda", "Mahsulotning faqat reklama tizimini amalda qo‘llashda", "Mahsulotning xom ashyosi bilan ishlashda"], "correct_index": 1},
+    {"question": "511. PR faoliyatida \"blogerlar bilan aloqalar\"ning maqsadi nimada?", "options": ["Mahsulotning xom ashyosini tarqatish", "Mahsulotning ishlab chiqarish jarayoni", "Kompaniya yoki brendning ijobiy obrazini keng targ‘ib qilish", "Mahsulotning narxini belgilash"], "correct_index": 2},
+    {"question": "512. PR \"jamoatchilik bilan aniq aloqa\" usuli qanday amalga oshiriladi?", "options": ["Mahsulotning texnik xususiyatlarini targ‘ib qilish", "Mahsulotning reklamasini ommaviy yoritish", "Mahsulotning faqat marketing yo‘nalishlarini belgilash", "Kompaniyaning auditoriyasi bilan to‘g‘ridan-to‘g‘ri aloqa orqali"], "correct_index": 3},
+    {"question": "513. \"PR faoliyatida samaradorlik\"ni qanday baholash mumkin?", "options": ["Mijozlar va jamoatchilikdan olingan ijobiy fikrlar va ta’sirlar", "Mahsulotning texnik ko‘rsatkichlari", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning raqobatga moslashishi"], "correct_index": 0},
+    {"question": "514. PR faoliyatida \"tadbirlar\"ning rolini qanday ta’riflash mumkin?", "options": ["Mahsulotning ishlab chiqarish jarayoni", "Kompaniyaning imidji va maqsadlarini ommaviy targ‘ib qilish va jamoatchilik bilan aloqalarni kuchaytirish", "Mahsulotning xom ashyosi", "Mahsulotning savdoga chiqarilishi"], "correct_index": 1},
+    {"question": "515. \"Jamoatchilik bilan aloqalarda asosiy strategik maqsad\" nimada?", "options": ["Mahsulotni arzonlashtirish", "Mahsulotning xom ashyosini topish", "Kompaniyaning ijobiy obrazini yaratish va uni saqlash", "Mahsulotning reklamasini targ‘ib qilish"], "correct_index": 2},
+    {"question": "516. \"PR faoliyatida\" jamoatchilik bilan aloqalar strategiyasining muhim qismi nima?", "options": ["Mahsulotning reklamasini ommaviy yoritish", "Mahsulotning savdoga chiqarilishi", "Mahsulotning texnik xizmat ko‘rsatishi", "Maqsadli auditoriya bilan doimiy va to‘g‘ridan-to‘g‘ri aloqa"], "correct_index": 3},
+    {"question": "517. \"Jamoatchilik bilan aloqalar faoliyatida\" tashrif buyurishning maqsadi nimada?", "options": ["Kompaniyaning ijobiy imidjini yaratish va aloqa o‘rnatish", "Mahsulotning reklamasini kamaytish", "Mahsulotning bevosita savdosini oshirish", "Mahsulotning xom ashyosini saqlash"], "correct_index": 0},
+    {"question": "518. PR faoliyatida \"jamoatchilikning fikrlari\"ning ahamiyati nimada?", "options": ["Mahsulotning reklamasini belgilash", "Kompaniyaning ijobiy yoki salbiy obrazini yaratishda muhim rol o‘ynashi", "Mahsulotning texnik tavsifini yaratish", "Mahsulotning qimmatini belgilash"], "correct_index": 1},
+    {"question": "519. To‘g‘ridan-to‘g‘ri marketing nima?", "options": ["Mahsulot narxi belgilash jarayoni", "Mahsulotning reklamasi orqali ommaviy targ‘ib qilish", "Mahsulot yoki xizmatlarni to‘g‘ridan-to‘g‘ri mijozlarga yetkazish", "Mahsulotni bozorga chiqarish jarayoni"], "correct_index": 2},
+    {"question": "520. To‘g‘ridan-to‘g‘ri marketingning maqsadi nimada?", "options": ["Mahsulot ishlab chiqarish jarayonini bozorga taqdim qilish", "Mahsulotni qimmatlashtirish", "Mahsulotning reklamasi orqali jamoatchilik bilan aloqa", "Mahsulot yoki xizmatlarning mijozlarga bevosita yetkazilishini ta’minlash"], "correct_index": 3},
+    {"question": "521. To‘g‘ridan-to‘g‘ri marketingning qaysisiga kirmaydi?", "options": ["Ommaviy reklama kampaniyalari", "Telefon orqali marketing", "Pochta orqali marketing", "Internet orqali marketing"], "correct_index": 0},
+    {"question": "522. To‘g‘ridan-to‘g‘ri marketing shakllaridan qaysisi marketingning to‘g‘ridan-to‘g‘ri aloqa usullaridan biridir?", "options": ["Maxsus distribyutorlar orqali targ‘ib qilish", "Telefon orqali marketing", "Bozorning ommaviy targ‘iboti", "Maxsus forumlarda ishlash"], "correct_index": 1},
+    {"question": "523. To‘g‘ridan-to‘g‘ri marketingda qaysi omillar muhim ahamiyatga ega?", "options": ["Mahsulotning reklamasi va targ‘iboti", "Brendning tanishligi va ko‘rsatkichlari", "Mijoz bilan shaxsiy aloqa va to‘g‘ridan-to‘g‘ri muloqot", "Mahsulot narxining belgilash"], "correct_index": 2},
+    {"question": "524. \"E-mail marketing\" qaysi to‘g‘ridan-to‘g‘ri marketing shakliga kirishi mumkin?", "options": ["Maxsus savdo tartibini yo‘lga qo‘yish", "Bozordagi raqobat va tanishlik orqali targ‘ib qilish", "Mahsulotning texnik ko‘rsatkichlari", "Internet orqali marketing"], "correct_index": 3},
+    {"question": "525. Telefon orqali marketingda qanday strategiyalar qo‘llaniladi?", "options": ["Mijozlarga to‘g‘ridan-to‘g‘ri telefon orqali aloqa qilish", "Mahsulotni ommaviy reklama orqali targ‘ib qilish", "Mahsulot narxi belgilash", "Mahsulotning xom ashyosini taqdim etish"], "correct_index": 0},
+    {"question": "526. To‘g‘ridan-to‘g‘ri marketingning \"pochta orqali marketing\" shaklining maqsadi nimada?", "options": ["Mahsulot narxini belgilash", "Mahsulot va xizmatlar haqidagi axborotni bevosita mijozlarga yetkazish", "Mahsulot ishlab chiqarish jarayonini yo‘lga qo‘yish", "Mahsulotni faqat reklama orqali tanitish"], "correct_index": 1},
+    {"question": "527. To‘g‘ridan-to‘g‘ri marketingda qaysi vosita ko‘proq foydalaniladi?", "options": ["Mahsulot ishlab chiqarish va marketing strategiyasini belgilash", "Mahsulotning reklama kampaniyasi", "Telefon, pochta, elektron pochta va internet orqali aloqa", "Mahsulotning xom ashyosi"], "correct_index": 2},
+    {"question": "528. To‘g‘ridan-to‘g‘ri marketing shakllaridan qaysisi internet orqali amalga oshiriladi?", "options": ["Maxsus do‘konlarda sotish", "Mahsulot ishlab chiqarish jarayoni", "Mahsulotning savdo tartibi", "E-mail marketing, bannerlar va internet-reklama"], "correct_index": 3},
+    {"question": "529. To‘g‘ridan-to‘g‘ri marketingda \"direkt pochta\" qanday ishlaydi?", "options": ["Maxsus xatlar, kataloga va prospektlar orqali mijozlarga ma’lumot yetkazish", "Mahsulotning xom ashyosi orqali targ‘ib qilish", "Mahsulotni faqat ommaviy yoritish", "Mahsulot narxini belgilash"], "correct_index": 0},
+    {"question": "530. To‘g‘ridan-to‘g‘ri marketingda \"SMS marketing\"ning maqsadi nimada?", "options": ["Mahsulotning reklamasini televidenieda yoritish", "Mijozlarga SMS orqali yangi mahsulotlar va xizmatlar haqida xabar berish", "Mahsulotning arzonlashtirish jarayoni", "Mahsulotni faqat raqobatga moslashtirish"], "correct_index": 1},
+    {"question": "531. Internetda \"afiliat marketing\" to‘g‘ridan-to‘g‘ri marketing shakllaridan biri sifatida qanday amalga oshiriladi?", "options": ["Mahsulotni televizor orqali targ‘ib qilish", "Mahsulotning arzonlashtirish kampaniyasi", "Internet-saytlarda boshqa saytlar orqali reklama qilish", "Maxsus to‘g‘ridan-to‘g‘ri yoritish"], "correct_index": 2},
+    {"question": "532. \"To‘g‘ridan-to‘g‘ri marketing\"da qaysi vosita individual reklamani yaratishga yordam beradi?", "options": ["Televizion va radio reklama", "Brendning ommaviy yoritilishi", "Mahsulotning xom ashyosi", "Maxsus telefon qo‘ng‘iroqlari va shaxsiy elektron pochta"], "correct_index": 3},
+    {"question": "533. \"To‘g‘ridan-to‘g‘ri marketingda\" qaysi usullarning samaradorligi yuqori bo‘lishi mumkin?", "options": ["Shaxsiy aloqa, targetlangan marketing va mijozlar bilan to‘g‘ridan-to‘g‘ri muloqot", "Ommaviy reklama kampaniyalari", "Mahsulotning tizimli ishlab chiqarilishi", "Mahsulotning qimmatini oshirish"], "correct_index": 0},
+    {"question": "534. \"To‘g‘ridan-to‘g‘ri marketingda\" qaysi shakl ommaviy marketingdan farq qiladi?", "options": ["Mahsulotning texnik tavsiflarini reklama orqali tarqatish", "Mahsulot yoki xizmatni aniq mijozlarga to‘g‘ridan-to‘g‘ri yetkazish", "Mahsulotni raqobatga moslashtirish", "Mahsulotning savdo oraliqlarini kengaytirish"], "correct_index": 1},
+    {"question": "535. \"To‘g‘ridan-to‘g‘ri marketing\"ning \"CRM\" (Customer Relationship Management) bilan bog‘liq jihati nima?", "options": ["Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning arzonlashtirish va ommaviy reklama", "Mijozlar bilan uzluksiz aloqani saqlash va mijozlar muammolarini tezda hal qilish", "Mahsulotning savdoga chiqarilishi"], "correct_index": 2},
+    {"question": "536. \"To‘g‘ridan-to‘g‘ri marketingda\" \"kampaniya\"ning ahamiyati nimada?", "options": ["Mahsulotning eng yuqori narxi belgilash", "Mahsulot ishlab chiqarish va innovatsion usullar", "Mahsulotning xom ashyosi", "Maxsus marketing kampaniyalari orqali mijozlarga to‘g‘ridan-to‘g‘ri aloqa qilish"], "correct_index": 3},
+    {"question": "537. \"To‘g‘ridan-to‘g‘ri marketingda\" savdo taktikasi qanday foydalaniladi?", "options": ["Mahsulot yoki xizmatlarni mijozlar bilan shaxsiy muloqot orqali sotish", "Mahsulotning reklamasini ommaviy yoritish", "Mahsulotning marketing faoliyatini ko‘rsatish", "Mahsulot narxini belgilash"], "correct_index": 0},
+    {"question": "538. To‘g‘ridan-to‘g‘ri marketingda \"interaktiv reklama\" qaysi usulga kirishi mumkin?", "options": ["Mahsulotni televizor orqali reklama qilish", "Internet orqali mijozlar bilan interaktiv muloqot", "Mahsulotning texnik parametrlarini yoritish", "Mahsulotning arzonlashtirish"], "correct_index": 1},
+    {"question": "539. Raqamli marketing nima?", "options": ["Mahsulot ishlab chiqarish jarayoni", "Mahsulotning texnik ko‘rsatkichlari", "Internet va raqamli kanallar orqali marketing faoliyati", "Mahsulotni ommaviy targ‘ib qilish"], "correct_index": 2},
+    {"question": "540. Raqamli marketingning asosiy maqsadi nimada?", "options": ["Mahsulotning savdoga chiqarish", "Mahsulot ishlab chiqarish jarayonini optimizatsiya qilish", "Mahsulot narxini belgilash", "Internet va raqamli kanallar orqali mijozlar bilan aloqa o‘rnatish"], "correct_index": 3},
+    {"question": "541. Raqamli marketingda qaysi kanallardan foydalaniladi?", "options": ["Veb-saytlar, sotsial media, elektron pochta, onlayn reklama", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning savdo strategiyasi", "Mahsulotning xom ashyosini tarqatish"], "correct_index": 0},
+    {"question": "543. Raqamli marketingda \"kontent marketing\" nima?", "options": ["Mahsulot narxini belgilash jarayoni", "Mijozlar uchun qimmatli va qiziqarli kontent (ma’lumot, maqolalar, videolar) yaratish", "Mahsulotning savdoga chiqarish jarayoni", "Mahsulotning raqobatga moslashishi"], "correct_index": 1},
+    {"question": "544. \"Raqamli reklama\"da qaysi platformada reklama olib boriladi?", "options": ["Mahsulot ishlab chiqarish va xom ashyolar", "Mahsulotning texnik tavsiflari", "Google, Facebook, Instagram, YouTube", "Mahsulotning narxini belgilash"], "correct_index": 2},
+    {"question": "545. Raqamli marketingda \"elektron pochta marketingi\"ning maqsadi nimada?", "options": ["Mahsulot ishlab chiqarish jarayonini yoritish", "Mahsulotning xom ashyosini tarqatish", "Mahsulotning arzonlashtirish strategiyasini belgilash", "Mijozlarga elektron pochta orqali reklamalar, takliflar va axborot jo‘natish"], "correct_index": 3},
+    {"question": "546. Raqamli marketingda \"sotsial media marketing\"ning asosiy maqsadi nimada?", "options": ["Mijozlar bilan aloqa o‘rnatish va brendingni rivojlantirish", "Mahsulotni xom ashyosi bilan tanishtirish", "Mahsulotning texnik ko‘rsatkichlarini ko‘rsatish", "Mahsulotning savdo ko‘rsatkichlari"], "correct_index": 0},
+    {"question": "547. \"Mobil marketing\"da qaysi vosita asosiy ahamiyatga ega?", "options": ["Mahsulot ishlab chiqarish jarayoni", "Smartfonlar va mobil qurilmalar orqali reklama va aloqa", "Mahsulotning savdo kanallari", "Maxsus reklamalar"], "correct_index": 1},
+    {"question": "548. Raqamli marketingda \"veb-analitika\"ning ahamiyati nimada?", "options": ["Mahsulotning texnik tavsiflari", "Mahsulotning ishlab chiqarish jarayoni", "Veb-saytning faoliyati va mijozlarning harakatlarini tahlil qilish", "Mahsulotning savdoga chiqarilishi"], "correct_index": 2},
+    {"question": "549. Raqamli marketingda \"affiliate marketing\" (afiliat marketing) nima?", "options": ["Mahsulot narxini pasaytirish", "Mahsulotning ishlab chiqarish jarayoni", "Mahsulotning reklamasi", "Raqamli kanallar orqali boshqa odamlar yoki kompaniyalar bilan hamkorlikda reklama qilish"], "correct_index": 3},
+    {"question": "550. Raqamli marketingda \"influencer marketing\" nima?", "options": ["Mashhur yoki tajribali shaxslar orqali mahsulotlar yoki xizmatlarni targ‘ib qilish", "Mahsulot narxini belgilash", "Maxsus reklama kampaniyalarini amalga oshirish", "Mahsulotning xom ashyosi"], "correct_index": 0},
+    {"question": "551. \"Targeting reklama\"da qaysi usul qo‘llaniladi?", "options": ["Mahsulot ishlab chiqarish jarayoni", "Ma’lum bir auditoriyaga yo‘naltirilgan reklama kampaniyalari", "Mahsulotning texnik tavsiflarini targ‘ib qilish", "Maxsus savdoga chiqarish"], "correct_index": 1},
+    {"question": "552. Raqamli marketingda \"sayt optimizatsiyasi\" (SEO)ning maqsadi nimada?", "options": ["Mahsulotning texnik tavsiflarini targ‘ib qilish", "Mahsulotni reklama qilish", "Veb-saytning organik izlanishlarda yuqori o‘rinlarda ko‘ringan holda tuzilishini optimizatsiya qilish", "Maxsus forumlarda ishlash"], "correct_index": 2},
+    {"question": "553. \"Raqamli marketingda\" qaysi platformada reklama berish mumkin?", "options": ["Maxsus savdo orqali marketing", "Maxsulotning xom ashyosi orqali marketing", "Mahsulot ishlab chiqarish", "Facebook, Instagram, Google Ads"], "correct_index": 3},
+    {"question": "554. Raqamli marketingda \"kontekstual reklama\" nima?", "options": ["Veb-saytlar va platformalarda kontentga mos keladigan reklama", "Mahsulot ishlab chiqarish jarayoni", "Mahsulotni targ‘ib qilish", "Maxsus reklama kampaniyalari"], "correct_index": 0},
+    {"question": "555. Raqamli marketingda \"analiz\"ning maqsadi nimada?", "options": ["Mahsulot ishlab chiqarish jarayonini ko‘rsatish", "Ma’lumotlarni tahlil qilish va marketing kampaniyalarining samaradorligini baholash", "Mahsulotni savdoga chiqarish", "Mahsulotning texnik parametrlarini yoritish"], "correct_index": 1},
+    {"question": "556. Marketingda etika nima?", "options": ["Mahsulot ishlab chiqarish jarayoni", "Mahsulotning reklama kampaniyasini tashkil qilish", "Mahsulot yoki xizmatlarni prosotsial, adolatli va javobgarlik bilan targ‘ib qilish", "Mahsulotni ko‘plab reklama kanallariga chiqarish"], "correct_index": 2},
+    {"question": "557. Reklamalarda etik muammolar qanday hodisalarga asoslanadi?", "options": ["Mahsulotni arzonlashtirish", "Mahsulot narxini belgilash jarayoni", "Mahsulot ishlab chiqarishning samaradorligi", "Xavfsizlik, jinsiy tartib, yoshlarga ta’sir va haqiqatga muvofiqlik"], "correct_index": 3},
+    {"question": "558. Reklamani etik nuqtai nazardan yomonlashtirishga olib kelishi mumkin bo‘lgan holatlar qaysilar?", "options": ["Mijozlarni aldamchilik, mo‘htaram emaslik yoki xatarli kontent orqali targ‘ib qilish", "Mahsulotning narxini qayta belgilash", "Mahsulotning xom ashyosi", "Mahsulotning texnik tavsiflari"], "correct_index": 0},
+    {"question": "559. Marketingda \"falsh\" (aldamchi) reklama yoki axborotlardan foydalanish qanday salbiy oqibatlarga olib kelishi mumkin?", "options": ["Mahsulotning xom ashyosini kamaytirish", "Mijozlarning ishonchini yo‘qotish va huquqiy masalalar", "Mahsulotning eng yaxshi narxi belgilash", "Maxsus reklamalar orqali targ‘ib qilish"], "correct_index": 1},
+    {"question": "560. Reklamalarda yoshlarga yoki bolalarga ta’sir etishda qanday etik muammolar bo‘lishi mumkin?", "options": ["Mahsulotni arzonlashtirish", "Mahsulot narxini yuqori belgilash", "Bala yoki yoshlarga zararli bo‘lgan axborot yoki qo‘zg‘atishdan qochish", "Mahsulotni ommaviy targ‘ib qilish"], "correct_index": 2},
+    {"question": "561. Marketingda eng muhim etik qoidalardan biri qanday?", "options": ["Mahsulot ishlab chiqarish jarayonini sir saqlash", "Mahsulotni arzonlashtirish strategiyasini belgilash", "Maxsus reklamalar orqali targ‘ib qilish", "Mijozlarga haqiqatga mos va aniq ma’lumot taqdim etish"], "correct_index": 3},
+    {"question": "562. Reklamalarda \"manipulyatsiya\" va \"cheklanish\" haqida qanday etik muammolar yuzaga kelishi mumkin?", "options": ["Mijozlarning ixtiyoriyatiga zarar yetkazadigan tushunchalar va ta’sirlar", "Mahsulot ishlab chiqarish jarayoni", "Mahsulotning reklama kampaniyasi", "Mahsulotning xom ashyosi"], "correct_index": 0},
+    {"question": "563. Reklamani etik tarzda ishlab chiqishda qanday jihatlar muhim?", "options": ["Mahsulot narxini oshirish", "Haqiqiy, aniq va mijozlarga mo‘ljallangan axborotni taqdim qilish", "Mahsulot ishlab chiqarish jarayoni", "Mahsulotning texnik parametrlarini yoritish"], "correct_index": 1},
+    {"question": "564. Etik marketingda \"jamiyat manfaatlari\"ni inobatga olish qanday ahamiyatga ega?", "options": ["Mahsulotning xom ashyosini taqdim etish", "Mahsulotning eng yaxshi narxini belgilash", "Mijozlar va jamiyat uchun ijobiy ta’sir ko‘rsatish", "Mahsulotning texnik tavsiflarini yoritish"], "correct_index": 2},
+    {"question": "565. Reklamada \"nonmozalizm\" yoki \"stereotiplar\"ni targ‘ib qilish qanday salbiy oqibatlarga olib kelishi mumkin?", "options": ["Mahsulotning narxini belgilash", "Mahsulot ishlab chiqarish", "Mahsulotning reklama kampaniyasini yangi shaklda tashkil qilish", "Jamiyatda qiyinchilik va ta’sirli norozilik"], "correct_index": 3},
+    {"question": "566. Marketingda etik yoki axloqiy xatolar kimlarga zarar keltiradi?", "options": ["Mijozlarga, brendga va jamiyatga", "Mahsulot ishlab chiqaruvchilarga", "Mahsulotning xom ashyosini ishlab chiqarishga", "Mahsulotning texnik ko‘rsatkichlariga"], "correct_index": 0},
+    {"question": "567. \"Reklamani yoshlarga yoki bolalarga targ‘ib qilishda qanday etik muammolar bo‘lishi mumkin?", "options": ["Mahsulotning narxini belgilash", "Qora reklama kontentini yoshlar yoki bolalarga taqdim qilish", "Mahsulotning xom ashyosi", "Mahsulot ishlab chiqarish"], "correct_index": 1},
+    {"question": "568. \"Reklamada\" voqealar yoki odamlarning yolg‘on tasvirlari qanday etik muammolarga olib keladi?", "options": ["Mahsulotni arzonlashtirish", "Mahsulot ishlab chiqarish jarayoni", "Mijozlarni aldamchilikka undashi va ishonchni yo‘qotish", "Mahsulotning xom ashyosini kamaytirish"], "correct_index": 2},
+    {"question": "569. Reklamada \"tanqidiy\" yoki \"xavfli\" kontentning ishlatilishi bilan qanday etik muammolar tug‘iladi?", "options": ["Mahsulot narxini belgilash", "Mahsulotning xom ashyosi", "Mahsulotni ommaviy targ‘ib qilish", "Mijozlarning psixologiyasiga ta’sir va sog‘lom jamiyatga zarar yetkazish"], "correct_index": 3},
+    {"question": "570. Reklamada \"salbiy stereotiplar\"ni qo‘llash qanday etik muammolarga olib kelishi mumkin?", "options": ["Mijozlar orasida norozilik va yolg‘on tushunchalarni kengaytirish", "Mahsulotning narxini pasaytirish", "Mahsulotning texnik tavsiflarini yoritish", "Mahsulotning reklamasini ommaviy yetkazish"], "correct_index": 0},
+    {"question": "571. Marketing va reklamalarda \"inson huquqlarini hurmat qilish\"ning ahamiyati nimada?", "options": ["Mahsulotning narxini belgilash", "Har qanday reklama va marketing ishi inson huquqlari, sha’ni va qadr-qimmatlariga hurmat bilan ishlash", "Mahsulotni ommaviy targ‘ib qilish", "Mahsulotning ishlab chiqarish jarayoni"], "correct_index": 1},
+    {"question": "572. \"Reklamada\" xato ma’lumotni tarqatish qanday etik muammolarga olib keladi?", "options": ["Mahsulot narxini qimmatlashtirish", "Mahsulotning reklamasini ommaviy targ‘ib qilish", "Mijozlarni aldamchilikka undashi va ishonchni yo‘qotish", "Mahsulotning texnik ko‘rsatkichlarini ommaviy yoritish"], "correct_index": 2},
+    {"question": "573. Marketingda etik qoidalarga rioya qilish uchun qaysi qaror muhim?", "options": ["Mahsulotni reklamalarda targ‘ib qilish", "Mahsulotning arzonlashtirish jarayoni", "Mahsulotning xom ashyosini ishlab chiqarish", "Mijozlarga to‘g‘ri va haqiqiy axborotni taqdim etish"], "correct_index": 3},
+    {"question": "574. \"Reklamada\" jinsga bo‘lgan diskriminatsiya qanday etik muammolarga olib keladi?", "options": ["Jinsga asoslangan stereotiplar va yolg‘on tushunchalarni tarqatish", "Mahsulot ishlab chiqarish jarayoni", "Mahsulotning texnik tavsiflarini yoritish", "Mahsulotning xom ashyosini kamaytirish"], "correct_index": 0}]
 
 @bot.message_handler(commands=['start', 'quiz'])
 def send_quiz(message):
     q_index = random.randint(0, len(QUIZ_DATA) - 1)
     quiz = QUIZ_DATA[q_index]
-
-    text = f"❓ <b>Savol:</b> {safe_html(quiz['question'])}\n\n"
-
+    text = f"\u2753 <b>Savol:</b> {safe_html(quiz['question'])}\n\n"
     labels = ['A', 'B', 'C', 'D']
     markup = InlineKeyboardMarkup()
     btn_row = []
-
     for i, option in enumerate(quiz['options']):
         text += f"<b>{labels[i]})</b> {safe_html(option)}\n\n"
         btn_row.append(InlineKeyboardButton(text=labels[i], callback_data=f"quiz_{q_index}_{i}"))
-
     markup.row(*btn_row)
     bot.send_message(message.chat.id, text, reply_markup=markup, parse_mode="HTML")
 
@@ -783,22 +604,17 @@ def check_answer(call):
     _, q_idx, chosen_idx = call.data.split('_')
     q_idx = int(q_idx)
     chosen_idx = int(chosen_idx)
-
     quiz = QUIZ_DATA[q_idx]
     correct_idx = quiz['correct_index']
     labels = ['A', 'B', 'C', 'D']
-
     original_text = call.message.text
-
     if chosen_idx == correct_idx:
-        answer_text = f"\n🎉 <b>To'g'ri!</b> Javobingiz: <b>{labels[chosen_idx]}</b>"
+        answer_text = f"\n\U0001f389 <b>To'g'ri!</b> Javobingiz: <b>{labels[chosen_idx]}</b>"
     else:
-        answer_text = f"\n❌ <b>Noto'g'ri.</b> Siz {labels[chosen_idx]} variantni tanladingiz.\n"
-        answer_text += f"✅ To'g'ri javob: <b>{labels[correct_idx]})</b> {safe_html(quiz['options'][correct_idx])}"
-
+        answer_text = f"\n\u274c <b>Noto'g'ri.</b> Siz {labels[chosen_idx]} variantni tanladingiz.\n"
+        answer_text += f"\u2705 To'g'ri javob: <b>{labels[correct_idx]})</b> {safe_html(quiz['options'][correct_idx])}"
     next_markup = InlineKeyboardMarkup()
-    next_markup.add(InlineKeyboardButton(text="➡️ Keyingi savol", callback_data="next_question"))
-
+    next_markup.add(InlineKeyboardButton(text="\u27a1\ufe0f Keyingi savol", callback_data="next_question"))
     try:
         bot.edit_message_text(
             chat_id=call.message.chat.id,
